@@ -29,4 +29,4 @@ def prod_list(request, category_id=None):
 
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
-    return render(request, 'products/product.html', {'products': products})
+    return render(request, 'products/product.html', {'product': product})
