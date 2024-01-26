@@ -1,0 +1,23 @@
+body{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(28, 28, 28, 1);
+    margin-bottom: 60px;
+}
+
+.base {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 80rem;
+    min-width: 80rem;;
+    background-color: rgba(28, 28, 28, 1);
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(28, 28, 28, 1);
+}
