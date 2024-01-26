@@ -1,0 +1,24 @@
+{%load static%}
+<head>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+</head>
+
+<nav class="px-5 mt-1 mb-4">
+    <div class="d-flex justify-content-start" style="width: 25rem">
+        <button class="catagories text-light btn dropdown-toggle "type="button"id="dropdownMenuButton1"data-bs-toggle="dropdown"aria-expanded="false">
+          Catagories
+        </button>
+        <ul class="nav-link text-light">
+          <ul class="catagories dropdown-menu">
+            {% for cat in links %}
+            <li>
+              <a class="text-light dropdown-item" href="{{ cat.get_absolute_url }}">
+                {{cat.name}}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </ul>
+      </div>
+
+</nav>
