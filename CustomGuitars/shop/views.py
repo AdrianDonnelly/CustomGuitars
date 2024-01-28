@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Product, Bestseller
+from .models import Category, Product, Bestseller , Guitar
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 def index(request):
@@ -30,3 +30,8 @@ def prod_list(request, category_id=None):
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     return render(request, 'products/product.html', {'product': product})
+
+def guitars(request):
+    guitars = Guitar.objects.filter(available=True)
+    return render(request, 'products/guitars.html', {'guitars': guitars})
+
