@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
 
+
 let width = window.innerWidth,
 height = window.innerHeight;
 
@@ -36,7 +37,7 @@ let controls = new OrbitControls(camera, renderer.domElement);
 
 
 const loader = new GLTFLoader();
-loader.load( './models/scene.gltf', function ( gltf ) {
+loader.load( '/static/models/truck/scene.gltf', function ( gltf ) {
 	scene.add( gltf.scene );
 }, 
 	undefined, function ( error ) {
@@ -61,3 +62,11 @@ function animate() {
 	controls.update();
 requestAnimationFrame( animate );
 }
+
+//imports
+import { a, password as sec } from "./ui/main";
+
+a()
+
+let testsdf = `object ${sec} is na`
+
