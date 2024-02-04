@@ -10,7 +10,9 @@ height = window.innerHeight;
 
 let renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
+renderer.setClearColor(0xEEEEEE);
 document.body.appendChild(renderer.domElement);
+
 
 let scene = new THREE.Scene();
 
@@ -37,8 +39,9 @@ let controls = new OrbitControls(camera, renderer.domElement);
 
 
 const loader = new GLTFLoader();
-loader.load( '/static/models/truck/scene.gltf', function ( gltf ) {
+loader.load( '/static/models/guitar/40Th_Telecaster_Gold_Main(1).glb', function ( gltf ) {
 	scene.add( gltf.scene );
+
 }, 
 	undefined, function ( error ) {
 	console.error( error );
@@ -48,6 +51,7 @@ loader.load( '/static/models/truck/scene.gltf', function ( gltf ) {
 
 resize();
 animate();
+
 window.addEventListener('resize',resize);
 function resize(){
 	let w = window.innerWidth;
