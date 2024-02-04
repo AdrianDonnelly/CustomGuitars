@@ -10,7 +10,7 @@ height = window.innerHeight;
 
 let renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
-renderer.setClearColor(0xEEEEEE);
+renderer.setClearColor(0xEEEEEf);
 document.body.appendChild(renderer.domElement);
 
 
@@ -24,10 +24,10 @@ scene.add(camera);
 
 
 
-let light = new THREE.PointLight(0xffffff);
-light.position.set(-100,200,100);
+const color = 0xFFFFFF;
+const intensity = 1.4;
+const light = new THREE.AmbientLight(color, intensity);
 scene.add(light);
-
 
 
 let controls = new OrbitControls(camera, renderer.domElement);
@@ -36,11 +36,30 @@ let controls = new OrbitControls(camera, renderer.domElement);
 //let axes = new THREE.AxisHelper(50);
 //scene.add( axes );
 
+const planeSize = 40;
+     
+const texloader = new THREE.TextureLoader();
+const texture = texloader.load('/static/models/resources/checker.png');
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.magFilter = THREE.NearestFilter;
+texture.colorSpace = THREE.SRGBColorSpace;
+const repeats = planeSize / 2;
+texture.repeat.set(repeats, repeats);
+
+const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+const planeMat = new THREE.MeshPhongMaterial({
+  map: texture,
+  side: THREE.DoubleSide,
+});
+const mesh = new THREE.Mesh(planeGeo, planeMat);
+mesh.rotation.x = Math.PI * -.5;
+scene.add(mesh);
 
 
 const loader = new GLTFLoader();
-loader.load( '/static/models/guitar/40Th_Telecaster_Gold_Main(1).glb', function ( gltf ) {
-	scene.add( gltf.scene );
+loader.load( '/static/models/guitar/gitar.glb', function ( glb ) {
+	scene.add( glb.scene );
 
 }, 
 	undefined, function ( error ) {
