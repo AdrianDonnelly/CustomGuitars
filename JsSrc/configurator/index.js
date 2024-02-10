@@ -3,8 +3,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
-
-
 let width = window.innerWidth,
 height = window.innerHeight;
 
@@ -19,16 +17,19 @@ let scene = new THREE.Scene();
 
 
 let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-camera.position.z = 50;
+camera.position.z = 30;
 scene.add(camera);
 
 
 
 const color = 0xFFFFFF;
-const intensity = 1.4;
+const intensity = 4;
 const light = new THREE.AmbientLight(color, intensity);
 scene.add(light);
 
+const spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.intensity = 10;
+spotLight.position.set( 1000, 1000, 1000 );
 
 let controls = new OrbitControls(camera, renderer.domElement);
 
@@ -57,9 +58,10 @@ mesh.rotation.x = Math.PI * -.5;
 scene.add(mesh);
 
 
+
 const loader = new GLTFLoader();
-loader.load( '/static/models/guitar/gitar.glb', function ( glb ) {
-	scene.add( glb.scene );
+loader.load( '/static/models/truck/scene.gltf', function ( gltf ) {
+	scene.add( gltf.scene );
 
 }, 
 	undefined, function ( error ) {
