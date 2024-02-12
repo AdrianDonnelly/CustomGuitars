@@ -11,10 +11,10 @@
       <div class="mb-3 d-flex justify-content-between">
         {{ field.label_tag }}
         {{ field }}
-      </div>
       {% if field.errors %}
           <small class="text-danger">{{ field.errors|join:", " }}</small>
         {% endif %}
+      </div>
     {% endfor %}
     <div class="d-flex justify-content-between">
     <button class="btn btn-success mt-5" type="submit">
