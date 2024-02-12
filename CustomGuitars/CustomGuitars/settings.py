@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'shop',
     'configurator',
     'accounts',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -135,7 +137,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'shop:home'
 LOGOUT_REDIRECT_URL ='shop:home'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 # Default primary key field type
