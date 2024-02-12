@@ -35,3 +35,5 @@ class ProfileUpdateView(UpdateView):
     form_class = CustomUserChangeForm
     success_url = reverse_lazy('account')
     template_name = 'account.html'  
+
+
