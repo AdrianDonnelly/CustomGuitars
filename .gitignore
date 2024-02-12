@@ -1,6 +1,7 @@
 # Django
 *.pyc
 __pycache__
+emails
 db.sqlite3
 *.pyo
 *.pyd
@@ -12,6 +13,7 @@ db.sqlite3
 *.pyo
 *.pyd
 migrations/
+
 
 # Webpack
 node_modules/
