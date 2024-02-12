@@ -128,6 +128,12 @@ STATICFILES_FINDERS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_REDIRECT_URL = 'shop:home'
+LOGOUT_REDIRECT_URL ='shop:home'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 

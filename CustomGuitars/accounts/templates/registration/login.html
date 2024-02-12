@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% block title %}Log In{% endblock title %} 
+
+{% block content %}
+<div class="text-light mt-5 px-5">
+    <h2>Log In</h2>
+    <form method="post">
+      {% csrf_token %} 
+
+      {% for field in form %}
+        <div class="mb-3 d-flex justify-content-between">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <small class="text-danger">{{ field.errors|join:", " }}</small>
+          {% endif %}
+        </div>
+     {% endfor %}
+
+      <button class="btn btn-success ml-2" type="submit">Log In</button>
+    </form>
+  </div>
+
+  <div class="text-light px-5 mt-5">
+    No account?
+    <button class="mx-1 btn text-light"type="button"aria-expanded="false">
+      <a href="{% url 'signup' %}"class="text-light link-underline link-underline-opacity-0">Signup</a>
+    </button>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,3 +1,37 @@
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView ,UpdateView 
+from django.contrib.auth.models import Group
+from .forms import CustomUserCreationForm , CustomUserChangeForm
+from .models import CustomUser
 
-# Create your views here.
+class SignUpView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
+
+    def form_valid(self, form):
+        try:
+            customer_group = Group.objects.get(name='Customer')
+        except Group.DoesNotExist:
+            customer_group = Group.objects.create(name='Customer')
+
+        signup_user = form.save()
+        username = form.cleaned_data.get('username')
+        signup_user = CustomUser.objects.get(username=username)
+        customer_group.user_set.add(signup_user)
+        return super().form_valid(form)
+
+class AccountView(UpdateView):
+    form_class = CustomUserChangeForm
+    success_url = reverse_lazy('account')
+    template_name = 'account.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+        
+class ProfileUpdateView(UpdateView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    success_url = reverse_lazy('account')
+    template_name = 'account.html'  

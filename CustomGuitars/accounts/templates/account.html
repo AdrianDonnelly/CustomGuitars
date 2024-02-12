@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Your Account{% endblock title %}
+
+{% block content %}
+<div class="container text-light mb-2 mt-2 px-5">
+  <h2>Account</h2>
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    
+    {% for field in form %}
+      <div class="mb-3 d-flex justify-content-between">
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+      {% if field.errors %}
+          <small class="text-danger">{{ field.errors|join:", " }}</small>
+        {% endif %}
+    {% endfor %}
+    <div class="d-flex justify-content-between">
+    <button class="btn btn-success mt-5" type="submit">
+      <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}">Log out</a>
+    </button>
+    <button class="btn btn-success mt-5" type="submit">Update Profile</button>
+  </div>
+  </form>
+</div>
+{% endblock content %}
