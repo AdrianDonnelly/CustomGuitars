@@ -12,16 +12,20 @@ nav{
     align-content: center;
     justify-content: space-between;
 }
+html {
+    position: relative;
+    min-height: 100%;
+  }
 
 .base {
     display:flex;
     justify-content: center;
     flex-direction: column;
+    min-width: 60rem;;
     max-width: 80rem;
-    min-width: 80rem;;
+ 
     background-color: rgba(28, 28, 28, 1);
 }
-
 .footer{
     position: absolute;
     bottom: 0;
