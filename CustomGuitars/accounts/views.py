@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView ,UpdateView 
 from django.contrib.auth.models import Group
@@ -39,5 +40,7 @@ class ProfileUpdateView(UpdateView):
     
     def get_object(self, queryset=None):
         return self.request.user
-
+    
+def OrderView(request):
+    return render(request, 'accounts/orders.html', {'orders':OrderView})
 
