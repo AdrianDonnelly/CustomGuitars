@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView ,UpdateView 
+from django.views.generic.edit import CreateView ,UpdateView
 from django.contrib.auth.models import Group
+from django.views.generic import CreateView, UpdateView, DetailView
 from .forms import CustomUserCreationForm , CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -22,25 +23,26 @@ class SignUpView(CreateView):
         signup_user = CustomUser.objects.get(username=username)
         customer_group.user_set.add(signup_user)
         return super().form_valid(form)
+    
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    template_name = 'accounts/account_edit.html'  
+    form_class = CustomUserCreationForm
+    
+    def get_object(self, queryset=None):
+        # Ensure a profile exists for the current user, create one if needed
+        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        return profile
 
-class AccountView(UpdateView):
-    model = CustomUser
-    success_url = reverse_lazy('account_edit')
-    form_class = CustomUserChangeForm
+    def get_success_url(self):
+        return reverse('show_profile', args=[str(self.object.id)])
+    
+    
+    
+class AccountView(DetailView):
+    model = Profile
     template_name = 'accounts/account.html'
 
-    def get_object(self, queryset=None):
-        return self.request.user
-
-class ProfileUpdateView(UpdateView):
-    model = CustomUser
-    form_class = CustomUserChangeForm
-    success_url = reverse_lazy('account')
-    template_name = 'accounts/account_edit.html'  
-    
-    def get_object(self, queryset=None):
-        return self.request.user
-    
 def OrderView(request):
     return render(request, 'accounts/orders.html', {'orders':OrderView})
 
