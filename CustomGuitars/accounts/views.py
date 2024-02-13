@@ -23,17 +23,21 @@ class SignUpView(CreateView):
         return super().form_valid(form)
 
 class AccountView(UpdateView):
+    model = CustomUser
+    success_url = reverse_lazy('account_edit')
     form_class = CustomUserChangeForm
-    success_url = reverse_lazy('account')
-    template_name = 'account.html'
+    template_name = 'accounts/account.html'
 
     def get_object(self, queryset=None):
         return self.request.user
-        
+
 class ProfileUpdateView(UpdateView):
     model = CustomUser
     form_class = CustomUserChangeForm
     success_url = reverse_lazy('account')
-    template_name = 'account.html'  
+    template_name = 'accounts/account_edit.html'  
+    
+    def get_object(self, queryset=None):
+        return self.request.user
 
 

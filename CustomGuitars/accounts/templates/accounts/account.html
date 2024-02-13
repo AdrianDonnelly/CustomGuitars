@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Your Account{% endblock title %}
+
+{% block content %}
+<div class="container text-light mb-2 mt-2 px-5">
+  <h2>Account Overview</h2>
+
+  <button class="btn btn-success mt-5" type="submit">
+    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'account_edit' %}">Edit Account</a>
+  </button>
+</div>
+{% endblock content %}
