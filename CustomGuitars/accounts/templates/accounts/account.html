@@ -6,10 +6,10 @@
   <h2>Account Overview</h2>
 
   <button class="btn btn-success mt-5" type="submit">
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'account_edit' %}">Edit Account</a>
+    <a class="text-light link-underline link-underline-opacity-0"href="{{ account_edit_url }}">Edit Account</a>
   </button>
   <button class="btn btn-success mt-5" type="submit">
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'orders' %}">Orders</a>
+    {% comment %} <a class="text-light link-underline link-underline-opacity-0"href="{% url 'orders' %}">Orders</a> {% endcomment %}
   </button>
 </div>
 {% endblock content %}

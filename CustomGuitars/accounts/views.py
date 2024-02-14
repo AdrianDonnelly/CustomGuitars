@@ -27,13 +27,10 @@ class SignUpView(CreateView):
 class ProfileUpdateView(UpdateView):
     model = Profile
     template_name = 'accounts/account_edit.html'  
-    form_class = CustomUserCreationForm
+    form_class = CustomUserChangeForm
+    def account_view(request, pk):
+        profile = get_object_or_404(Profile, user__pk=pk)
     
-    def get_object(self, queryset=None):
-        # Ensure a profile exists for the current user, create one if needed
-        #profile, created = Profile.objects.get_or_create(user=self.request.user)
-        return profile
-
     def get_success_url(self):
         return reverse('show_profile', args=[str(self.object.id)])
     
@@ -42,7 +39,8 @@ class ProfileUpdateView(UpdateView):
 class AccountView(DetailView):
     model = Profile
     template_name = 'accounts/account.html'
-
+    account_edit_url= reversed("account_edit")
+    
 def OrderView(request):
     return render(request, 'accounts/orders.html', {'orders':OrderView})
 
