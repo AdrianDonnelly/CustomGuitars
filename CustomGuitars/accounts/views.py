@@ -31,7 +31,7 @@ class ProfileUpdateView(UpdateView):
     
     def get_object(self, queryset=None):
         # Ensure a profile exists for the current user, create one if needed
-        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        #profile, created = Profile.objects.get_or_create(user=self.request.user)
         return profile
 
     def get_success_url(self):
