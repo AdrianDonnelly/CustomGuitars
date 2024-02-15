@@ -1,5 +1,5 @@
-body{
-    display:flex;
+body {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -7,32 +7,67 @@ body{
     margin-bottom: 60px;
 }
 
-nav{
-    display:flex;
+nav {
+    display: flex;
     align-content: center;
     justify-content: space-between;
 }
+
 html {
     position: relative;
     min-height: 100%;
-  }
+}
 
 .base {
-    display:flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
-    min-width: 60rem;;
+    min-width: 60rem;
+    ;
     max-width: 80rem;
- 
+
     background-color: rgba(28, 28, 28, 1);
 }
-.footer{
+
+.footer {
     position: absolute;
     bottom: 0;
     background-color: rgba(28, 28, 28, 1);
 }
 
-.catagories{
+.catagories {
     background-color: rgba(64, 64, 64, 1);
 }
 
+/* cart design temp */
+
+/****Cart Page****/
+.my_custom_table {
+    min-width: 400px;
+    font-size: 14px;
+}
+
+.my_custom_thead {
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    background-color: #f8f9fa !important;
+}
+
+.custom_image {
+    width: 100px;
+    height: 100px;
+}
+
+.custom_a {
+    text-decoration: none;
+}
+
+.custom_icon {
+    text-decoration: none;
+    color: #868e96 !important;
+}
+
+.my_custom_button {
+    margin-top: 5px;
+}

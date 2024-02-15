@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'configurator',
     'accounts',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'cart',
+    'order',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'shop.context_processors.menu_links',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.counter',
             ],
         },
     },
@@ -150,3 +154,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STRIPE_SECRET_KEY ='sk_test_51OErWIHVvMvpN8XZRZJLrTJ6GGPTTCSHMbGJNch1i3ZGa47gx7VG2vtJLAFTUjhcDxvQvku3A6j0WRlp3gLwguwA00xsSS5NPY'
+STRIPE_PUBLISHABLE_KEY ='pk_test_51OErWIHVvMvpN8XZ4OVx7IgTBedxjUSE1I2hwnmQ5fBygKc0jO6tyovCrHGhJr84pDNTDSU5QYNgn3arVwQkNSzp00vbCBNn4G'
