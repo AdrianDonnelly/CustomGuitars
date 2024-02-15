@@ -21,5 +21,5 @@ class Profile(models.Model):
         return str(self.user)
     
     def get_absolute_url(self):
-        return reverse("account", args=[str(self.id)])
+        return reverse('accounts:account_edit', args=[str(self.id)])
     

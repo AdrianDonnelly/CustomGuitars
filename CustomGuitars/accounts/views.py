@@ -35,6 +35,10 @@ class ProfileUpdateView(UpdateView):
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
     
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    
     
     
 class AccountView(DetailView):
@@ -43,6 +47,7 @@ class AccountView(DetailView):
     
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
