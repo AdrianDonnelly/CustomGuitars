@@ -35,8 +35,6 @@ class ProfileUpdateView(UpdateView):
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
     
-    def get_success_url(self):
-        return reverse_lazy('show_profile', args=[str(self.object.id)])
     
     
 class AccountView(DetailView):

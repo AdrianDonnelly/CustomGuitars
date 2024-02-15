@@ -4,7 +4,11 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
-    age = models.PositiveIntegerField(null = True, blank = True)
+    first_name = models.CharField(max_length=250)
+    last_name = models.CharField(max_length=250)
+    dob = models.DateField(null = True, blank = True)
+    email = models.EmailField(max_length=254,)
+    
     
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -13,14 +17,9 @@ class Profile(models.Model):
         null=True,
     )
     
-    first_name = models.CharField(max_length=250)
-    last_name = models.CharField(max_length=250)
-    dob = models.DateField(null = True, blank = True)
-    email = models.EmailField(max_length=254, )
-    
     def __str__(self):
         return str(self.user)
     
     def get_absolute_url(self):
-        return reverse("show_profile", args=[str(self.id)])
+        return reverse("account", args=[str(self.id)])
     

@@ -9,11 +9,22 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username','age','is_staff',]
+    list_display = ('username','first_name','last_name','email','dob','is_staff',)
     
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'first_name', 'last_name', 'dob', 'email']
-    search_fields = ['user__username', 'first_name', 'last_name', 'email']
+    list_display = ('user', 'first_name', 'last_name', 'dob', 'email')
+
+    def first_name(self, obj):
+        return obj.user.first_name
+
+    def last_name(self, obj):
+        return obj.user.last_name
+
+    def dob(self, obj):
+        return obj.user.dob
+
+    def email(self, obj):
+        return obj.user.email
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(CustomUser, CustomUserAdmin)
