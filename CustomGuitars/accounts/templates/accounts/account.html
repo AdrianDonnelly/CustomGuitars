@@ -6,7 +6,7 @@
   <h2>Account Overview</h2>
 
   <button class="btn btn-success mt-5" type="submit">
-    <a class="text-light link-underline link-underline-opacity-0"href="{{ account_edit_url }}">Edit Account</a>
+    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:account_edit' pk=object.user.id %}">Edit Account</a>
   </button>
   <button class="btn btn-success mt-5" type="submit">
     {% comment %} <a class="text-light link-underline link-underline-opacity-0"href="{% url 'orders' %}">Orders</a> {% endcomment %}
