@@ -30,10 +30,12 @@ class ProfileUpdateView(UpdateView):
     form_class = CustomUserChangeForm
     def account_view(request, pk):
         profile = get_object_or_404(Profile, user__pk=pk)
+        
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user__id=self.kwargs['pk'])
     
     def get_success_url(self):
         return reverse('show_profile', args=[str(self.object.id)])
-    
     
     
 class AccountView(DetailView):
