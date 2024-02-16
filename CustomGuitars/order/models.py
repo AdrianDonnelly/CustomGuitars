@@ -19,8 +19,8 @@ verbose_name='Email Address')
  shippingCountry = models.CharField(max_length=200, blank=True) 
 
 class Meta: 
- db_table = 'Order'
- ordering = ['-created'] 
+    db_table = 'Order'
+    ordering = ['-created'] 
     
 def __str__(self):
     return str(self.id)
