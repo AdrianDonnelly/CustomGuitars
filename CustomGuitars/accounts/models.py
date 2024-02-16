@@ -9,6 +9,12 @@ class CustomUser(AbstractUser):
     dob = models.DateField(null = True, blank = True)
     email = models.EmailField(max_length=254,)
     
+    def __str__(self):
+        return str(self.user)
+    
+    def get_absolute_url(self):
+        return reverse('accounts:account', args=[str(self.id)])
+    
     
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -20,6 +26,4 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
     
-    def get_absolute_url(self):
-        return reverse('accounts:account_edit', args=[str(self.id)])
     
