@@ -38,20 +38,22 @@
 
                             </div>
                         </div>
+                    </div>
                         {% endfor %}
                         <div>
                             <form method="post" class="mt-4">
-                            {% csrf_token %}
+                                {% csrf_token %}
+                
+                                {% for field in form %}
+                                    <div class="mb-3 d-flex justify-content-between">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        {% if field.errors %}
+                                            <small class="text-danger">{{ field.errors|join:", " }}</small>
+                                        {% endif %}
+                                    </div>  
+                                {% endfor %}
 
-                            {% for field in form %}
-                                <div class="mb-3 d-flex justify-content-between">
-                                    {{field.label_tag}}
-                                    {{field}}
-                                    {% if field.errors %}
-                                        <small class="text-danger">{{ field.errors|join:", " }}</small>
-                                    {% endif %}
-                             </div>  
-                            {% endfor %}
                             <button type="submit" class="btn btn-primary">Submit Review</button>
                         </form>
                         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Category, Product, Bestseller , Guitar
+from .models import Category, Product, Bestseller , Guitar, ProductReview
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from shop.forms import ProductReviewForm
 
@@ -31,15 +31,6 @@ def prod_list(request, category_id=None):
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     reviews = product.reviews.all()
-
-    return render(request, 'products/product.html', {'product': product, 'reviews': reviews})
-
-def guitars(request):
-    guitars = Guitar.objects.filter(available=True)
-    return render(request, 'products/guitars.html', {'guitars': guitars})
-
-def add_review(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
     
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
@@ -47,9 +38,17 @@ def add_review(request, product_id):
             form.instance.user = request.user
             form.instance.product = product
             form.save()
-            return redirect('shop:product_detail', category_id=product.category.id, product_id=product.id)
+            # Refresh reviews after submitting the form
+            reviews = product.reviews.all()
     else:
         form = ProductReviewForm()
 
-    return render(request, 'products/product.html', {'product': product, 'form': form})
+    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 'form':form})
+
+def guitars(request):
+    guitars = Guitar.objects.filter(available=True)
+    return render(request, 'products/guitars.html', {'guitars': guitars})
+
+
+
     
