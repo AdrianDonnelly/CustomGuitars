@@ -26,16 +26,35 @@
                     {% else %}
                     <a class ="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
                     {% endif %}
+                    
                     <div class = "form-group">
                         <h3>Reviews</h3>
                         {% for r in reviews %}
-                        <div>
+                        <div class="text-light">
                             <a href=# class="">{{r.user.username|title}}</a>
                             <div>
-                                <p class="text-light">{{r.reviews}}</p>
+                                <p >{{r.review}}</p>
+                                
+
                             </div>
                         </div>
                         {% endfor %}
+                        <div>
+                            <form method="post" class="mt-4">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                                <div class="mb-3 d-flex justify-content-between">
+                                    {{field.label_tag}}
+                                    {{field}}
+                                    {% if field.errors %}
+                                        <small class="text-danger">{{ field.errors|join:", " }}</small>
+                                    {% endif %}
+                             </div>  
+                            {% endfor %}
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
+                        </div>
                     </div>
 
                 </div>

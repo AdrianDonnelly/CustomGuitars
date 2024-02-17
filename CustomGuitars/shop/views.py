@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from .models import Category, Product, Bestseller , Guitar
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from shop.forms import ProductReview
+from shop.forms import ProductReviewForm
 
 def index(request):
     return render(request, 'home.html')
@@ -30,21 +30,26 @@ def prod_list(request, category_id=None):
 
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
-    return render(request, 'products/product.html', {'product': product})
+    reviews = product.reviews.all()
 
-    reviews = ProductReview.objects.filter(product=product)
-    
-    review_from = ProductReview()
+    return render(request, 'products/product.html', {'product': product, 'reviews': reviews})
 
-    context = {
-        "reviews":reviews,
-        "review_form" : review_from
-    }
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
 
-def add_review(request,product_id):
-    product = Product.object.get(pk=product_id)
-    user = request.user
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    if request.method == 'POST':
+        form = ProductReviewForm(request.POST)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.instance.product = product
+            form.save()
+            return redirect('shop:product_detail', category_id=product.category.id, product_id=product.id)
+    else:
+        form = ProductReviewForm()
+
+    return render(request, 'products/product.html', {'product': product, 'form': form})
     
