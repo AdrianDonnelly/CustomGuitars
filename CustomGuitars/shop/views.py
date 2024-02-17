@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product, Bestseller , Guitar
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from shop.forms import ProductReview
 
 def index(request):
     return render(request, 'home.html')
@@ -31,7 +32,19 @@ def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     return render(request, 'products/product.html', {'product': product})
 
+    reviews = ProductReview.objects.filter(product=product)
+    
+    review_from = ProductReview()
+
+    context = {
+        "reviews":reviews,
+        "review_form" : review_from
+    }
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
 
+def add_review(request,product_id):
+    product = Product.object.get(pk=product_id)
+    user = request.user
+    

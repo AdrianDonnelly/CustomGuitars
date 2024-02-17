@@ -26,6 +26,17 @@
                     {% else %}
                     <a class ="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
                     {% endif %}
+                    <div class = "form-group">
+                        <h3>Reviews</h3>
+                        {% for r in reviews %}
+                        <div>
+                            <a href=# class="">{{r.user.username|title}}</a>
+                            <div>
+                                <p class="text-light">{{r.reviews}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
 
                 </div>
             </div>
