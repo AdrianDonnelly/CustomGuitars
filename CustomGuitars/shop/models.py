@@ -39,10 +39,18 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+
     class Meta:
         ordering = ('name',)
         verbose_name = 'product'
         verbose_name_plural = 'products'
+        
+    def get_existing(self,user,review):
+        if user and review:
+            existing_review = self.reviews.filter(user=user).exists()
+            if existing_review:
+                review_limit = "Review limit reached"
+                return review_limit
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.category.id, self.id])
@@ -92,7 +100,6 @@ class Bestseller(models.Model):
 
 
 class ProductReview(models.Model):
-    
     RATING_CHOICES = [
         (1, '1 star'),
         (2, '2 stars'),
@@ -106,11 +113,9 @@ class ProductReview(models.Model):
         null=True)
     
     product = models.ForeignKey(Product, on_delete=models.CASCADE ,related_name="reviews")
+    date = models.DateTimeField(auto_now_add=True)
     review = models.TextField()
     rating = models.IntegerField(choices=RATING_CHOICES,default=None)
-    date = models.DateTimeField(auto_now_add=True)
-    
-    
     
     class Meta:
         verbose_name_plural = "Product Reviews"

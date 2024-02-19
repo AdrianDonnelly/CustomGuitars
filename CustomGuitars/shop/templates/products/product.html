@@ -31,9 +31,9 @@
                         <h3>Reviews</h3>
                         {% for r in reviews %}
                         <div class="text-light">
-                            <a href=# class="">{{r.user.username|title}}</a>
+                            <a href="", class="">{{r.user.username|title}}</a>
                             <div>
-                                <p >{{r.rating}} Stars</p>
+                                <p >{{r.rating}}</p>
                                 <p >{{r.review}}</p>
                                
                                 
@@ -45,7 +45,9 @@
                         <div>
                             <form method="post" class="mt-4">
                                 {% csrf_token %}
-                
+                                 {% if existing_review %}
+                                <p>Cant review a product twice</p>
+                                {% else %}
                                 {% for field in form %}
                                     <div class="mb-3 d-flex justify-content-between">
                                         {{ field.label_tag }}
@@ -55,6 +57,7 @@
                                         {% endif %}
                                     </div>  
                                 {% endfor %}
+                                {% endif %}
 
                             <button type="submit" class="btn btn-primary">Submit Review</button>
                         </form>

@@ -31,6 +31,12 @@ def prod_list(request, category_id=None):
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     reviews = product.reviews.all()
+    try:
+        review_instance = get_object_or_404(ProductReview,product=product,user=request.user.id)
+    except:
+        review_instance=None
+        
+    existing_review = product.get_existing(user=request.user,review=review_instance)
     
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
@@ -43,12 +49,12 @@ def product_detail(request, category_id, product_id):
     else:
         form = ProductReviewForm()
 
-    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 'form':form})
+    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 'form':form ,'existing_review':existing_review})
 
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
-
+ 
 
 
     
