@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import Category, Product, Bestseller , Guitar, ProductReview
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from shop.forms import ProductReviewForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'home.html')
@@ -28,6 +29,7 @@ def prod_list(request, category_id=None):
 
     return render(request, 'products/catagories.html', {'category': category, 'prods': products})
 
+
 def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     reviews = product.reviews.all()
@@ -40,7 +42,7 @@ def product_detail(request, category_id, product_id):
     
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
-        if form.is_valid():
+        if form.is_valid ():
             form.instance.user = request.user
             form.instance.product = product
             form.save()

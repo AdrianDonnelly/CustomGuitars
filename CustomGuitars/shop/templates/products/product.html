@@ -45,9 +45,9 @@
                         <div>
                             <form method="post" class="mt-4">
                                 {% csrf_token %}
-                                 {% if existing_review %}
+                                {% if existing_review %}
                                 <p>Cant review a product twice</p>
-                                {% else %}
+                                {% elif user.is_authenticated%}
                                 {% for field in form %}
                                     <div class="mb-3 d-flex justify-content-between">
                                         {{ field.label_tag }}
@@ -57,9 +57,12 @@
                                         {% endif %}
                                     </div>  
                                 {% endfor %}
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                                {% else %}
+                                <p>Must be logged in to review</p>
                                 {% endif %}
 
-                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                            
                         </form>
                         </div>
                     </div>
