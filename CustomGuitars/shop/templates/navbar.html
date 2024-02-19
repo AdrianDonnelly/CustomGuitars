@@ -19,6 +19,11 @@
             </li>
             {% endfor %}
           </ul>
+          <div class="d-flex text-light">
+            <form class="nav-item"style="width: 25rem"action="{% url 'search_app:searchResult' %}"method="get">
+              <input class="form-control"type="search"placeholder="Search"aria-label="Search"name="q"
+              />
+            </form>
         </ul>
       </div>
 
