@@ -48,6 +48,7 @@ def product_detail(request, category_id, product_id):
             form.save()
             # Refresh reviews after submitting the form
             reviews = product.reviews.all()
+            form = ['Thank you for submitting a review']
     else:
         form = ProductReviewForm()
 
