@@ -26,6 +26,46 @@
                     {% else %}
                     <a class ="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
                     {% endif %}
+                    
+                    <div class = "form-group">
+                        <h3>Reviews</h3>
+                        {% for r in reviews %}
+                        <div class="text-light">
+                            <a href="", class="">{{r.user.username|title}}</a>
+                            <div>
+                                <p >{{r.rating}}</p>
+                                <p >{{r.review}}</p>
+                               
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                        {% endfor %}
+                        <div>
+                            <form method="post" class="mt-4">
+                                {% csrf_token %}
+                                {% if existing_review %}
+                                <p>Cant review a product twice</p>
+                                {% elif user.is_authenticated%}
+                                {% for field in form %}
+                                    <div class="mb-3 d-flex justify-content-between">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        {% if field.errors %}
+                                            <small class="text-danger">{{ field.errors|join:", " }}</small>
+                                        {% endif %}
+                                    </div>  
+                                {% endfor %}
+                                <button id="submit_button" onclick="hide()" type="submit" class="btn btn-primary">Submit Review</button>
+                                {% else %}
+                                <p>Must be logged in to review</p>
+                                {% endif %}
+
+                            
+                        </form>
+                        </div>
+                    </div>
 
                 </div>
             </div>

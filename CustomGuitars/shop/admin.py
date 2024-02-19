@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Bestseller,Guitar
+from .models import Category, Product, Bestseller,Guitar, ProductReview
 from django.contrib import admin
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -26,4 +26,9 @@ class BestsellerAdmin(admin.ModelAdmin):
     list_display = ['product']
 
 admin.site.register(Bestseller, BestsellerAdmin)
+
+class ProductReviewAdmin(admin.ModelAdmin):
+    list_display = ['user','product','review','rating','date']
+    
+admin.site.register(ProductReview, ProductReviewAdmin)
 

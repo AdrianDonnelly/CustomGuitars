@@ -30,8 +30,8 @@ verbose_name='Email Address')
  MaxValueValidator(100)])
 
 class Meta: 
- db_table = 'Order'
- ordering = ['-created'] 
+    db_table = 'Order'
+    ordering = ['-created'] 
     
 def __str__(self):
     return str(self.id)

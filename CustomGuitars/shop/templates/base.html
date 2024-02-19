@@ -31,15 +31,5 @@ crossorigin="anonymous">
             crossorigin="anonymous">
         </script>
     </body>
-
-    <ul class="d-flex justify-content-end">
-        <i class="fa-solid fa-cart-shopping fa-2xl m-3 mt-4"></i>
-        <a class="nav-link m-2" href="{% url 'cart:cart_detail' %}">Basket 
-            {% if item_count > 0 %}
-                <a class="nav-link mt-2" href="{% url 'cart:cart_detail' %}"><i
-                        class="">{{item_count}}</i></a>
-
-            {% endif %}</a>
-    </ul>
     <script src="https://kit.fontawesome.com/71e0b3e869.js" crossorigin="anonymous"></script>
 </html>

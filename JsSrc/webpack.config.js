@@ -9,8 +9,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
-        accounts: './accounts/index.js',
         configurator: './configurator/index.js',
+        shop:'./shop/index.js',
     },
     module: {
         rules: [
