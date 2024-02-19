@@ -2,131 +2,163 @@
 {% load static %}
 
 {% block metadescription %}
-    This is the shopping cart page. Proceed to review your items and place the order.
+This is the shopping cart page. Proceed to review your items and place the order.
 {% endblock %}
 
 {% block title %}
-    Cart -
+Cart -
 {% endblock %}
 
 {% block content %}
-    {% if not cart_items %}
-        <div>
-            <div class="text-center text-light ">
-                <br>
-                <h1 class="text-center my_title">
-                    Your shopping cart is empty
-                </h1>
-                <br>
-                <p class="text-center">
-                    Please click <a href="{% url 'shop:home' %}" class="link-underline link-underline-opacity-0">here</a> to continue shopping.
-                </p>
-            </div>
+{% if not cart_items %}
+<div>
+    <div class="text-center text-light ">
+        <br>
+        <h1 class="text-center my_title">
+            Your shopping cart is empty
+        </h1>
+        <br>
+        <p class="text-center">
+            Please click <a href="{% url 'shop:home' %}" class="link-underline link-underline-opacity-0">here</a> to
+            continue shopping.
+        </p>
+    </div>
+</div>
+{% else %}
+<div class="row mx-auto">
+    <div class="col-12 col-md-6">
+        <div class="text-center text-light">
+            <h2 class="text-center my_title">
+                Your shopping cart
+            </h2>
         </div>
-    {% else %}
-        <div class="row mx-auto">
-            <div class="col-12 col-md-6">
-                <div class="text-center text-light">
-                    <h2 class="text-center my_title">
-                        Your shopping cart
-                    </h2>
-                </div>
-                <div class=" text-center rounded p-1 my_custom_box mx-4">
-                    <table class="table my_custom_table"style="min-height:12rem">
-                        <thead class="my_custom_thead">
-                            <tr>
-                                <th colspan="5">
-                                    Your items
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cart_item in cart_items %}
-                                <tr>
-                                    <td style="max-width:10rem">
-                                        <a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}" alt=""
-                                                class="float-left rounded custom_image"></a>
-                                    </td>
-                                    <div style="width:10rem">
-                                    <td class="text-left">
-                                        {{cart_item.product.name}}
-                                        <br>
-                                        Unit Price: €{{cart_item.product.price}}
-                                        <br>
-                                        Qty: {{cart_item.quantity}} x €{{cart_item.product.price}}
-                                    </td>
-                                    <td>
-                                        {% if cart_item.quantity < cart_item.product.stock %}
-                                            <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i
-                                                    class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
-                                            <a href="{% url 'cart:cart_remove' cart_item.product.id %}"
-                                                class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-                                            <a href="{% url 'cart:full_remove' cart_item.product.id %}"
-                                                class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
-                                        {% else %}
-                                            &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}"
-                                                class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-                                            <a href="{% url 'cart:full_remove' cart_item.product.id %}"
-                                                class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
-                                        {% endif %}
-                                    </td>
-                                </div>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="text-center col-12 col-md-6">
-                <div class="text-center text-light">
-                    <h2 class="text-center my_title">
-                        Checkout
-                    </h2>
-                </div>
-                <div class="rounded p-1 my_custom_box">
-                    <table class="table my_custom_table">
-                        <thead class="my_custom_thead">
-                            <tr>
-                                <th>
-                                    Summary
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Please review your shopping cart items before proceeding with the order payment.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">
-                                    Your total is: <strong>€{{ total }}</strong>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <div class="pt-2">
-                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                data-key="{{ data_key }}"
-                                data-amount="{{ stripe_total }}"
-                                data-name="WEB GAMES"
-                                data-description="{{ description }}"
-                                data-image="{% static 'images/logo.png' %}"
-                                data-locale="auto"
-                                data-currency="eur"
-                                data-shipping-address="true"
-                                data-billing-address="true"
-                                data-zip-code="true">
-                            </script>
+        <div class=" text-center rounded p-1 my_custom_box mx-4">
+            <table class="table my_custom_table" style="min-height:12rem">
+                <thead class="my_custom_thead">
+                    <tr>
+                        <th colspan="5">
+                            Your items
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td style="max-width:10rem">
+                            <a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}" alt=""
+                                    class="float-left rounded custom_image"></a>
+                        </td>
+                        <div style="width:10rem">
+                            <td class="text-left">
+                                {{cart_item.product.name}}
+                                <br>
+                                Unit Price: €{{cart_item.product.price}}
+                                <br>
+                                Qty: {{cart_item.quantity}} x €{{cart_item.product.price}}
+                            </td>
+                            <td>
+                                {% if cart_item.quantity < cart_item.product.stock %} <a
+                                    href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i
+                                        class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
+                                    <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i
+                                            class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
+                                    <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i
+                                            class="fas fa-trash-alt custom_icon"></i></a>
+                                    {% else %}
+                                    &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}"
+                                        class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
+                                    <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i
+                                            class="fas fa-trash-alt custom_icon"></i></a>
+                                    {% endif %}
+                            </td>
                         </div>
-                    </form>
-                    <div class="mx-auto pt-2">
-                        <a style="width:100%" href="{% url 'shop:home' %}" class="btn text-light catagories">Continue Shopping</a>
-                    </div>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center col-12 col-md-6">
+        <div class="text-center text-light">
+            <h2 class="text-center my_title">
+                Checkout
+            </h2>
+        </div>
+        <div class="rounded p-1 my_custom_box">
+            <table class="table my_custom_table">
+                <thead class="my_custom_thead">
+                    <tr>
+                        <th>
+                            Summary
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Please review your shopping cart items before proceeding with the order payment.
+                        </td>
+                    </tr>
+                    {% if voucher %}
+                    <tr class="subtotal">
+                        <td>Total</td>
+                        <td colspan="4"></td>
+                        <td class="num">€{{ total|floatformat:"2" }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            "{{ voucher.code }}" voucher
+                            ({{ voucher.discount }}% off)
+                        </td>
+                        <td colspan="4"></td>
+                        <td class="num neg">
+                            - €{{ discount|floatformat:"2" }}
+                        </td>
+                    </tr>
+                    <tr class="total">
+                        <td>Total</td>
+                        <td colspan="4"></td>
+                        <td class="num">
+                            €{{ new_total|floatformat:"2" }}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="total">
+                        <td>Total</td>
+                        <td colspan="4"></td>
+                        <td class="num">
+                            €{{ total|floatformat:"2" }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <p>Apply a voucher:</p>
+            <form action="{% url 'vouchers:apply' %}" method="post">
+                {{ voucher_apply_form }}
+                <input type="submit" value="Apply">
+                {% csrf_token %}
+            </form>
+
+            </tbody>
+            </table>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="pt-2">
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="{{ data_key }}" data-amount="{{ stripe_total }}" data-name="WEB GAMES"
+                        data-description="{{ description }}" data-image="{% static 'images/logo.png' %}"
+                        data-locale="auto" data-currency="eur" data-shipping-address="true" data-billing-address="true"
+                        data-zip-code="true">
+                        </script>
                 </div>
+            </form>
+            <div class="mx-auto pt-2">
+                <a style="width:100%" href="{% url 'shop:home' %}" class="btn text-light catagories">Continue
+                    Shopping</a>
             </div>
         </div>
-    {% endif %}
+    </div>
+</div>
+{% endif %}
 {% endblock %}
