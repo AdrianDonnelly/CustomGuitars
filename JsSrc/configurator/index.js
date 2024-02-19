@@ -46,7 +46,7 @@ texture.wrapT = THREE.RepeatWrapping;
 texture.magFilter = THREE.NearestFilter;
 texture.colorSpace = THREE.SRGBColorSpace;
 const repeats = planeSize / 2;
-texture.repeat.set(repeats, repeats);
+texture.repeat.set(repeats, repeats); 
 
 const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
 const planeMat = new THREE.MeshPhongMaterial({
@@ -87,11 +87,3 @@ function animate() {
 	controls.update();
 requestAnimationFrame( animate );
 }
-
-//imports
-import { a, password as sec } from "./ui/main";
-
-a()
-
-let testsdf = `object ${sec} is na`
-

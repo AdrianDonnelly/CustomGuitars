@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.urls import reverse
+from accounts.models import CustomUser
 
 class Category(models.Model):
     id = models.UUIDField(
@@ -9,7 +10,6 @@ class Category(models.Model):
         editable=False)
     name = models.CharField(max_length=250, unique=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='category', blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -39,10 +39,18 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+
     class Meta:
         ordering = ('name',)
         verbose_name = 'product'
         verbose_name_plural = 'products'
+        
+    def get_existing(self,user,review):
+        if user and review:
+            existing_review = self.reviews.filter(user=user).exists()
+            if existing_review:
+                review_limit = "Review limit reached"
+                return review_limit
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.category.id, self.id])
@@ -90,3 +98,30 @@ class Bestseller(models.Model):
         def get_absolute_url(self):
             return reverse('shop:Bestseller', args=[self.product.id, self.id])
 
+
+class ProductReview(models.Model):
+    RATING_CHOICES = [
+        (1, '1 star'),
+        (2, '2 stars'),
+        (3, '3 stars'),
+        (4, '4 stars'),
+        (5, '5 stars'),
+    ]
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        null=True)
+    
+    product = models.ForeignKey(Product, on_delete=models.CASCADE ,related_name="reviews")
+    date = models.DateTimeField(auto_now_add=True)
+    review = models.TextField()
+    rating = models.IntegerField(choices=RATING_CHOICES,default=None)
+    
+    class Meta:
+        verbose_name_plural = "Product Reviews"
+        
+    def __str__(self):
+        return self.product.name
+    
+    def get_rating(self):
+        return self.rating

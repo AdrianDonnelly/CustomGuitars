@@ -13,6 +13,8 @@ class CustomUser(AbstractUser):
         return reverse('accounts:account', args=[str(self.id)])
     
     
+    
+    
 class Profile(models.Model):
     user = models.OneToOneField(
         CustomUser,
@@ -22,5 +24,6 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.user)
+    
     
     
