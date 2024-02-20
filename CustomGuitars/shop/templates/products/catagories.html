@@ -10,7 +10,7 @@
     {% for product in prods %}
     <div class="container-fluid d-flex flex-row">
       <div>
-        <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" alt="{{product.name}}"/></a>
+        <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
         <div>
           <h4>{{product.name}}</h4>
           <p>€{{product.price}}</p>
