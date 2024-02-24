@@ -1,5 +1,5 @@
 import pyotp
-from datetime import time,timedelta 
+from datetime import datetime,timedelta 
 
 def send_otp(request):
     totp=pyotp.TOTP(pyotp.random_base32(),interval=60)

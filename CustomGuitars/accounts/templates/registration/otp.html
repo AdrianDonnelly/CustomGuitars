@@ -4,13 +4,16 @@
 {% block content %}
 <div class="text-light mt-5 px-5">
     <h2>2FA</h2>
+    {% if error_message%}
+      <div class="text-light px-5 mt-5">
+        <p >{{error_message}}</p>
+      </div>
+    {%endif%}
     <form method="post">
       {% csrf_token %} 
-        <label for="otp">2FA Token</label>
-            <input></input>
-
+      <input type="text" name="otp" required>
+      <button type="submit">Submit</button>
         
-      <button class="btn btn-success ml-2" type="submit">Log In</button>
     </form>
   </div>
 </div>

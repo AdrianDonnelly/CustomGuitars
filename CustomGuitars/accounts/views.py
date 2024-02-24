@@ -1,19 +1,19 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView ,UpdateView
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group,User
 from django.views.generic import CreateView, UpdateView, DetailView
 from .forms import CustomUserCreationForm , CustomUserChangeForm
 from .models import CustomUser, Profile
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from .utils import send_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth import login
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('userlogin')
     template_name = 'registration/signup.html'
 
     def form_valid(self, form):
@@ -31,43 +31,46 @@ class SignUpView(CreateView):
         )
         return super().form_valid(form)
     
-def AuthView(request):
+def OtpView(request):
     error_message = None
     if request.method == "POST":
-        username = request.session['username']
+        username = request.session.get('username')
+        password = request.session.get('password')
         otp = request.POST['otp']
         
         otp_secret_key = request.session['otp_secret_key']
         otp_valid_until = request.session['otp_valid_date']
         
         if otp_secret_key and otp_valid_until is not None:
-            valid_until = datetime.fromisoformat(otp_valid_date)
+            valid_until = datetime.fromisoformat(otp_valid_until)
             
             if valid_until>datetime.now():
                 totp = pyotp.TOTP(otp_secret_key,interval=60)
                 if totp.verify(otp):
                     user = get_object_or_404(User,username=username, password=password)
                     login(request,user)
+                    return redirect('home')
+                
                     
                     del request.session[otp_secret_key]
                     del request.session[otp_valid_date]
                     
-                    return redirect('home')
-                
+                    
                 else:
-                    error_message = "invalid Auth token"
+                    error_message = "invalid One time password token"
             else:
-                error_message = "Auth token has expired"
+                error_message = "otp token has expired"
         else:
             error_message = "sompthing went wrong"
                     
                     
 
-    return render(request,'registration/auth.html',{})
+    return render(request,'registration/otp.html',{})
     
     
 def UserLoginView(request):
     error_message=None
+    
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -75,11 +78,13 @@ def UserLoginView(request):
     
         if user is not None:
             send_otp(request)
-            username = request.session['username']
-            return redirect('accounts:auth')
-        
+            request.session['username'] = username
+            return redirect('accounts:otp')
         else:
-            return render(request,'login.html',{'error_message':error_message})
+            error_message = "Invalid Username or Password"
+        
+    return render(request, 'registration/userlogin.html', {'error_message': error_message})
+
         
 
 
