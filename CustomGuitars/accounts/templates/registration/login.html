@@ -4,22 +4,17 @@
 {% block content %}
 <div class="text-light mt-5 px-5">
     <h2>Log In</h2>
-    <form method="post">
+    <form method="POST">
       {% csrf_token %} 
-
-      {% for field in form %}
-        <div class="mb-3 d-flex justify-content-between">
-          {{ field.label_tag }}
-          {{ field }}
-          {% if field.errors %}
-            <small class="text-danger">{{ field.errors|join:"," }}</small>
-          {% endif %}
+      <div>
+        <label for="username">username:</label>
+          <input class=form-control type="text" name="username" required></input>
+      </div>
+      <div>
+        <label for="password">password:</label>
+          <input class=form-control type="text" name="password" required></input>
+      </div>
         </div>
-        
-     {% endfor %}
-     {% if form.errors %}
-          <p>Your username and password didn't match. Please try again.</p>
-        {% endif %}
 
       <button class="btn btn-success ml-2" type="submit">Log In</button>
       

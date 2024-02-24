@@ -6,7 +6,11 @@ from django.contrib.auth.models import Group
 from django.views.generic import CreateView, UpdateView, DetailView
 from .forms import CustomUserCreationForm , CustomUserChangeForm
 from .models import CustomUser, Profile
-
+from django.contrib.auth import authenticate
+from .utils import send_otp
+from datetime import datetime
+import pyotp
+from django.contrib.auth import login
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -27,19 +31,57 @@ class SignUpView(CreateView):
         )
         return super().form_valid(form)
     
+def AuthView(request):
+    error_message = None
+    if request.method == "POST":
+        username = request.session['username']
+        otp = request.POST['otp']
+        
+        otp_secret_key = request.session['otp_secret_key']
+        otp_valid_until = request.session['otp_valid_date']
+        
+        if otp_secret_key and otp_valid_until is not None:
+            valid_until = datetime.fromisoformat(otp_valid_date)
+            
+            if valid_until>datetime.now():
+                totp = pyotp.TOTP(otp_secret_key,interval=60)
+                if totp.verify(otp):
+                    user = get_object_or_404(User,username=username, password=password)
+                    login(request,user)
+                    
+                    del request.session[otp_secret_key]
+                    del request.session[otp_valid_date]
+                    
+                    return redirect('home')
+                
+                else:
+                    error_message = "invalid Auth token"
+            else:
+                error_message = "Auth token has expired"
+        else:
+            error_message = "sompthing went wrong"
+                    
+                    
+
+    return render(request,'registration/auth.html',{})
+    
+    
 def UserLoginView(request):
-    error_message = "Login Error"
+    error_message=None
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
     
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            send_otp(request)
+            username = request.session['username']
+            return redirect('accounts:auth')
         
         else:
-            return render(request,'login.html')
+            return render(request,'login.html',{'error_message':error_message})
+        
+
 
     
 class ProfileUpdateView(UpdateView):
@@ -73,5 +115,3 @@ class AccountView(DetailView):
 def OrderView(request):
     return render(request, 'accounts/orders.html', {'orders':OrderView})
 
-def Otp(request):
-    username 
