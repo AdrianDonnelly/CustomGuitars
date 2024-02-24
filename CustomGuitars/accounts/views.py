@@ -27,6 +27,21 @@ class SignUpView(CreateView):
         )
         return super().form_valid(form)
     
+def UserLoginView(request):
+    error_message = "Login Error"
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+    
+        if user is not None:
+            login(request, user)
+            return redirect('login')
+        
+        else:
+            return render(request,'login.html')
+
+    
 class ProfileUpdateView(UpdateView):
     model = Profile
     template_name = 'accounts/account_edit.html'  
@@ -58,3 +73,5 @@ class AccountView(DetailView):
 def OrderView(request):
     return render(request, 'accounts/orders.html', {'orders':OrderView})
 
+def Otp(request):
+    username 

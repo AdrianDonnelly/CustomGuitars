@@ -12,10 +12,14 @@
           {{ field.label_tag }}
           {{ field }}
           {% if field.errors %}
-            <small class="text-danger">{{ field.errors|join:", " }}</small>
+            <small class="text-danger">{{ field.errors|join:"," }}</small>
           {% endif %}
         </div>
+        
      {% endfor %}
+     {% if form.errors %}
+          <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
 
       <button class="btn btn-success ml-2" type="submit">Log In</button>
       
