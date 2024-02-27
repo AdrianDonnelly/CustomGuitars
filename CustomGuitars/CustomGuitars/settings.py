@@ -143,7 +143,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'shop:home'
 LOGOUT_REDIRECT_URL = 'shop:home'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #sends a email to the console change when we might use smtp server
 EMAIL_FILE_PATH = BASE_DIR / 'accounts/emails'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
