@@ -67,7 +67,7 @@ def OtpView(request):
                     
                     
 
-    return render(request,'registration/otp.html',{})
+    return render(request,'registration/otp.html',{'error_message': error_message})
     
     
 def UserLoginView(request):
