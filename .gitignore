@@ -1,17 +1,17 @@
 # Django
-*.pyc
+.pyc
 __pycache__
 emails
 db.sqlite3
-*.pyo
-*.pyd
-*.pyo
-*.pyc
-*.pyo
-*.pyd
-*.pyc
-*.pyo
-*.pyd
+.pyo
+.pyd
+.pyo
+.pyc
+.pyo
+.pyd
+.pyc
+.pyo
+.pyd
 migrations/
 
 
