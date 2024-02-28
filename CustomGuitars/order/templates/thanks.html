@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-Thanks - Perfect Cushion Store
+Thanks - Custom Guitar Shop
 {% endblock %}
 {% block content %}
 <div>
@@ -16,8 +16,16 @@ Thanks - Perfect Cushion Store
         <p>Your order number is: <b>{{ customer_order.id }}</b></p>
         <br>
         <p>
-            Thank you for choosing Custom Guitars you'r order details are being processed and you will receive a confirmation email shortly.
+            Thank you for choosing Custom Guitars. Your order details are being processed and you will receive a confirmation email shortly.
         </p>
+        <br>
+        <p>Order Details:</p>
+        <ul>
+            {% for item in customer_order.orderitem_set.all %}
+                <li>{{ item.product }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <p>Total: {{ customer_order.total }}</p>
     </div>
 </div>
 <br>
