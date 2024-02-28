@@ -33,10 +33,14 @@ class SignUpView(CreateView):
     
 def OtpView(request):
     error_message = None
+    user = request.session.get('otp_user')
+    
+    if user is not None:
+        User = get_user_model()
+        user = get_object_or_404(User, id=user)
+    
     if request.method == "POST":
-        username = request.session.get('username')
-        password = request.session.get('password')
-        otp = request.POST['otp']
+        otp = request.POST.get('otp', '')
         
         otp_secret_key = request.session['otp_secret_key']
         otp_valid_until = request.session['otp_valid_date']
@@ -47,13 +51,11 @@ def OtpView(request):
             if valid_until>datetime.now():
                 totp = pyotp.TOTP(otp_secret_key,interval=60)
                 if totp.verify(otp):
-                    user = get_object_or_404(User,username=username, password=password)
                     login(request,user)
-                    return redirect('home')
+                    return redirect('shop:home')
                 
                     
-                    del request.session[otp_secret_key]
-                    del request.session[otp_valid_date]
+                    
                     
                     
                 else:
@@ -61,7 +63,7 @@ def OtpView(request):
             else:
                 error_message = "otp token has expired"
         else:
-            error_message = "sompthing went wrong"
+            error_message = "something went wrong"
                     
                     
 
@@ -77,9 +79,11 @@ def UserLoginView(request):
         user = authenticate(request, username=username, password=password)
     
         if user is not None:
+            request.session['otp_user'] = user.id
             send_otp(request)
-            request.session['username'] = username
             return redirect('accounts:otp')
+            
+        
         else:
             error_message = "Invalid Username or Password"
         
