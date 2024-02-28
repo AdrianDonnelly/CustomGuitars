@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from vouchers.models import Voucher
+from django.core.mail import send_mail
+
 
 
 class Order(models.Model):
@@ -29,12 +31,24 @@ verbose_name='Email Address')
  validators=[MinValueValidator(0), 
  MaxValueValidator(100)])
 
+ 
+
 class Meta: 
     db_table = 'Order'
     ordering = ['-created'] 
     
 def __str__(self):
     return str(self.id)
+
+def sender_order_email(self):
+        subject = "Order Confirmation"
+        customers_email = self.emailAddress
+        message = f"Thanks for your order!\n\nOrder Number: {self.id}\nTotal: {self.total}\n\n"
+        from_email = "CustomGuitars@test.com"
+        to_email = [customers_email]
+
+        send_mail(subject, message, from_email, to_email)
+
 
 class OrderItem(models.Model):
     product = models.CharField(max_length=250) 
