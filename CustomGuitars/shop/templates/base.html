@@ -18,9 +18,9 @@ crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
 </head>
     <body>
-        <div class="base px-5">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <div class="base">
             {% include 'header.html' %}
-            {% include 'navbar.html' %}
             {% block content %}
             {% endblock %}
             {% include 'footer.html' %}
