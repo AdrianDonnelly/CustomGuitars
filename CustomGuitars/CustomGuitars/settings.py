@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'stripe',
     'vouchers',
     'search',
+    'wishlist',
 ]
 
 MIDDLEWARE = [

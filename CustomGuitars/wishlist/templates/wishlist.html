@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="text-light px-5">
+    <h1>Wishlist</h1>
+</div>
+<div class="container-fluid d-flex flex-column justify-content-between text-light mt-4 px-5">
+    {% if wshlist %}
+    <div class="container-fluid d-flex flex-row justify-content-between">
+        {% for product in wishlist %}
+        <div class="container-fluid d-flex flex-row">
+            <div>
+                <a class="img"><img class="cat_img" alt="{{product.name}}"/></a>
+                <div>
+                    <h4>{{product.name}}</h4>
+                    <p>€{{product.price}}</p>
+                    <p>{{product.description}}</p>
+                    {% if product.stock == 0%}
+                        <p><b>Out of Stock</b></p>
+                    {% else %}
+                        <p><b>In Stock</b></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
