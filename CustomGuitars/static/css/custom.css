@@ -48,11 +48,16 @@ html {
     width: 20rem;
 }
 .cat_img{
-    max-width: 20rem;
+    max-height: 15rem;
 }
 .prod_img{
-    max-width: 25rem;
+    max-height: 25rem;
 }
+.review{
+    max-width: 20rem;
+}
+
+
 
 .footer {
     position: absolute;
