@@ -9,11 +9,14 @@
         <p >{{error_message}}</p>
       </div>
     {%endif%}
-    <form method="post">
+    <form class="d-flex flex-column"method="post">
       {% csrf_token %} 
-      <input type="text" name="otp" required>
-      <button type="submit">Submit</button>
-        
+      <div>
+      <input name="otp" type="text" name="otp" required>
+      </div>
+      <div>
+      <button class="btn btn-outline-light mb-2 mt-2"type="submit">Submit</button>
+      </div>
     </form>
   </div>
 </div>

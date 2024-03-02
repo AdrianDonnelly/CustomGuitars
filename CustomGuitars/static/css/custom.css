@@ -33,14 +33,25 @@ html {
     min-width: 100%;
     background-color: rgb(30, 30, 30);
 }
-
+.login{
+    width: 30rem;
+}
 .logo {
     max-width: 40%;
+}
+.signup{
+    width: 50rem;
 }
 
 .searchbar{
     height: 1.8rem;
     width: 20rem;
+}
+.cat_img{
+    max-width: 20rem;
+}
+.prod_img{
+    max-width: 25rem;
 }
 
 .footer {

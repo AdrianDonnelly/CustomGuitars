@@ -6,7 +6,6 @@
   <h2>Account</h2>
   <form method="post" class="mt-4">
     {% csrf_token %}
-    
     {% for field in form %}
       <div class="mb-3 d-flex justify-content-between">
         {{ field.label_tag }}
@@ -16,14 +15,14 @@
         {% endif %}
       </div>
     {% endfor %}
-    <div class="d-flex justify-content-between">
-    <button class="btn btn-success mt-5" type="submit">
+    <div class="d-flex justify-content-start">
+    <button class="btn btn btn-outline-light m-2" type="submit">
       <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}">Log out</a>
     </button>
-    <button class="btn btn-success mt-5" type="submit">
+    <button class="btn btn btn-outline-light m-2" type="submit">
       <a class="text-light link-underline link-underline-opacity-0"href="{% url 'password_reset' %}">Reset Password</a>
     </button>
-    <button class="btn btn-success mt-5" type="submit">Update Profile</button>
+    <button class="btn btn btn-outline-light m-2" type="submit">Update Profile</button>
   </div>
   </form>
 </div>

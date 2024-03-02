@@ -1,15 +1,16 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 
-<div class="text-light px-5">
+<div class=" d-flex align-items-center flex-column text-light px-5">
   <h1>{{category.name}}</h1>
+  <p>{{category.description}}</p>
 </div>
 <div class="container-fluid d-flex flex-column justify-content-between text-light mt-4 px-5">
   {% if category %}
   <div class="container-fluid d-flex flex-row justify-content-between">
-    <p>{{category.description}}</p>
+    
     {% for product in prods %}
     <div class="container-fluid d-flex flex-row">
-      <div>
+      <div class="cat-img">
         <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
         <div>
           <h4>{{product.name}}</h4>
