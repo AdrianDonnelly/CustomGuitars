@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(30, 30, 30);
+    background-color:#212121;
     margin-bottom: 60px;
 }
 
@@ -31,13 +31,20 @@ html {
     flex-direction: column;
     flex-wrap: wrap;
     min-width: 100%;
-    background-color: rgb(30, 30, 30);
+    background-color:#212121;
 }
 .login{
     width: 30rem;
 }
 .logo {
     max-width: 40%;
+    min-width: 20%;
+}
+.home_btn{
+    width: 100%;
+}
+.home_img{
+    max-width: 100%;
 }
 .signup{
     width: 50rem;

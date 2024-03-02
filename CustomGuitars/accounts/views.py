@@ -11,6 +11,8 @@ from .utils import send_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth import login
+
+
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('userlogin')

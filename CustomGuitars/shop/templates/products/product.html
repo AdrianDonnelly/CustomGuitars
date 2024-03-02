@@ -38,8 +38,10 @@
             <p>{{r.review}}</p>
           </div>
         </div>
+        <hr>
+        {% endfor %}
       </div>
-      {% endfor %}
+
       <div>
         <form method="post" class="mt-4">
           {% csrf_token %} 
@@ -48,7 +50,8 @@
           {% elif user.is_authenticated%}
            {% for field in form %}
           <div class="mb-3 d-flex justify-content-between">
-            {{ field.label_tag }} {{ field }} {% if field.errors %}
+            {{ field }}
+            {% if field.errors %}
             <small class="text-danger">{{ field.errors|join:", " }}</small>
             {% endif %}
           </div>
