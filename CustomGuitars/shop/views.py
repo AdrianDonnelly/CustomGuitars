@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Category, Product, Bestseller , Guitar, ProductReview
+from .models import Category, Product , Guitar, ProductReview
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from shop.forms import ProductReviewForm
 from django.contrib.auth.decorators import login_required
@@ -57,6 +57,17 @@ def product_detail(request, category_id, product_id):
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
+
+def featured(request, category=None):
+    categories = Category.objects.all()
+    featured_products = []
+
+    if category:
+        selected_category = get_object_or_404(Category, name=category)
+        featured_products = Product.objects.filter(category=selected_category, featured=True, available=True)
+
+    print("Featured Products:", featured_products)
+    return render(request, 'home.html', {'categories': categories, 'featured': featured_products, 'selected_category': category})
  
 
 

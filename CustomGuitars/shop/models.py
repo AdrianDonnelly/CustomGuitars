@@ -36,6 +36,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product', blank=True)
     stock = models.IntegerField()
     available = models.BooleanField(default=True)
+    featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -82,22 +83,6 @@ class Guitar(models.Model):
 
     def __str__(self):
         return self.name
-    
-class Bestseller(models.Model):
-        id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False)
-        product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-        class Meta:
-            ordering = ('product',)
-            verbose_name = 'bestseller'
-            verbose_name_plural = 'bestsellers'
-
-        def get_absolute_url(self):
-            return reverse('shop:Bestseller', args=[self.product.id, self.id])
-
 
 class ProductReview(models.Model):
     RATING_CHOICES = [
