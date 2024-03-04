@@ -11,6 +11,8 @@ from .utils import send_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth import login
+from order.models import Order
+from django.shortcuts import render
 
 
 class SignUpView(CreateView):
@@ -124,5 +126,6 @@ class AccountView(DetailView):
 
     
 def OrderView(request):
-    return render(request, 'accounts/orders.html', {'orders':OrderView})
-
+    # Retrieve orders associated with the current user
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'accounts/orders.html', {'orders': orders})

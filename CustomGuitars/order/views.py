@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Order
+from order.models import Order
 from django.core.mail import send_mail
+from django.shortcuts import render
 
 def sender_order_email(order):
     subject = "Order Confirmation"
@@ -25,3 +26,8 @@ def thanks(request, order_id):
     sender_order_email(customer_order)
     
     return render(request, 'thanks.html', {'customer_order': customer_order})
+
+def users_orders(request):
+    users_orders = Order.objects.filter(user=request.user)
+
+    return render(request, 'orders.html',{'user_orders': users_orders})
