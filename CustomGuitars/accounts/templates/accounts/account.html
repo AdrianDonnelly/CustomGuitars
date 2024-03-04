@@ -9,6 +9,9 @@
     <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:account_edit' pk=object.user.id %}">Edit Account</a>
   </button>
   <button class="btn btn btn-outline-light mt-5" type="submit">
+    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}">Log Out</a>
+  </button>
+  <button class="btn btn btn-outline-light mt-5" type="submit">
     <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:orders' %}">Orders</a>
   </button>
 </div>

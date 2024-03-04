@@ -91,7 +91,7 @@ def UserLoginView(request):
         else:
             error_message = "Invalid Username or Password"
         
-    return render(request, 'registration/userlogin.html', {'error_message': error_message})
+    return render(request, 'registration/login.html', {'error_message': error_message})
 
         
 
