@@ -32,7 +32,7 @@ def add_cart(request, product_id):
         cart_item = CartItem.objects.create(product=product, quantity=1,cart=cart)
     return redirect('cart:cart_detail')
 
-@login_required
+@login_required(login_url='./userlogin/')
 def cart_detail(request, total=0, counter=0, cart_items = None):
     discount = 0
     voucher_id = 0
