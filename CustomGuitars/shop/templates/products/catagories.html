@@ -9,12 +9,11 @@
   <div class="container-fluid d-flex flex-row justify-content-between">
     
     {% for product in prods %}
-    <div class="container-fluid d-flex flex-row">
-      <div class="cat-img">
+    <div class="container-fluid d-flex flex-row justify-content-center">
+      <div class=" d-flex cat-img  align-items-center flex-column">
         <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
         <div>
           <p>{{product.name}}</p>
-          <p>€{{product.price}}</p>
         </div>
       </div>
     </div>

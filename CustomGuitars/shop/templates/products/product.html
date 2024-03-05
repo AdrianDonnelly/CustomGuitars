@@ -1,71 +1,99 @@
-{% extends "base.html" %} {% load static %} {% block metadescription %} {{product.description|truncatewords:155 }} 
-{% endblock %} 
-{% block title %} 
-{{product.name }} 
-{% endblock %} 
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block metadescription %}
+{{product.description|truncatewords:155 }} {% endblock %} {% block title %}
+{{product.name }} {% endblock %} {% block content %}
 <div class="d-flex flex-column mt-5">
-    <br />
-    <div class="d-flex justify-content-around">
-        <div>
-          <img class="prod_img" src="{{product.image.url}}" alt="{{product.name}}"/>
-        </div>
-
-      <div class="text-light col-12 col-sm-12 col-md-12 col-lg-6">
-        <div>
-          <h1>{{product.name}}</h1>
-          <h2>€{{product.price}}</h2>
-          <p>{{product.description}}</p>
-          {% if product.stock == 0%}
-          <p><b>Out of Stock</b></p>
-          {% else %}
-          <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}"
-          >Add to Cart
-        </a>
-          {% endif %}
-        </div>
+  <br />
+  <div class="d-flex justify-content-around">
+    <div class="text-light col-12 col-sm-12 col-md-12 col-lg-6">
+      <div>
+        <h1>{{product.name}}</h1>
+        <img
+          class="prod_img"
+          src="{{product.image.url}}"
+          alt="{{product.name}}"
+        />
       </div>
     </div>
-      <div class="review d-flex form-group text-light mt-5 ms-5 justify-content-around flex-column">
-        <h3>Reviews</h3>
-        {% for r in reviews %}
-        <div class="text-light">
-          <a href="" class="link-underline link-underline-opacity-0 text-light">
-            {{r.user.username|title}}
-        </a>
-          <div>
-            <p>{{r.rating}}</p>
-            <p>{{r.review}}</p>
-          </div>
-        </div>
-        <hr>
-        {% endfor %}
+    <div class="text-light">
+      <div>
+        <h2>Similar Items</h2>
+        <img
+          class="similar_img"
+          src="{{product.image.url}}"
+          alt="{{product.name}}"
+        />
+        <hr />
       </div>
 
-      <div>
-        <form method="post" class="mt-4">
-          {% csrf_token %} 
-          {% if existing_review %} 
-          <p>Cant submint more than one review</p>
-          {% elif user.is_authenticated%}
-           {% for field in form %}
-          <div class="mb-3 d-flex justify-content-between">
-            {{ field }}
-            {% if field.errors %}
-            <small class="text-danger">{{ field.errors|join:", " }}</small>
-            {% endif %}
-          </div>
+      <h1 class="mt-4">€{{product.price}}</h1>
+      <div class="d-flex justify-content-between mt-4">
+        <p>Shipping incl.</p>
+        {% if product.stock != 0%}
+        <p class="text-success">In Stock</p>
+        {%endif%}
+      </div>
+      {% if product.stock == 0%}
+      <p><b>Out of Stock</b></p>
+      {% else %}
+      <div class="d-flex home_btn mb-4 mt-2">
+        <a
+          class="btn btn-primary home_btn"
+          href="{% url 'cart:add_cart' product.id %}"
+          >Add to Cart</a
+        >
+      </div>
+      <hr />
+      <p>30 day money back guarantee</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="d-flex justify-content-around">
+    <div class="desc text-light mt-5">
+      <h3>Discription</h3>
+      <p>{{product.description}}</p>
+    </div>
+    <div
+      class="review d-flex form-group text-light justify-content-around flex-column mt-5"
+    >
+      <h3>Reviews</h3>
+      {% for r in reviews %}
+      <div class="text-light">
+        <a href="" class="link-underline link-underline-opacity-0 text-light">
+          {{r.user.username|title}}
+        </a>
+        <div>
+          <p>{{r.rating}}</p>
+          <p>{{r.review}}</p>
+          <hr />
           {% endfor %}
-          <button id="submit_button" onclick="hide()"type="submit" class="btn btn-primary">
-            Submit Review
-          </button>
-          {% else %}
-          <p>Must be logged in to review</p>
-          {% endif %}
-        </form>
+          <div class="d-flex align-items-end">
+            <form method="post" class="mt-4">
+              {% csrf_token %} {% if existing_review %}
+              <p></p>
+              {% elif user.is_authenticated%} {% for field in form %}
+              <div class="mb-3 d-flex justify-content-between">
+                {{ field }} {% if field.errors %}
+                <small class="text-danger">{{ field.errors|join:", " }}</small>
+                {% endif %}
+              </div>
+              {% endfor %}
+              <button
+                id="submit_button"
+                onclick="hide()"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Submit Review
+              </button>
+              {% else %}
+              <p>Must be logged in to review</p>
+              {% endif %}
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  {% endblock %}
 </div>
+    {% endblock %}
+
