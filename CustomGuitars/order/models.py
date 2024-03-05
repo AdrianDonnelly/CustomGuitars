@@ -2,10 +2,12 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from vouchers.models import Voucher
 from django.core.mail import send_mail
+from accounts.models import CustomUser
 
 
 
 class Order(models.Model):
+ user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
  token = models.CharField(max_length=250, blank=True) 
  total = models.DecimalField(max_digits=10, decimal_places=2, 
 verbose_name='Euro Order Total') 

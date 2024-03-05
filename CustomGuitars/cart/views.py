@@ -8,6 +8,7 @@ from order.models import Order, OrderItem
 from vouchers.models import Voucher
 from vouchers.forms import VoucherApplyForm
 from decimal import Decimal
+from django.contrib.auth.decorators import login_required
 
 def _cart_id(request):
     cart = request.session.session_key
@@ -31,6 +32,7 @@ def add_cart(request, product_id):
         cart_item = CartItem.objects.create(product=product, quantity=1,cart=cart)
     return redirect('cart:cart_detail')
 
+@login_required
 def cart_detail(request, total=0, counter=0, cart_items = None):
     discount = 0
     voucher_id = 0
@@ -83,6 +85,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
             '''Creating the order'''
             try:
                     order_details = Order.objects.create(
+                        user=request.user,
                         token=token,
                         total=total,
                         emailAddress=email,
