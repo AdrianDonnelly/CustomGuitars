@@ -7,7 +7,7 @@ from accounts.models import CustomUser
 
 
 class Order(models.Model):
- user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+ user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True,)
  token = models.CharField(max_length=250, blank=True) 
  total = models.DecimalField(max_digits=10, decimal_places=2, 
 verbose_name='Euro Order Total') 
