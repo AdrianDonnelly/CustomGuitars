@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Order, OrderItem
-from .views import generate_order_pdf
+from django.http import FileResponse,HttpResponse
+from reportlab.pdfgen import canvas
 
 class OrderItemAdmin(admin.TabularInline):
         model = OrderItem
@@ -16,10 +17,75 @@ class OrderItemAdmin(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     actions = ['generate_pdf']
     
-    def generate_pdf(self, request, queryset):
+    def generate_pdf(modeladmin, request, queryset):
+    
+    
         for order in queryset:
-            generate_order_pdf(order)
-        self.message_user(request, f'PDFs generated for {queryset.count()} orders.')
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="Order_{order.id}_Report.pdf"'
+            
+            p = canvas.Canvas(response)
+            pdf_title = f'Order {order.id} Details'
+            p.setTitle(pdf_title)
+
+            heading = 'ORDER DETAILS'
+            p.drawString(250, 800, heading)
+            
+            order_info = [
+                f'Order ID: {order.id}',
+                f'Total: {order.total}',
+                f'Created: {order.created.strftime("%d-%m-%y %H:%M:%S")}',
+                '',
+            ]
+
+
+            billing_info = [
+                'BILLING INFORMATION',
+                f'Name: {order.billingName}',
+                f'Address: {order.billingAddress1}, {order.billingCity}, {order.billingPostcode}, {order.billingCountry}',
+                f'Email: {order.emailAddress}',
+                '',
+            ]
+
+
+            shipping_info = [
+                'SHIPPING INFORMATION',
+                f'Name: {order.shippingName}',
+                f'Address: {order.shippingAddress1}, {order.shippingCity}, {order.shippingPostcode}, {order.shippingCountry}',
+                '',
+            ]
+
+
+            order_items = ['ORDER ITEMS']
+            for item in order.orderitem_set.all():
+                order_items.extend([
+                    f'Product: {item.product}',
+                    f'Quantity: {item.quantity}',
+                    f'Price: {item.price}',
+                    '',
+                ])
+
+            full_info = order_info + billing_info + shipping_info + order_items
+
+            y_position = 750
+            for line in full_info:
+                p.drawString(110, y_position, line)
+                y_position -= 20 
+
+            pdf_file_path = f'static/pdf/order_{order.id}.pdf'
+            p.save()
+            with open(pdf_file_path, 'wb') as pdf_file:
+                pdf_file.write(response.content)
+
+        return response
+    
+    generate_pdf.short_description = "Generate PDFs"
+    
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
 
     list_display = ['id','billingName','emailAddress','created']##order admin preview
     

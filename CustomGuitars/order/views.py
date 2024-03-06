@@ -5,6 +5,7 @@ from reportlab.pdfgen import canvas
 from order.models import Order
 from django.core.mail import send_mail
 from django.shortcuts import render
+from order.models import Order
 
 def sender_order_email(order):
     subject = "Order Confirmation"
@@ -34,21 +35,3 @@ def users_orders(request):
     users_orders = Order.objects.filter(user=request.user)
 
     return render(request, 'orders.html',{'user_orders': users_orders})
-
-def generate_order_pdf(order):
-    folder_path = 'pdf/'
-    pdf_path = os.path.join(folder_path, f'order_{order.id}.pdf')
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="order_{order.id}.pdf"'
-    
-
-    # Create a PDF using reportlab
-    pdf = canvas.Canvas(response)
-    pdf.drawString(100, 800, f'Order ID: {order.id}')
-    # Add more content as needed
-
-    pdf.showPage()
-    pdf.save()
-    print("pdf created")
-
-    return response
