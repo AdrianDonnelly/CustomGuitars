@@ -27,13 +27,17 @@ class SignUpView(CreateView):
             customer_group = Group.objects.get(name='Customer')
         except Group.DoesNotExist:
             customer_group = Group.objects.create(name='Customer')
-
-        user = form.save()
+            
+        user = form.save(commit=False)
+        user.secret_key = pyotp.random_base32()
+        user.save()
+        
         username = form.cleaned_data.get('username')
         user = CustomUser.objects.get(username=username)
         customer_group.user_set.add(user)
+        
         Profile.objects.create(
-            user=user
+            user=user,
         )
         return super().form_valid(form)
     
@@ -51,18 +55,22 @@ def OtpView(request):
         otp_secret_key = request.session['otp_secret_key']
         otp_valid_until = request.session['otp_valid_date']
         
+        print(f"Stored Secret Key: {otp_secret_key}")
+        print(f"Stored Valid Until: {otp_valid_until}")
+        
+        
         if otp_secret_key and otp_valid_until is not None:
             valid_until = datetime.fromisoformat(otp_valid_until)
             
             if valid_until>datetime.now():
                 totp = pyotp.TOTP(otp_secret_key,interval=60)
+                expected_otp = totp.now()
+                print(f"Expected OTP: {expected_otp}")
+                print(f"Received OTP: {otp}")
                 if totp.verify(otp):
-                    login(request,user)
+                    login(request, user)
                     return redirect('shop:home')
                 
-                    
-                    
-                    
                     
                 else:
                     error_message = "invalid One time password token"
@@ -87,8 +95,11 @@ def UserLoginView(request):
     
         if user is not None:
             request.session['otp_user'] = user.id
-            otp = send_otp(request)
+            
+            secret_key = user.secret_key  
+            otp = send_otp(request, secret_key)
             email_otp(otp,email)
+            
             return redirect('accounts:otp')
         
         else:
@@ -144,7 +155,8 @@ class Setup_2FAView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        img = generate_qr(self.data, issuer_name='Custom Guitars', account_name='CustomGuitars@outlook.com')
+        otp = self.send_otp(self.request, self.object.seceret_key)
+        img = generate_qr(self.data ,issuer_name='Custom Guitars', account_name='Custom')
         
         folder_path = os.path.join(settings.MEDIA_ROOT, "temp")
         os.makedirs(folder_path, exist_ok=True)
