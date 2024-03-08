@@ -7,11 +7,10 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from .forms import CustomUserCreationForm , CustomUserChangeForm
 from .models import CustomUser, Profile
 from django.contrib.auth import authenticate, get_user_model
-from .utils import send_otp
+from .utils import send_otp,email_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth import login
-from order.models import Order
 from django.shortcuts import render
 
 
@@ -41,7 +40,7 @@ def OtpView(request):
     
     if user is not None:
         User = get_user_model()
-        user = get_object_or_404(User, id=user)
+        user = get_object_or_404(User, id=user )
     
     if request.method == "POST":
         otp = request.POST.get('otp', '')
@@ -80,11 +79,13 @@ def UserLoginView(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        email = request.POST["email"]
+        user = authenticate(request, username=username, password=password,email=email)
     
         if user is not None:
             request.session['otp_user'] = user.id
-            send_otp(request)
+            otp = send_otp(request)
+            email_otp(otp,email)
             return redirect('accounts:otp')
             
         
