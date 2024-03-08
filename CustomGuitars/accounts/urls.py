@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, AccountView, ProfileUpdateView, OrderView, UserLoginView, OtpView
+from .views import SignUpView, AccountView, ProfileUpdateView, OrderView, UserLoginView, OtpView, Setup_2FAView 
 
 app_name = 'accounts'
 
@@ -8,6 +8,7 @@ urlpatterns = [
     path('userlogin/', UserLoginView, name='userlogin'),
     path('otp/', OtpView, name='otp'),
     path('account/<int:pk>/', AccountView.as_view(), name='account'),
+    path('setup_2FA/<int:pk>/',Setup_2FAView.as_view(),name='setup_2FA'),
     path('account_edit/<int:pk>/', ProfileUpdateView.as_view(), name='account_edit'),
     path('orders/', OrderView, name='orders'), 
 ]

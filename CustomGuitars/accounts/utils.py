@@ -1,4 +1,5 @@
 import pyotp
+import qrcode
 from datetime import datetime,timedelta
 from django.core.mail import send_mail
 
@@ -17,3 +18,14 @@ def email_otp(otp,user_email):
     from_email = "CustomGuitars@test.com"
     to_email = [user_email]
     send_mail(subject, message, from_email, to_email)
+    
+def generate_qr(data):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,)
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    return img

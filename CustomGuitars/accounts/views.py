@@ -7,9 +7,12 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from .forms import CustomUserCreationForm , CustomUserChangeForm
 from .models import CustomUser, Profile
 from django.contrib.auth import authenticate, get_user_model
-from .utils import send_otp,email_otp
+from .utils import send_otp,email_otp,generate_qr
 from datetime import datetime
 import pyotp
+import os
+import qrcode
+from django.conf import settings
 from django.contrib.auth import login
 from django.shortcuts import render
 
@@ -71,7 +74,7 @@ def OtpView(request):
                     
 
     return render(request,'registration/otp.html',{'error_message': error_message})
-    
+
     
 def UserLoginView(request):
     error_message=None
@@ -130,3 +133,28 @@ def OrderView(request):
     # Retrieve orders associated with the current user
     orders = Order.objects.filter(user=request.user)
     return render(request, 'accounts/orders.html', {'orders': orders})
+
+class Setup_2FAView(DetailView):
+    model = Profile
+    template_name = 'accounts/setup_2FA.html'
+    
+    data = "adrian"
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user__id=self.kwargs['pk'])
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        img = generate_qr(self.data)
+        
+        folder_path = os.path.join(settings.MEDIA_ROOT, "temp")
+        os.makedirs(folder_path, exist_ok=True)
+        img_path = os.path.join(folder_path, "qr.png")
+        
+        img.save(img_path)
+        img_url = img_path.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
+
+        context['qr_code_data'] = img_url
+        context['setup_2FA_url'] = reverse_lazy('accounts:setup_2FA', kwargs={'pk': self.object.user.id})
+        
+        return context

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Setup 2FA{% endblock title %}
+{%block content%}
+<div class="text-light">
+    <h2>Setup 2FA</h2>
+  </div>
+<div>
+    <img src="{{ qr_code_data }}" alt="QR Code">
+</div>
+{%endblock content%}
