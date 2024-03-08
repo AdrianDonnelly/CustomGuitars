@@ -19,13 +19,22 @@ def email_otp(otp,user_email):
     to_email = [user_email]
     send_mail(subject, message, from_email, to_email)
     
-def generate_qr(data):
+def generate_qr(data, issuer_name, account_name):
+    totp = pyotp.TOTP(pyotp.random_base32(), interval=60)
+    
+    uri = totp.provisioning_uri(
+        name=account_name,
+        issuer_name=issuer_name,
+    )
+    
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,)
-    qr.add_data(data)
+    
+    
+    qr.add_data(uri)
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
     return img

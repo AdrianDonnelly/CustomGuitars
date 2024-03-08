@@ -90,7 +90,6 @@ def UserLoginView(request):
             otp = send_otp(request)
             email_otp(otp,email)
             return redirect('accounts:otp')
-            
         
         else:
             error_message = "Invalid Username or Password"
@@ -145,7 +144,7 @@ class Setup_2FAView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        img = generate_qr(self.data)
+        img = generate_qr(self.data, issuer_name='Custom Guitars', account_name='CustomGuitars@outlook.com')
         
         folder_path = os.path.join(settings.MEDIA_ROOT, "temp")
         os.makedirs(folder_path, exist_ok=True)
