@@ -92,7 +92,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_display_links = ('id','billingName') 
     search_fields = ['id','billingName','emailAddress'] 
     readonly_fields = ['id','token','total','emailAddress','created','billingName','billingAddress1','billingCity', 'billingPostcode','billingCountry','shippingName','shippingAddress1','shippingCity','shippingPostcode','shippingCountry'] 
-    fieldsets = [('ORDER INFORMATION',{'fields': ['id','token','total','created']}),
+    fieldsets = [
+    ('ORDER INFORMATION',{'fields': ['id','token','total','created']}),
     ('BILLING INFORMATION', {'fields': ['billingName','billingAddress1','billingCity','billingPostcode','billingCountry','emailAddress']}),
     ('SHIPPING INFORMATION', {'fields': ['shippingName','shippingAddress1','shippingCity','shippingPostcode','shippingCountry']}),
  ] 

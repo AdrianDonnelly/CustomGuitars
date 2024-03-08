@@ -20,6 +20,11 @@ html {
 .header{
     background-color: rgb(0, 0, 0);
 }
+.footer {
+    position: absolute;
+    bottom: 0;
+
+}
 
 .dropdown-menu{
     background-color: black;
@@ -75,10 +80,7 @@ html {
 
 
 
-.footer {
-    position: absolute;
-    bottom: 0;
-}
+
 
 
 /* cart design temp */
