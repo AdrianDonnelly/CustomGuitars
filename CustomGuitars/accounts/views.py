@@ -63,7 +63,7 @@ def OtpView(request):
             valid_until = datetime.fromisoformat(otp_valid_until)
             
             if valid_until>datetime.now():
-                totp = pyotp.TOTP(otp_secret_key,interval=60)
+                totp = pyotp.TOTP(otp_secret_key,interval=30)
                 expected_otp = totp.now()
                 print(f"Expected OTP: {expected_otp}")
                 print(f"Received OTP: {otp}")
