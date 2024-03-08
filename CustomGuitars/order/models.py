@@ -7,12 +7,10 @@ from accounts.models import CustomUser
 
 
 class Order(models.Model):
- user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+ user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True,)
  token = models.CharField(max_length=250, blank=True) 
- total = models.DecimalField(max_digits=10, decimal_places=2, 
-verbose_name='Euro Order Total') 
- emailAddress = models.EmailField(max_length=250, blank=True, 
-verbose_name='Email Address') 
+ total = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Euro Order Total') 
+ emailAddress = models.EmailField(max_length=250, blank=True, verbose_name='Email Address') 
  created = models.DateTimeField(auto_now_add=True) 
  billingName = models.CharField(max_length=250, blank=True) 
  billingAddress1 = models.CharField(max_length=250, blank=True) 
@@ -55,8 +53,7 @@ def sender_order_email(self):
 class OrderItem(models.Model):
     product = models.CharField(max_length=250) 
     quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2, 
-verbose_name='Euro Price') 
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Price') 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
  
     class Meta: 

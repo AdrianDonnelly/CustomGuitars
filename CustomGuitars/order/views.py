@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+import os
+from django.http import FileResponse,HttpResponse
+from reportlab.pdfgen import canvas
 from order.models import Order
 from django.core.mail import send_mail
 from django.shortcuts import render
+from order.models import Order
 
 def sender_order_email(order):
     subject = "Order Confirmation"
