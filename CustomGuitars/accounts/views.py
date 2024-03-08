@@ -95,9 +95,7 @@ def UserLoginView(request):
     
         if user is not None:
             request.session['otp_user'] = user.id
-            
-            secret_key = user.secret_key  
-            otp = send_otp(request, secret_key)
+            otp = send_otp(request,{'otp_secret_key': user.secret_key})
             email_otp(otp,email)
             
             return redirect('accounts:otp')
@@ -147,16 +145,14 @@ def OrderView(request):
 class Setup_2FAView(DetailView):
     model = Profile
     template_name = 'accounts/setup_2FA.html'
-    
-    data = "adrian"
+
 
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        otp = self.send_otp(self.request, self.object.seceret_key)
-        img = generate_qr(self.data ,issuer_name='Custom Guitars', account_name='Custom')
+        img = generate_qr({'otp_secret_key': self.object.user.secret_key} ,issuer_name='Custom Guitars', account_name='Custom')
         
         folder_path = os.path.join(settings.MEDIA_ROOT, "temp")
         os.makedirs(folder_path, exist_ok=True)

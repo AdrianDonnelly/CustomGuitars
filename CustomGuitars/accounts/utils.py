@@ -3,9 +3,10 @@ import qrcode
 from datetime import datetime,timedelta
 from django.core.mail import send_mail
 
-def send_otp(request,secret_key):
-    totp=pyotp.TOTP(secret_key,interval=60)
-    otp = totp.now()
+def send_otp(request,data):
+    otp_secret_key = data.get('otp_secret_key', '')
+    totp=pyotp.TOTP(otp_secret_key,interval=30)
+    otp = totp.at(datetime.now())
     request.session['otp_secret_key']=totp.secret
     valid_date = datetime.now()+timedelta(minutes=1)
     request.session['otp_valid_date'] = str(valid_date)
@@ -19,10 +20,10 @@ def email_otp(otp,user_email):
     to_email = [user_email]
     send_mail(subject, message, from_email, to_email)
     
-def generate_qr(data, issuer_name, account_name):
-    secret_key = data.get('otp_secret_key', '')
+def generate_qr(data,issuer_name, account_name):
+    otp_secret_key = data.get('otp_secret_key', '')
 
-    totp = pyotp.TOTP(secret_key)
+    totp = pyotp.TOTP(otp_secret_key,interval=30)
     
     uri = totp.provisioning_uri(
         name=account_name,

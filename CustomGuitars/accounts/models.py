@@ -21,6 +21,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         null=True,
     )
+    secret_key = models.CharField(max_length=16, null=True)
 
     
     def __str__(self):
