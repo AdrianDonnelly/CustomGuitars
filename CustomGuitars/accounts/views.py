@@ -19,7 +19,7 @@ from django.shortcuts import render
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('userlogin')
+    success_url = reverse_lazy('accounts:userlogin')
     template_name = 'registration/signup.html'
 
     def form_valid(self, form):
@@ -39,7 +39,7 @@ class SignUpView(CreateView):
         Profile.objects.create(
             user=user,
         )
-        return super().form_valid(form)
+        return super().form_valid(form) 
     
 def OtpView(request):
     error_message = None
@@ -152,7 +152,7 @@ class Setup_2FAView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        img = generate_qr({'otp_secret_key': self.object.user.secret_key} ,issuer_name='Custom Guitars', account_name='Custom')
+        img = generate_qr({'otp_secret_key': self.object.user.secret_key} ,issuer_name='Custom Guitars', account_name=self.object.user.email)
         
         folder_path = os.path.join(settings.MEDIA_ROOT, "temp")
         os.makedirs(folder_path, exist_ok=True)
