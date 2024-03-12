@@ -34,7 +34,7 @@ def product_detail(request, category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     reviews = product.reviews.all()
     try:
-        review_instance = get_object_or_404(ProductReview,product=product,user=request.user.id)
+        review_instance = get_object_or_404(ProductReview,product=product,user=request.user)
     except:
         review_instance=None
         

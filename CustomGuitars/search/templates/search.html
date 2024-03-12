@@ -1,28 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
-{% block metadescription %}
-Test code for the heading on this page
-{% endblock %}
-{% block title %}
-Search - Perfect Cushion Store
-{% endblock %}
+{% block title %}Search{% endblock %}
 {% block content %}
 <div>
-    <p class="text-center my_search_text text-light">You have searched for: <b>"{{ query }}"</b></p>
+    <h4 class="text-center my_search_text text-light mt-5 mb-5">You have searched for: <b>"{{ query }}"</b></h4>
 </div>
-<div class="container">
-    <div class="row mx-auto">
+<div class="container d-flex align-items-center text-light px-5">
+    <div class="container-fluid d-flex flex-row justify-content-between">
         {% for product in product_list %}
-        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md- 12 col-lg-4">
-            <div class="text-light text-center" style="min-width: 18rem;">
-                <a href="{{product.get_absolute_url}}"><img class="card-img-top my_image" src="{{product.image.url}}"
-                        alt="{{product.name}}"></a>
-                <div class="card-body">
-                    <h4>{{product.name}}</h4>
-                    <p>€{{product.price}}</p>
-                </div>
+        <div class="container-fluid d-flex flex-row justify-content-center">
+            <div class=" d-flex cat-img  align-items-center flex-column">
+              <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
+              <div>
+                <p>{{product.name}}</p>
+              </div>
             </div>
-        </div>
+          </div>
         {% empty %}
         <div class="row mx-auto">
             <p class="text-center my_search_text text-light">0 results found.</p>
