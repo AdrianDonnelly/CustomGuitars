@@ -86,17 +86,17 @@ class Guitar(models.Model):
 
 class ProductReview(models.Model):
     RATING_CHOICES = [
-        (1, "★"),
-        (2, "★★"),
-        (3, "★★★"),
-        (4, "★★★★"),
-        (5, "★★★★★"),
+        ("★", "★"),
+        ("★★", "★★"),
+        ("★★★", "★★★"),
+        ("★★★★", "★★★★"),
+        ("★★★★★", "★★★★★"),
     ]
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE ,related_name="reviews")
     date = models.DateTimeField(auto_now_add=True)
     review = models.TextField()
-    rating = models.IntegerField(choices=RATING_CHOICES,default=None)
+    rating = models.CharField(choices=RATING_CHOICES,default=None,max_length = 5)
     
     class Meta:
         verbose_name_plural = "Product Reviews"
