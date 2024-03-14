@@ -15,6 +15,7 @@ import qrcode
 from django.conf import settings
 from django.contrib.auth import login
 from django.shortcuts import render
+from order.views import Order
 
 
 class SignUpView(CreateView):
