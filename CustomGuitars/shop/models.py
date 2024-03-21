@@ -1,7 +1,9 @@
-from django.db import models
 import uuid
-from django.urls import reverse
+
 from accounts.models import CustomUser
+from django.db import models
+from django.urls import reverse
+
 
 class Category(models.Model):
     id = models.UUIDField(
