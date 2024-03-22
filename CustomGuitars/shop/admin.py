@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'description', 'category', 'stock', 'available', 'created', 'updated','featured']
+    list_display = ['name', 'price', 'description', 'category', 'stock', 'available', 'created', 'updated','featured','name', 'wood', 'neck', 'fretboard', 'frets', 'pickups', 'switches', 'mastervol', 'mastertone', 'trem', 'tuners', 'hardware', 'colour', 'scale']
     list_editable = ['price', 'stock', 'available','featured']
     list_per_page = 20
 

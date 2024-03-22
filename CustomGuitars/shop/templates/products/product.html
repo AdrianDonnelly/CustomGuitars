@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {% block metadescription %}
 {{product.description|truncatewords:155 }} {% endblock %} {% block title %}
 {{product.name }} {% endblock %} {% block content %}
-<div class="d-flex flex-column mt-5">
+<div class="d-flex justify-content-around flex-column mt-5">
   <br />
   <div class="d-flex justify-content-around">
     <div class="text-light col-12 col-sm-12 col-md-12 col-lg-6">
@@ -61,7 +61,22 @@
     <div class="desc text-light mt-5">
       <h3>Discription</h3>
       <p>{{product.description}}</p>
+      <p>{{product.wood}}</p>
+      <p>{{product.fretboard}}</p>
+      <p>{{product.frets}}</p>
+      <p>{{product.pickups}}</p>
+      <p>{{product.switches}}</p>
+      <p>{{product.mastervol}}</p>
+      <p>{{product.mastertone}}</p>
+      <p>{{product.trem}}</p>
+      <p>{{product.tuners}}</p>
+      <p>{{product.hardware}}</p>
+      <p>{{product.colour}}</p>
+      <p>{{product.scale}}</p>
+      
+
     </div>
+    
     <div
       class="review d-flex form-group text-light justify-content-around flex-column mt-5"
     >
