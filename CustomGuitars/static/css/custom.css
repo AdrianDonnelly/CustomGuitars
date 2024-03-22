@@ -19,6 +19,9 @@ html {
     position: relative;
     min-height: 100%;
 }
+.account{
+    max-width: 40rem;
+}
 .header{
     background-color: rgb(0, 0, 0);
 }

@@ -37,11 +37,28 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='product', blank=True)
     stock = models.IntegerField()
+    discreption= models.TextField(blank=True)
     available = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-
+    name = models.TextField(blank=True)
+    wood = models.TextField(blank=True)
+    neck = models.TextField(blank=True)
+    fretboard = models.TextField(blank=True)
+    frets= models.TextField(blank=True)
+    pickups= models.TextField(blank=True)
+    switches= models.TextField(blank=True)
+    mastervol= models.TextField(blank=True)
+    mastertone= models.TextField(blank=True)
+    trem= models.TextField(blank=True)
+    tuners= models.TextField(blank=True)
+    hardware= models.TextField(blank=True)
+    strings= models.TextField(blank=True)
+    colour= models.TextField(blank=True)
+    scale = models.IntegerField(blank=True, null=True)
+    
+    
 
     class Meta:
         ordering = ('name',)

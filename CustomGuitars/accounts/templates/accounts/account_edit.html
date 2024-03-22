@@ -2,7 +2,7 @@
 {% block title %}Edit Account{% endblock title %}
 
 {% block content %}
-<div class="container text-light mb-2 mt-2 px-5">
+<div class="container account text-light mb-2 mt-2 px-5">
   <h2>Account</h2>
   <form method="post" class="mt-4">
     {% csrf_token %}
@@ -16,9 +16,8 @@
       </div>
     {% endfor %}
     <div class="d-flex justify-content-start">
-    <button class="btn btn btn-outline-light m-2" type="submit">
-      <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}">Log out</a>
-    </button>
+    
+      <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}"><button class="btn btn btn-outline-light m-2" type="submit">Log out</button></a>
     <button class="btn btn btn-outline-light m-2" type="submit">
       <a class="text-light link-underline link-underline-opacity-0"href="{% url 'password_reset' %}">Reset Password</a>
     </button>
