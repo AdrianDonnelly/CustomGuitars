@@ -2,6 +2,9 @@ function showFeatured(category) {
   sessionStorage.setItem('scrollToCategory', category);
   window.location.href = `/featured/${category}/`;
 }
+function compareProduct(category) {
+  window.location.href = `/compare/${category}/`;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   let scrollToCategory = sessionStorage.getItem('scrollToCategory');

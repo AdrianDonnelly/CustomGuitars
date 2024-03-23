@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% load static %} 
+{% block title %}Compare Products{%endblock%}
+{% block content %}
+
+<div class="text-light mb-2 mt-5 px-5">
+  <h2>Compare Products</h2>
+</div>
+<div
+  id="home"
+  class="home text-light px-5 d-flex justify-content-center flex-column"
+>
+  <div class="d-flex justify-content-between">
+    <button
+      onclick="compareProduct('Electrics')"
+      class="home_btn btn btn-primary mt-2 me-1"
+    >
+      Electrics
+    </button>
+    <button
+      onclick="compareProduct('Basses')"
+      class="home_btn btn btn btn-primary mt-2 me-1"
+    >
+      Basses
+    </button>
+    <button
+      onclick="compareProduct('Acoustics')"
+      class="home_btn btn btn btn-primary mt-2 me-1"
+    >
+      Acoustics
+    </button>
+    <button
+      onclick="compareProduct('Amps')"
+      class="home_btn btn btn btn-primary mt-2 me-1"
+    >
+      Amps
+    </button>
+    <button
+      onclick="compareProduct('Pedals')"
+      class="home_btn btn btn btn-primary mt-2"
+    >
+      Pedals
+    </button>
+  </div>
+
+  <div id="{{ selected_category }}" class="featured-element">
+    <div class="container-fluid d-flex flex-row justify-content-between">
+      {% for product in compare_products%}
+      <div class="container-fluid d-flex flex-row justify-content-center">
+        <div class="d-flex cat-img align-items-center flex-column">
+          <a class="img" href="{{product.get_absolute_url}}" >
+            <img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}" />
+          </a>
+          <div>
+            <p>{{product.name}}</p>
+
+            <button class="home_btn btn btn btn-primary mt-2 me-1" >Compare</button>
+
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <div id="selected_guitar_info" class="selected-guitar-info text-light">
+      <div>
+        <h1>Products</h1>
+      </div>
+      <hr />
+      <div>
+        <h4>Name:</h4>
+      </div>
+      <hr />
+      <div>
+        <h4>Description:</h4>
+      </div>
+      <hr />
+      <div>
+        <h4>Wood:</h4>
+      </div>
+    </div>
+  </div>
+  {%endblock%}
+</div>

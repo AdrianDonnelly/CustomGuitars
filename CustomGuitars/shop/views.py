@@ -58,6 +58,15 @@ def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
 
+def compare(request,category=None):
+    categories = Category.objects.all()
+    compare_products= []
+    if category:
+        selected_category = get_object_or_404(Category, name=category)
+        compare_products = Product.objects.filter(category=selected_category, featured=True, available=True)
+        
+    return render(request, 'products/compare.html', { 'categories': categories, 'selected_category': category,'compare_products':compare_products})
+
 def featured(request, category=None):
     categories = Category.objects.all()
     featured_products = []
