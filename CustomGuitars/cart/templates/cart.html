@@ -25,20 +25,20 @@ Cart -
     </div>
 </div>
 {% else %}
-<div class="row mx-auto">
+<div class="row mx-auto mt-5">
     <div class="col-12 col-md-6">
         <div class="text-center text-light">
-            <h2 class="text-center my_title">
+            <h2 class="text-center my_title ">
                 Your shopping cart
             </h2>
         </div>
-        <div class=" text-center rounded p-1 my_custom_box mx-4">
-            <table class="table my_custom_table" style="min-height:12rem">
-                <thead class="my_custom_thead">
+        <div class=" text-center rounded p-1  mx-4">
+            <table class="text-light" style="min-height:12rem">
+                <thead class="">
                     <tr>
-                        <th colspan="5">
+                        <h4 class="text-light" colspan="5">
                             Your items
-                        </th>
+                        </h4>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@ Cart -
                                 <br>
                                 Unit Price: €{{cart_item.product.price}}
                                 <br>
-                                Qty: {{cart_item.quantity}} x €{{cart_item.product.price}}
+                                Qty: {{cart_item.quantity}}
                             </td>
                             <td>
                                 {% if cart_item.quantity < cart_item.product.stock %} <a
@@ -84,24 +84,20 @@ Cart -
                 Checkout
             </h2>
         </div>
-        <div class="rounded p-1 my_custom_box">
-            <table class="table my_custom_table">
-                <thead class="my_custom_thead">
-                    <tr>
-                        <th>
-                            Summary
-                        </th>
-                    </tr>
+        <div class="rounded p-1 d-flex flex-column">
+            <table class="text-light ">
+                <thead class="">
+                   
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <p class="text-light" colspan="5">
                             Please review your shopping cart items before proceeding with the order payment.
-                        </td>
+                        </p>
                     </tr>
                     {% if voucher %}
                     <tr class="subtotal">
-                        <td>Total</td>
+                        <td>Total:</td>
                         <td colspan="4"></td>
                         <td class="num">€{{ total|floatformat:"2" }}</td>
                     </tr>
@@ -116,16 +112,16 @@ Cart -
                         </td>
                     </tr>
                     <tr class="total">
-                        <td>Total</td>
+                        <td>Total:</td>
                         <td colspan="4"></td>
                         <td class="num">
                             €{{ new_total|floatformat:"2" }}
                         </td>
                     </tr>
                     {% else %}
-                    <tr class="total">
-                        <td>Total</td>
-                        <td colspan="4"></td>
+                    <tr class="total d-flex justify-content-center">
+                        <td>Total:</td>
+                        <td colspan="1"></td>
                         <td class="num">
                             €{{ total|floatformat:"2" }}
                         </td>
@@ -133,8 +129,10 @@ Cart -
                     {% endif %}
                 </tbody>
             </table>
-            <p>Apply a voucher:</p>
-            <form action="{% url 'vouchers:apply' %}" method="post">
+            <hr />
+            
+            <form action="{% url 'vouchers:apply' %}" method="post"class="text-light">
+                <p>Apply Voucher</p>
                 {{ voucher_apply_form }}
                 <input type="submit" value="Apply">
                 {% csrf_token %}
@@ -145,9 +143,9 @@ Cart -
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="pt-2">
-                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button "
                         data-key="{{ data_key }}" data-amount="{{ stripe_total }}" data-name="Custom Guitars"
-                        data-description="{{ description }}" data-image="{% static 'images/logo.png' %}"
+                        data-description="{{ description }}" data-image="/media/Logo/GuitarLogo.png"
                         data-locale="auto" data-currency="eur" data-shipping-address="true" data-billing-address="true"
                         data-zip-code="true">
                         </script>
