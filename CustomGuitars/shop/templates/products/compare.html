@@ -4,24 +4,32 @@
 
 <div class="text-light mb-2 mt-5 px-5">
   <h2>Compare Products</h2>
+  <h1>Products</h1>
 </div>
-    <div id="selected_guitar_info" class="selected-guitar-info text-light">
-      <div>
-        <h1>Products</h1>
-      </div>
-      <hr />
-      <div>
-        <h4>Name:</h4>
-      </div>
-      <hr />
-      <div>
-        <h4>Description:</h4>
-      </div>
-      <hr />
-      <div>
-        <h4>Wood:</h4>
-      </div>
-    </div>
+    <div id="compare" class="d-flex text-light ">
+      <div class="d-flex flex-column">
+        
+        {%for compare_item in compare_items %}    
+        <div class="d-flex flex-column">
+          <div>
+          <a href="{{compare_item.product.get_absolute_url}}"><img src="{{compare_item.product.image.url}}" alt=""class="compare_img"></a>
+          <a href="{% url 'shop:compare_remove' compare_item.product.id %}" class="custom_a"><i
+            class="fas fa-minus-circle custom_icon"></i></a>
+        </div>
+        
+        <div style="width:10rem">
+          <p>Name:{{compare_item.product.name}}</p>
+          
+          <p>Name:{{compare_item.product.name}}</p>
+          <hr />
+          <p>Name:{{compare_item.product.name}}</p>
+          <hr />
+          <p>Name:{{compare_item.product.name}}</p>
+
+              
+          </div>
+        </div>
   </div>
+  {% endfor %}
   {%endblock%}
 </div>

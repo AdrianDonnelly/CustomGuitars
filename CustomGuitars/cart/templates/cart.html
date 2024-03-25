@@ -57,9 +57,10 @@ Cart -
                                 Qty: {{cart_item.quantity}} x €{{cart_item.product.price}}
                             </td>
                             <td>
-                                {% if cart_item.quantity < cart_item.product.stock %} <a
-                                    href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i
-                                        class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
+                                {% if cart_item.quantity < cart_item.product.stock %} 
+                                <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a">
+                                    <i class="fas fa-plus-circle custom_icon"></i>
+                                </a>&nbsp;
                                     <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i
                                             class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
                                     <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i

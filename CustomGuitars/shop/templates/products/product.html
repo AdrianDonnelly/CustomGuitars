@@ -52,6 +52,13 @@
           >Add to Cart</a
         >
       </div>
+      <div class="d-flex home_btn mb-4 mt-2">
+        <a
+          class="btn btn-primary home_btn"
+          href="{% url 'shop:add_compare' product.id %}"
+          >Compare product</a
+        >
+      </div>
       <hr />
       <p>30 day money back guarantee</p>
       {% endif %}
