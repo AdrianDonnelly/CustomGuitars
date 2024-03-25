@@ -125,3 +125,24 @@ class ProductReview(models.Model):
     
     def get_rating(self):
         return self.rating
+    
+class Compare(models.Model):
+    compare_id = models.CharField(max_length=250, blank=True)
+
+    class Meta:
+        db_table = 'Compare'
+
+    def __str__(self):
+        return self.compare_id
+
+class CompareItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    compare = models.ForeignKey(Compare, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    
+    class Meta:
+        db_table = 'CompareItem'
+
+    def __str__(self):
+        return self.product
+    

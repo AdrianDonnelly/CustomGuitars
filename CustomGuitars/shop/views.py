@@ -58,14 +58,7 @@ def guitars(request):
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
 
-def compare(request,category=None):
-    categories = Category.objects.all()
-    compare_products= []
-    if category:
-        selected_category = get_object_or_404(Category, name=category)
-        compare_products = Product.objects.filter(category=selected_category, featured=True, available=True)
-        
-    return render(request, 'products/compare.html', { 'categories': categories, 'selected_category': category,'compare_products':compare_products})
+
 
 def featured(request, category=None):
     categories = Category.objects.all()
@@ -78,6 +71,46 @@ def featured(request, category=None):
     print("Featured Products:", featured_products)
     return render(request, 'home.html', {'categories': categories, 'featured': featured_products, 'selected_category': category})
  
+def _compare_id(request):
+    compare = request.session.session_key
+    if not compare:
+        compare = request.session.create()
+    return compare
+
+def add_compare(request, product_id):
+    product = Product.objects.get(id=product_id)
+    try:
+        compare= Compare.objects.get(compare_id=_compare_id(request))
+    except Cart.DoesNotExist:
+        compare = Compare.objects.create(compare_id=_compare_id(request))
+        Compare.save()
+    try:
+        compare_item = CompareItem.objects.get(product=product, compare=compare)
+        if (compare_item.quantity < compare_item.product.stock):
+           compare_item.quantity +=1
+        compare_item.save()
+    except CompareItem.DoesNotExist:
+        compare_item = CompareItem.objects.create(product=product, quantity=1,compare=compare)
+    return redirect('compare:compare_detail')
+
+def compare_detail(request, total=0, counter=0, compare_items = None):
+    try:
+        compare = Compare.objects.get(compare_id=_compare_id(request))
+        compare_items = CompareItem.objects.filter(compare=compare, active=True)
+        for compare_item in compare_items:
+            counter += cart_item.quantity
+    except:
+        ObjectDoesNotExist
+        pass
+        
+    return render(request, 'products/compare.html', { 'categories': categories, 'selected_category': category,'compare_products':compare_products})
+
+def compare_remove(request, product_id):
+    compare= Compare.objects.get(compare_id=_compare_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    compare_items = CompareItem.objects.filter(compare=compare, active=True)
+    compare_item.delete()
+    return redirect('compare:compare_detail')
 
 
     
