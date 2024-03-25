@@ -1,35 +1,145 @@
-{% extends "base.html" %} {% load static %} 
-{% block title %}Compare Products{%endblock%}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}Compare
+Products{%endblock%} {% block content %}
 
 <div class="text-light mb-2 mt-5 px-5">
   <h2>Compare Products</h2>
-  <h1>Products</h1>
 </div>
-    <div id="compare" class="d-flex text-light ">
-      <div class="d-flex flex-column">
-        
-        {%for compare_item in compare_items %}    
-        <div class="d-flex flex-column">
-          <div>
-          <a href="{{compare_item.product.get_absolute_url}}"><img src="{{compare_item.product.image.url}}" alt=""class="compare_img"></a>
-          <a href="{% url 'shop:compare_remove' compare_item.product.id %}" class="custom_a"><i
-            class="fas fa-minus-circle custom_icon"></i></a>
+<div
+  id="compare"
+  style="min-width: 50rem"
+  class="d-flex text-light flex-column justify-content-between">
+  <div class="d-flex justify-content-between ">
+    <div>
+      {%for compare_item in compare_items %}
+      <div class="d-flex flex-column ms-4 me-4">
+        <div class="d-flex flex-row">
+          <a href="{{compare_item.product.get_absolute_url}}"
+            ><img
+              src="{{compare_item.product.image.url}}"
+              alt=""
+              class="compare_img"
+          /></a>
+          <a
+            href="{% url 'shop:compare_remove' compare_item.product.id %}"
+            class="custom_a"
+            ><i class="fas fa-minus-circle custom_icon"></i
+          ></a>
         </div>
-        
-        <div style="width:10rem">
-          <p>Name:{{compare_item.product.name}}</p>
-          
-          <p>Name:{{compare_item.product.name}}</p>
-          <hr />
-          <p>Name:{{compare_item.product.name}}</p>
-          <hr />
-          <p>Name:{{compare_item.product.name}}</p>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="d-flex flex-column">
+      <div class="d-flex flex-row justify-content-between">
+        Name:{%for compare_item in compare_items %}
+        <p>{{compare_item.product.name}}</p>
+        {%endfor%}
+      </div>
+      <hr />
 
-              
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row justify-content-between">
+          Category:{%for compare_item in compare_items %}
+          <p>{{compare_item.product.category}}</p>
+          {%endfor%}
+        </div>
+        <hr />
+        <div style="" class="d-flex flex-column">
+          <div class="d-flex flex-row justify-content-between">
+            Price:{%for compare_item in compare_items %}
+            <p style="max-width: 15rem">{{compare_item.product.price}}</p>
+            {%endfor%}
+          </div>
+          <hr />
+          <div style="" class="d-flex flex-column">
+            <div class="d-flex flex-row justify-content-between">
+              Wood:{%for compare_item in compare_items %}
+              <p style="max-width: 15rem">{{compare_item.product.wood}}</p>
+              {%endfor%}
+            </div>
+            <hr />
+            <div style="" class="d-flex flex-column">
+              <div class="d-flex flex-row justify-content-between">
+                Neck:{%for compare_item in compare_items %}
+                <p style="max-width: 15rem">{{compare_item.product.neck}}</p>
+                {%endfor%}
+              </div>
+              <hr />
+              <div style="" class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-between">
+                  Fretboard:{%for compare_item in compare_items %}
+                  <p style="max-width: 15rem">
+                    {{compare_item.product.fretboard}}
+                  </p>
+                  {%endfor%}
+                </div>
+                <hr />
+                <div style="" class="d-flex flex-column">
+                  <div class="d-flex flex-row justify-content-between">
+                    Frets:{%for compare_item in compare_items %}
+                    <p style="max-width: 15rem">
+                      {{compare_item.product.frets}}
+                    </p>
+                    {%endfor%}
+                  </div>
+                  <hr />
+                  <div class="d-flex flex-column">
+                    <div class="d-flex flex-row justify-content-between">
+                      Pickups:{%for compare_item in compare_items %}
+                      <p style="max-width: 15rem">
+                        {{compare_item.product.pickups}}
+                      </p>
+                      {%endfor%}
+                    </div>
+                    <hr />
+                    <div class="d-flex flex-column">
+                      <div class="d-flex flex-row justify-content-between">
+                        switches:{%for compare_item in compare_items %}
+                        <p style="max-width: 15rem">
+                          {{compare_item.product.switches}}
+                        </p>
+                        {%endfor%}
+                      </div>
+                      <hr />
+                      <div class="d-flex flex-column">
+                        <div class="d-flex flex-row justify-content-between">
+                          mastervol:{%for compare_item in compare_items %}
+                          <p style="max-width: 15rem">
+                            {{compare_item.product.mastervol}}
+                          </p>
+                          {%endfor%}
+                        </div>
+                        <hr />
+                        <div class="d-flex flex-column">
+                          <div class="d-flex flex-row justify-content-between">
+                            mastertone:{%for compare_item in compare_items %}
+                            <p style="max-width: 15rem">
+                              {{compare_item.product.mastertone}}
+                            </p>
+                            {%endfor%}
+                          </div>
+                          <hr />
+                          <div class="d-flex flex-column">
+                            <div class="d-flex flex-row justify-content-between">
+                              trem:{%for compare_item in compare_items %}
+                              <p style="max-width: 15rem">
+                                {{compare_item.product.trem}}
+                              </p>
+                              {%endfor%}
+                            </div>
+                            <hr />
+                          </div>
+                        </div>
+                      </div>
+
+                      {%endblock%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
-  {% endfor %}
-  {%endblock%}
 </div>
