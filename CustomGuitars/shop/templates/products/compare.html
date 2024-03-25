@@ -1,6 +1,10 @@
-{% extends "base.html" %} {% load static %} {% block title %}Compare
-Products{%endblock%} {% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}Compare Products{%endblock%} {% block content %}
 
+{% if error_message %}
+<div class="alert bg-danger text-light" role="alert">
+    {{ error_message }}
+</div>
+{% endif %}
 <div class="text-light mb-2 mt-5 px-5">
   <h2>Compare Products</h2>
 </div>
@@ -8,26 +12,23 @@ Products{%endblock%} {% block content %}
   id="compare"
   style="min-width: 50rem"
   class="d-flex text-light flex-column justify-content-between">
-  <div class="d-flex justify-content-between ">
+  <div class="d-flex justify-content-between">
+    {% for compare_item in compare_items %}
     <div>
-      {%for compare_item in compare_items %}
       <div class="d-flex flex-column ms-4 me-4">
         <div class="d-flex flex-row">
-          <a href="{{compare_item.product.get_absolute_url}}"
-            ><img
-              src="{{compare_item.product.image.url}}"
-              alt=""
-              class="compare_img"
-          /></a>
-          <a
-            href="{% url 'shop:compare_remove' compare_item.product.id %}"
-            class="custom_a"
-            ><i class="fas fa-minus-circle custom_icon"></i
-          ></a>
+          <a href="{{compare_item.product.get_absolute_url}}">
+            <img src="{{compare_item.product.image.url}}" alt="" class="compare_img">
+          </a>
+          <a href="{% url 'shop:compare_remove' compare_item.product.id %}" class="custom_a">
+            <i class="fas fa-minus-circle custom_icon"></i>
+          </a>
         </div>
       </div>
     </div>
     {% endfor %}
+  </div>
+  
     <div class="d-flex flex-column">
       <div class="d-flex flex-row justify-content-between">
         Name:{%for compare_item in compare_items %}

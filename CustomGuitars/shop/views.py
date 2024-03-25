@@ -80,20 +80,33 @@ def _compare_id(request):
 
 def add_compare(request, product_id):
     product = Product.objects.get(id=product_id)
+    error_message=None
+    
     try:
         compare= Compare.objects.get(compare_id=_compare_id(request))
     except Compare.DoesNotExist:
         compare = Compare.objects.create(compare_id=_compare_id(request))
         compare.save()
         
+    if CompareItem.objects.filter(compare=compare).count() >= 3:
+        error_message ="You can only compare up to three items."
+        request.session['error_message'] = error_message
+        return redirect('shop:compare_detail')
+        
     try:
         compare_item = CompareItem.objects.get(product=product, compare=compare)
         compare_item.save()
+    
     except CompareItem.DoesNotExist:
         compare_item = CompareItem.objects.create(product=product,compare=compare)
+        
+    if error_message:
+        request.session['error_message'] = error_message
+        
     return redirect('shop:compare_detail')
 
 def compare_detail(request, total=0, counter=0, compare_items = None):
+    error_message = request.session.pop('error_message', None)
     try:
         compare = Compare.objects.get(compare_id=_compare_id(request))
         compare_items = CompareItem.objects.filter(compare=compare, active=True)
@@ -103,7 +116,7 @@ def compare_detail(request, total=0, counter=0, compare_items = None):
         ObjectDoesNotExist
         pass
         
-    return render(request, 'products/compare.html', { 'compare_items':compare_items})
+    return render(request, 'products/compare.html', { 'compare_items':compare_items, 'error_message':error_message})
 
 def compare_remove(request, product_id):
     compare= Compare.objects.get(compare_id=_compare_id(request))
