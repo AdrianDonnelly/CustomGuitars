@@ -45,8 +45,9 @@ Cart -
                     {% for cart_item in cart_items %}
                     <tr>
                         <td style="max-width:10rem">
-                            <a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}" alt=""
-                                    class="float-left rounded custom_image"></a>
+                            <a href="{{cart_item.product.get_url}}">
+                                <img src="{{cart_item.product.image.url}}" alt=""class="float-left compare_img ">
+                            </a>
                         </td>
                         <div style="width:10rem">
                             <td class="text-left">
@@ -57,9 +58,10 @@ Cart -
                                 Qty: {{cart_item.quantity}}
                             </td>
                             <td>
-                                {% if cart_item.quantity < cart_item.product.stock %} <a
-                                    href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i
-                                        class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
+                                {% if cart_item.quantity < cart_item.product.stock %} 
+                                <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a">
+                                    <i class="fas fa-plus-circle custom_icon"></i>
+                                </a>&nbsp;
                                     <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i
                                             class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
                                     <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i

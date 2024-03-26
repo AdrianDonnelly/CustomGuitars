@@ -30,7 +30,9 @@ html {
     bottom: 0;
 
 }
-
+.compare_img{
+    max-width: 5rem;
+}
 .dropdown-menu{
     background-color: black;
 }
