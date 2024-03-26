@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import Category, Product , Guitar, ProductReview, Compare,CompareItem
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from shop.forms import ProductReviewForm
+from .models import Category, Product, Guitar, ProductReview, Compare, CompareItem, Wishlist, WishlistItem
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -126,4 +127,35 @@ def compare_remove(request, product_id):
     return redirect('shop:compare_detail')
 
 
+
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+    wishlist_item, item_created = WishlistItem.objects.get_or_create(wishlist=wishlist, product=product)
+
+    if item_created:
+        message = f'{product.name} added to your wishlist.'
+    else:
+        message = f'{product.name} is already in your wishlist.'
+
+    return redirect('shop:wishlist_detail')
+
+@login_required
+def remove_from_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist = get_object_or_404(Wishlist, user=request.user)
+    wishlist_item = get_object_or_404(WishlistItem, wishlist=wishlist, product=product)
+    wishlist_item.delete()
+
+    return redirect('shop:wishlist_detail')
+
+@login_required
+def wishlist_detail(request):
+   
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     
+    
+    wishlist_items = wishlist.items.all()
+    
+    return render(request, 'products/wishlist.html', {'wishlist': wishlist, 'wishlist_items': wishlist_items})
