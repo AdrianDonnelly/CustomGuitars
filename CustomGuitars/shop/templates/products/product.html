@@ -57,12 +57,10 @@
           >Add to Cart</a
         >
       </div>
-      <div class="d-flex home_btn mb-4 mt-2">
-        <a
-          class="btn btn-primary home_btn"
-          href="{% url 'shop:add_compare' product.id %}"
-          >Compare product</a
-        >
+      <hr/>
+      <div class="d-flex home_btn mb-4 mt-2 justify-content-around">
+        <a class="d-flex flex-column justify-content-center link-underline link-underline-opacity-0 text-light" href="{% url 'shop:add_compare' product.id %}"><i class="fa-solid fa-star d-flex  justify-content-center"></i>Compare product</a>
+        <a class="d-flex flex-column justify-content-center link-underline link-underline-opacity-0 text-light" href=""><i class="fa-solid fa-star d-flex  justify-content-center"></i>Wishlist</a>
       </div>
       <hr />
       <p>30 day money back guarantee</p>
@@ -73,20 +71,6 @@
     <div class="desc text-light mt-5">
       <h3>Discription</h3>
       <p>{{product.description}}</p>
-      <p>{{product.wood}}</p>
-      <p>{{product.fretboard}}</p>
-      <p>{{product.frets}}</p>
-      <p>{{product.pickups}}</p>
-      <p>{{product.switches}}</p>
-      <p>{{product.mastervol}}</p>
-      <p>{{product.mastertone}}</p>
-      <p>{{product.trem}}</p>
-      <p>{{product.tuners}}</p>
-      <p>{{product.hardware}}</p>
-      <p>{{product.colour}}</p>
-      <p>{{product.scale}}</p>
-      
-
     </div>
     
     <div
