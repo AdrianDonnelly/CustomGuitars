@@ -45,8 +45,9 @@ Cart -
                     {% for cart_item in cart_items %}
                     <tr>
                         <td style="max-width:10rem">
-                            <a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}" alt=""
-                                    class="float-left rounded custom_image"></a>
+                            <a href="{{cart_item.product.get_url}}">
+                                <img src="{{cart_item.product.image.url}}" alt=""class="float-left compare_img ">
+                            </a>
                         </td>
                         <div style="width:10rem">
                             <td class="text-left">
