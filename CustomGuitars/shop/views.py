@@ -37,19 +37,33 @@ def product_detail(request,category_id, product_id):
     reviews = product.reviews.all()
     featured_products = None
     product_category=None
+    page_obj = None
     
     try:
         review_instance = get_object_or_404(ProductReview,product=product,user=request.user)
+       
     except:
         review_instance=None
-
         
+    if review_instance:
+        p = Paginator(reviews, 3) 
+        page_number = request.GET.get('page')
+        try:
+            page_obj = p.get_page(page_number)  
+        except PageNotAnInteger:
+            page_obj = p.page(4)
+        except EmptyPage:
+            page_obj = p.page(p.num_pages)   
+            
     if category is not None:
         product_category = get_object_or_404(Category, id=category_id)
         featured_products = Product.objects.filter(category=product_category, featured=True, available=True)
     
-    existing_review = product.get_existing(user=request.user,review=review_instance)
+    existing_review = product.get_existing(user=request.user,review=review_instance)  
     
+   
+
+
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
         if form.is_valid ():
@@ -64,7 +78,7 @@ def product_detail(request,category_id, product_id):
 
     return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 
                                                      'form':form ,'existing_review':existing_review ,
-                                                     'featured':featured_products,'product_category':category,})
+                                                     'featured':featured_products,'product_category':category,'page_obj': page_obj})
 
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
