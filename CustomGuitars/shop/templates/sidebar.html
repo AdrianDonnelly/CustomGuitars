@@ -2,48 +2,59 @@
 
     <div id="top-sidebar" class="top-sidebar d-flex justify-content-start align-items-center text-light">
 
-        <a class="text-light"href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-xmark fa-lg"></i></a>
+        <a class="text-light ms-2 me-3"href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-xmark fa-lg"></i></a>
         {%if user.is_authenticated %}
-            <i class="fa-solid fa-user fa-xl me-3"></i>
-            <a class=" nav-link  " href="{% url 'accounts:account' pk=user.pk %}">Hi {{user.username}}</a>
+            <i class="fa-solid fa-user fa-xl"></i>
+            <a class=" nav-link  ms-2" href="{% url 'accounts:account' pk=user.pk %}">Hi {{user.username}}</a>
         {% else %}
             <i class="fa-solid fa-user fa-xl me-3"></i>
             <a class="nav-link " href="{% url 'accounts:userlogin' %}">Log in</a>
         {% endif %}
     </div>
 
-    <div class="ms-2">
-    <div class=" d-flex mt-5 align-items-center">
-        {#<a href="{% url 'accounts:account_edit' pk=object.user.id %}">#}
+    <div class="ms-3">
+    <div class="  mt-5 ">
+        <a class="link-underline text-dark link-underline-opacity-0"href="{% url 'accounts:account_edit' pk=user.id %}">
         <p>Account Settings<p>
         </a>
-    </div class=" d-flex mt-3 align-items-center">
+    </div >
     <div>
-        <a href="{% url 'accounts:orders' %}">
+        <a class="link-underline text-dark link-underline-opacity-0"href="{% url 'accounts:orders' %}">
         <p>Orders<p>
         </a>
     </div>
-    <div  class=" d-flex mt-3 align-items-center"> 
-        <a  href="{% url 'cart:cart_detail' %}">
+    <div class="  mt-3 "> 
+        <a class="link-underline text-dark link-underline-opacity-0"  href="{% url 'cart:cart_detail' %}">
         <p>Cart<p>
         </a>
     </div>
     <hr/>
-    <div class=" d-flex mt-5 align-items-center">
-        <p>Shop Electric Guitars<p>
-    </div class=" d-flex mt-3 align-items-center">
-    <div>
-        <p>Shop Amps<p>
-    </div>
-    <div  class=" d-flex mt-3 align-items-center"> 
-        <p>Shop Strings<p>
-    </div>
+    <p>
+        Categories
+    </p>
+          {% for cat in links %}
+          <li>
+            <a class="link-underline text-dark link-underline-opacity-0" href="{{ cat.get_absolute_url }}">
+              {{cat.name}}
+            </a>
+          </li>
+          {% endfor %}
+      </ul>
     <hr/>
-    <div class=" d-flex mt-5 align-items-center">
+    <div class="mt-3">
         <p>Gift Vouchers<p>
-    </div class=" d-flex mt-3 align-items-center">
-    <div>
-        <p>Return Product<p>
+    </div>
+    <div class="mt-3">
+        <a class=" text-dark link-underline link-underline-opacity-0 "href="{% url 'configurator:configurator' %}">Configurator</a>
+    </div>
+    <div class="mt-3">
+        <a class="text-dark link-underline link-underline-opacity-0"href="{% url 'shop:compare_detail' %}">Compare Products</a>
+    </div>
+    <div class="mt-3">
+        <a class="text-dark link-underline link-underline-opacity-0"href="#">Wishlist</a>
+    </div>
+    <div class="logout-side mb-5">
+        <a class="text-dark link-underline link-underline-opacity-0 "href="{% url 'logout' %}"><p class="font-weight-bold">Logout</p></a>
     </div>
 </div>
     

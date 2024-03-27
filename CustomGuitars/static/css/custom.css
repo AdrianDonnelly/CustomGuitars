@@ -34,6 +34,10 @@ div.scrollmenu {
 }
 .header{
     background-color: rgb(0, 0, 0);
+    height: 4.5rem;
+}
+.header-items{
+    max-width: 90%;
 }
 .footer {
     position: absolute;
@@ -94,16 +98,10 @@ div.scrollmenu {
 .review{
     max-width: 20rem;
 }
-.sidebutton {
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    text-align: inherit;
-    font: inherit;
-    border-radius: 0;
-    appearance: none;
+.cart-side-div{
+    min-width: 5rem;
 }
+
 .sidebar {
     position: absolute;
     right: 0;
@@ -112,6 +110,7 @@ div.scrollmenu {
     min-height: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     visibility :hidden;
+    transition: width 0.4s;
 
 }
 .top-sidebar{
@@ -120,6 +119,10 @@ div.scrollmenu {
     background-color:#0F4C75;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     visibility :hidden;
+}
+.logout-side{
+    position: absolute;
+    bottom: 0;
 }
 
 
