@@ -16,7 +16,7 @@ def prod_list(request, category_id=None):
         category = get_object_or_404(Category, id=category_id)
         products = Product.objects.filter(category=category, available=True)
 
-    paginator = Paginator(products, 4)
+    paginator = Paginator(products, 20)
 
     try:
         page = int(request.GET.get('page', '1'))
@@ -31,14 +31,23 @@ def prod_list(request, category_id=None):
     return render(request, 'products/catagories.html', {'category': category, 'prods': products})
 
 
-def product_detail(request, category_id, product_id):
+def product_detail(request,category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
+    category = Category.objects.all()
     reviews = product.reviews.all()
+    featured_products = None
+    product_category=None
+    
     try:
         review_instance = get_object_or_404(ProductReview,product=product,user=request.user)
     except:
         review_instance=None
+
         
+    if category is not None:
+        product_category = get_object_or_404(Category, id=category_id)
+        featured_products = Product.objects.filter(category=product_category, featured=True, available=True)
+    
     existing_review = product.get_existing(user=request.user,review=review_instance)
     
     if request.method == 'POST':
@@ -53,7 +62,9 @@ def product_detail(request, category_id, product_id):
     else:
         form = ProductReviewForm()
 
-    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 'form':form ,'existing_review':existing_review})
+    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 
+                                                     'form':form ,'existing_review':existing_review ,
+                                                     'featured':featured_products,'product_category':category,})
 
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)
@@ -69,7 +80,6 @@ def featured(request, category=None):
         selected_category = get_object_or_404(Category, name=category)
         featured_products = Product.objects.filter(category=selected_category, featured=True, available=True)
 
-    print("Featured Products:", featured_products)
     return render(request, 'home.html', {'categories': categories, 'featured': featured_products, 'selected_category': category})
  
 def _compare_id(request):
