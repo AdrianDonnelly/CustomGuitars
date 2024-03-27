@@ -23,9 +23,9 @@
       <div class="d-flex flex-column">
         <h2>Similar Items</h2>
         <div class="scrollmenu d-flex">
-            {% for product in featured%}
+            {% for featured_product in featured%}
             <div class="product-item">
-                 <a class="img m-1 ms-3 mt-3" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
+                 <a class="img m-1 ms-3 mt-3" href="{{featured_product.get_absolute_url}}"><img class="cat_img" src="{{featured_product.image.url}}" alt="{{featured_product.name}}"/></a>
             </div>
             {% endfor %}
           </div>
@@ -74,15 +74,16 @@
      
 
       {% for existing_review in page_obj.object_list %}
-      <div class="text-light">
-        <a href="" class="link-underline link-underline-opacity-0 text-light">
-          {{existing_review.user.username|title}}
-        </a>
-        <div>
-          <p>{{existing_review.rating}}</p>
-          <p>{{existing_review.review}}</p>
-          <hr />
-          {% endfor %}
+<div class="text-light">
+  <a href="" class="link-underline link-underline-opacity-0 text-light">
+    {{existing_review.user.username|title}}
+  </a>
+  <div>
+    <p>{{existing_review.rating}}</p>
+    <p>{{existing_review.review}}</p>
+    <hr />
+  </div>
+{% endfor %}
           <center>
             {%if page_obj.has_previous %} 
                 <a href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-caret-left"></i></a> 
