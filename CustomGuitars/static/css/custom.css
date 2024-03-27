@@ -19,6 +19,16 @@ html {
     position: relative;
     min-height: 100%;
 }
+
+div.scrollmenu {
+    
+    width: 20rem;
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-color: rgb(147, 147, 147) #212121;
+}
+    
+
 .account{
     max-width: 40rem;
 }

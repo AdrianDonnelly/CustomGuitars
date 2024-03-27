@@ -20,24 +20,17 @@
       </div>
     </div>
     <div class="text-light">
-      <div>
+      <div class="d-flex flex-column">
         <h2>Similar Items</h2>
-        <img
-          class="similar_img"
-          src="{{product.image.url}}"
-          alt="{{product.name}}"
-        />
-        <img
-          class="similar_img"
-          src="{{product.image.url}}"
-          alt="{{product.name}}"
-        />
-        <img
-          class="similar_img"
-          src="{{product.image.url}}"
-          alt="{{product.name}}"
-        />
-        <hr />
+        <div class="scrollmenu d-flex">
+            {% for product in featured%}
+            <div class="product-item">
+                 <a class="img m-1 ms-3 mt-3" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
+            </div>
+            {% endfor %}
+          </div>
+
+        
       </div>
 
       <h1 class="mt-4">€{{product.price}}</h1>
