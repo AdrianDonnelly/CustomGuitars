@@ -45,15 +45,14 @@ def product_detail(request,category_id, product_id):
     except:
         review_instance=None
         
-    if review_instance:
-        p = Paginator(reviews, 3) 
-        page_number = request.GET.get('page')
-        try:
-            page_obj = p.get_page(page_number)  
-        except PageNotAnInteger:
-            page_obj = p.page(4)
-        except EmptyPage:
-            page_obj = p.page(p.num_pages)   
+    p = Paginator(reviews, 3) 
+    page_number = request.GET.get('page')
+    try:
+        page_obj = p.get_page(page_number)  
+    except PageNotAnInteger:
+        page_obj = p.page(4)
+    except EmptyPage:
+        page_obj = p.page(p.num_pages)   
             
     if category is not None:
         product_category = get_object_or_404(Category, id=category_id)
@@ -61,9 +60,6 @@ def product_detail(request,category_id, product_id):
     
     existing_review = product.get_existing(user=request.user,review=review_instance)  
     
-   
-
-
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
         if form.is_valid ():

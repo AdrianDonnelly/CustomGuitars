@@ -18,4 +18,3 @@ document.addEventListener('DOMContentLoaded', function () {
     sessionStorage.removeItem('scrollToCategory');
   }
 });
-

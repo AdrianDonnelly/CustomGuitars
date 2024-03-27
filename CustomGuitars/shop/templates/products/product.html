@@ -85,12 +85,12 @@
           {% endfor %}
           <center>
             {%if page_obj.has_previous %} 
-                <a href="?page={{page_obj.previous_page_number}}"><</a> 
+                <a href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-caret-left"></i></a> 
             {% endif %}
             <span>{{page_obj.number}}</span>
            
             {%if page_obj.has_next %} 
-                <a href="?page={{page_obj.next_page_number}}">></a> 
+                <a href="?page={{page_obj.next_page_number}}"><i class="fa-solid fa-caret-right"></i></a> 
             {% endif %}
         </center>
       </div>
