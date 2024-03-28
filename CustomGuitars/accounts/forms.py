@@ -6,13 +6,13 @@ from django.core.exceptions import ValidationError
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username','first_name','last_name','email','dob',)
+        fields = ('username','first_name','last_name','email','dob','phone_number')
     
 class CustomUserChangeForm(UserChangeForm):
     password = None
     
     class Meta:
         model = CustomUser
-        fields = ('username','email','dob',)
+        fields = ('username','email','phone_number')
  
  

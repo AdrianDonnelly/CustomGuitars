@@ -135,6 +135,7 @@ class AccountView(DetailView):
     template_name = 'accounts/account.html'
     
     
+    
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
 

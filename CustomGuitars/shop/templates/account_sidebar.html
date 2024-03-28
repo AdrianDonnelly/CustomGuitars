@@ -6,6 +6,9 @@
     </div>
     <hr />
     <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1"href="{% url 'accounts:account' pk=user.id %}"> Account Overview</a>
+    </div>
+    <div class="user-setting mt-2 d-flex justify-content-center">
       <a class="text-light link-underline link-underline-opacity-0 p-1"href="{% url 'accounts:account_edit' pk=user.id %}"> Edit Account</a>
     </div>
     

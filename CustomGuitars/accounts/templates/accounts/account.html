@@ -9,8 +9,31 @@
 
 {% block content %}
 
-  <div class="container text-light mb-2 mt-2 px-5">
+  <div class=" text-light mb-2 mt-4 px-5">
     <h2>Account Overview</h2>
+  </div>
+    <div class= "account_container text-light mb-2 p-3 ms-5">
+
+    <div class="mt-4">
+      <p>User Name :</p>
+      {{user.username}}
+      
+    </div>
+    <hr />
+
+    <div class="mt-4">
+      <p>Email:</p>
+      {{user.email}}
+    </div>
+    <hr />
+
+    <div class="mt-4">
+      <p>Phone Number:</p>
+      {{user.phone_number}}
+    </div>
+    <hr />
+    
+    </div>
 
   </div>
 </div>
