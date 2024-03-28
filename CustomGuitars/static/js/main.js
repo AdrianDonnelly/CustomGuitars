@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function openNav() {
-  document.getElementById("sidebar").style.width = "270px";
+  
   document.getElementById("top-sidebar").style.visibility = "visible";
   document.getElementById("sidebar").style.visibility = "visible";
 
 }
 
 function closeNav() {
-  document.getElementById("sidebar").style.width = "0";
+  
   document.getElementById("top-sidebar").style.visibility = "hidden";
   document.getElementById("sidebar").style.visibility = "hidden";
   

@@ -24,7 +24,12 @@
         <div class="base">
             {% include 'header.html' %}
             {% include 'footer.html' %}   
-            {% include 'sidebar.html'%}      
+            {% include 'sidebar.html'%}
+            {% block account_sidebar %}
+            {% if show_account_sidebar %}
+                {% include 'account_sidebar.html'%}
+            {% endif %}
+            {% endblock %}
             {% block content %}
             {% endblock %}
             

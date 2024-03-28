@@ -1,0 +1,26 @@
+<div id="account_main" class="account_main">
+  <div id="account-sidebar" class="account-sidebar d-flex flex-column text-light ">
+    <div class="d-flex flex-column text-light mt-4">
+    <div class=" d-flex justify-content-center">
+    <p>User Settings</p>
+    </div>
+    <hr />
+    <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1"href="{% url 'accounts:account_edit' pk=user.id %}"> Edit Account</a>
+    </div>
+    
+    <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1 "href="{% url 'accounts:setup_2FA'  pk=user.id %}">Setup 2FA</a>
+    </div>
+    <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1"href="{% url 'accounts:orders' %}">Orders</a>
+    </div>
+    <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1"href="#">Wishlist</a>
+    </div>
+    <div class="user-setting mt-2 d-flex justify-content-center">
+      <a class="text-light link-underline link-underline-opacity-0 p-1"href="{% url 'logout' %}">Log Out</a>
+    </div>
+  </div>
+  </div>
+</div>

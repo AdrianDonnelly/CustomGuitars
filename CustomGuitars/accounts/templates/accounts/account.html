@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}Your Account{% endblock title %}
 
-{% block content %}
-<div class="container text-light mb-2 mt-2 px-5">
-  <h2>Account Overview</h2>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:account_edit' pk=object.user.id %}"><button class="btn btn btn-outline-light mt-5" type="submit">Edit Account</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}"><button class="btn btn btn-outline-light mt-5" type="submit">Log Out</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:setup_2FA'  pk=object.user.id %}"><button class="btn btn btn-outline-light mt-5" type="submit">Setup 2FA</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:orders' %}"><button class="btn btn btn-outline-light mt-5" type="submit">Orders</button></a>
+{% block base_settings %}
+    {% with show_account_sidebar=True %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
+{% block content %}
+
+  <div class="container text-light mb-2 mt-2 px-5">
+    <h2>Account Overview</h2>
+
+  </div>
 </div>
 {% endblock content %}
-<button class="btn btn btn-outline-light mt-5" type="submit">
