@@ -6,7 +6,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color:#212121;
-    margin-bottom: 60px;
+    margin-bottom: 20rem;
 }
 
 nav {
@@ -35,6 +35,7 @@ div.scrollmenu {
 .header{
     background-color: rgb(0, 0, 0);
     height: 4.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .header-items{
     max-width: 90%;
@@ -42,6 +43,9 @@ div.scrollmenu {
 .footer {
     position: absolute;
     bottom: 0;
+    background-color: #000000;
+    min-width: 100%;
+    min-height: 7rem;
 
 }
 .compare_img{
@@ -174,6 +178,12 @@ h3{
     font-style: normal;
 }
 h4{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+h5{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
