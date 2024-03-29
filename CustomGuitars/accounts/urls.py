@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path,include
 from .views import SignUpView, AccountView, ProfileUpdateView, OrderView, UserLoginView, OtpView, Setup_2FAView 
+from shop.views import wishlist_detail
 
 app_name = 'accounts'
 
@@ -11,4 +12,5 @@ urlpatterns = [
     path('setup_2FA/<int:pk>/',Setup_2FAView.as_view(),name='setup_2FA'),
     path('account_edit/<int:pk>/', ProfileUpdateView.as_view(), name='account_edit'),
     path('orders/', OrderView, name='orders'), 
+    path('wishlist/', include('shop.urls')),
 ]

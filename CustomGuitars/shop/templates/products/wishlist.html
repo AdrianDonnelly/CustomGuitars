@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Wishlist
+{% endblock %}
+
+{% block content %}
+<div class="container text-light mt-5">
+    <h2 class="mb-4">Wishlist</h2>
+    
+    {% if wishlist_items %}
+    <div id="wishlist" class="d-flex text-light flex-column justify-content-between">
+        {% for item in wishlist_items %}
+        <div class="d-flex justify-content-between mb-4">
+            <div style="width: 30%">
+                <a href="{{ item.product.get_absolute_url }}" class="link-dark">
+                    <img src="{{ item.product.primary_image.url }}" alt="{{ item.product.name }}" class="compare_img" />
+                </a>
+            </div>
+            <div style="width: 50%" class="d-flex flex-column justify-content-between">
+                <div>
+                    <p class="mb-0">{{ item.product.name }}</p>
+                    {% if item.product.stock > 0 %}
+                    <p class="text-success">In Stock</p>
+                    {% else %}
+                    <p class="text-danger">Out of Stock</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% url 'shop:remove_from_wishlist' item.product.id %}" class="btn btn-danger">Remove</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center">
+        <p>Your wishlist is empty.</p>
+        <a href="{% url 'shop:home' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
