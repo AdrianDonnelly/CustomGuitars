@@ -2,7 +2,7 @@
 {% block title %}Your Orders{% endblock title %}
 
 {% block content %}
-<div class="container text-light mb-2 mt-2 px-5">
+<div class="container text-light mb-2 mt-4 px-5">
   <h2>Your Orders</h2>
   {% for order in orders %}
   <p>Order Number: {{ order.id }}, Total: {{ order.total }}</p>

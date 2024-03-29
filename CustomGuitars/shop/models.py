@@ -35,7 +35,11 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='product', blank=True)
+    primary_image = models.ImageField(upload_to='product', blank=True)
+    secondary_image1 = models.ImageField(upload_to='product', blank=True)
+    secondary_image2 = models.ImageField(upload_to='product', blank=True)
+    secondary_image3 = models.ImageField(upload_to='product', blank=True)
+    secondary_image4 = models.ImageField(upload_to='product', blank=True)
     stock = models.IntegerField()
     discreption= models.TextField(blank=True)
     available = models.BooleanField(default=True)
@@ -71,7 +75,34 @@ class Product(models.Model):
             if existing_review:
                 review_limit = "Review limit reached"
                 return review_limit
+    
+    def average_rating(self):
+        # Mapping for Unicode stars to corresponding integer values
+        star_to_int_map = {
+            "★": 1,
+            "★★": 2,
+            "★★★": 3,
+            "★★★★": 4,
+            "★★★★★": 5
+        }
 
+        # Calculate the total rating
+        total_rating = sum(star_to_int_map[review.rating] for review in self.reviews.all())
+
+        # Calculate the average rating
+        if self.reviews.count() > 0:
+            average= total_rating / self.reviews.count()
+        else:
+            average= 0
+        
+        stars = "★" * int(average)
+        return stars
+    
+    def total_reviews(self):
+        total_review = self.reviews.values('user').distinct().count()
+        print(total_review)
+        return total_review
+    
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.category.id, self.id])
 

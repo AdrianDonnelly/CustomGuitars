@@ -1,12 +1,11 @@
 
-
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color:#212121;
-    margin-bottom: 60px;
+    margin-bottom: 20rem;
 }
 
 nav {
@@ -19,22 +18,50 @@ html {
     position: relative;
     min-height: 100%;
 }
+
+div.scrollmenu {
+    
+    width: 20rem;
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-color: rgb(147, 147, 147) #212121;
+}
+    
+.primary_button{
+    background-color:#0F4C75;
+}
+.primary_button:hover{
+    background-color:#1a5a85
+}
 .account{
     max-width: 40rem;
 }
 .header{
     background-color: rgb(0, 0, 0);
+    height: 4.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.header-items{
+    max-width: 90%;
 }
 .footer {
     position: absolute;
     bottom: 0;
+    background-color: #000000;
+    min-width: 100%;
+    min-height: 7rem;
 
 }
 .compare_img{
     max-width: 5rem;
 }
 .dropdown-menu{
-    background-color: black;
+    background-color: #212121;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.dropdown-item:hover{
+    background-color: #868e96;
+
 }
 .home{
     max-width: 80%;
@@ -78,12 +105,68 @@ html {
 .cat_img{
     max-height: 15rem;
 }
-.prod_img{
+.p_prod_img{
     max-height: 35rem;
+}
+.s_prod_img{
+    max-height: 8rem;
 }
 .review{
     max-width: 20rem;
 }
+.cart-side-div{
+    min-width: 5rem;
+}
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    background-color: #E6E6E6;
+    width: 270px ;
+    min-height: 100%;
+    box-shadow: -4px 4px 8px 0 rgba(0, 0, 0, 0.2), -6px 6px 20px 0 rgba(0, 0, 0, 0.19);
+    visibility :hidden;
+    transition: width 0.4s;
+
+}
+.top-sidebar{
+    min-width: 100%;
+    min-height: 4rem;
+    background-color:#0F4C75;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    visibility :hidden;
+}
+.logout-side{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000;
+}
+.account-sidebar{
+    position: absolute;
+    left: 0;
+    background-color: #212121;
+    width: 250px ;
+    min-height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.user-setting{
+    min-width: 100%;
+}
+.user-setting:hover{
+    background-color: #868e96;
+}
+.account_container{
+    background-color: #212121;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    min-width: 60%;
+    min-height: 60%;
+}
+
+
+
 
 /*txt-fonts*/
 p{
@@ -104,6 +187,7 @@ h2{
     font-weight: 400;
     font-style: normal;
 }
+
 h3{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -111,6 +195,12 @@ h3{
     font-style: normal;
 }
 h4{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+h5{
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;

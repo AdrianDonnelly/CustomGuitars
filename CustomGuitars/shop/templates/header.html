@@ -1,5 +1,5 @@
 <header id="header" class="header">
-<div class=" d-flex align-items-center justify-content-between ms-3 me-3 ">
+<div class=" header-items d-flex align-items-center justify-content-between ms-3 me-5 ">
 
   <div class="justify-content-start" style="text-align: center">
     <a href="{% url 'shop:home' %}">
@@ -18,7 +18,7 @@
   </button>
 
     <button class=" mx-2 head-btn text-light btn dropdown-toggle"type="button"id="dropdownMenuButton1"data-bs-toggle="dropdown">
-      Catagories
+      Categories
     </button>
 
     <ul class="dropdown-menu ">
@@ -39,24 +39,17 @@
 </div>
 
 
-    
+    <div class=" cart-side-div d-flex justify-content-between">
     <div class="d-flex text-light align-items-center" id="login/cart">
-        <a class="nav-link me-5" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping fa-xl "></i>
-
-        {% if item_count > 0 %}
-          <a class="nav-link" href="{% url 'cart:cart_detail' %}"></a>
-        {% endif %}</a>
-        {%if user.is_authenticated %}
-            <i class="fa-solid fa-user fa-xl me-3"></i>
-            <a class=" nav-link me-2 " href="{% url 'accounts:account' pk=user.pk %}">Hi {{user.username}}</a>
-        {% else %}
-            <i class="fa-solid fa-user fa-xl me-3"></i>
-            <a class="nav-link me-2 " href="{% url 'accounts:userlogin' %}">Log in</a>
-        {% endif %}
+        <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping fa-xl "></i>
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}"></a></a>
     </div>
-
-</div>
-    
+      <a class="text-light" href="#"id="sidebutton" onclick="openNav()">
+        <i onclick="openNav()" class="fa-solid fa-bars fa-xl"></i>
+      </a> 
+    </div>
+  </div>
+      
   </div>
 </div>
 </header>

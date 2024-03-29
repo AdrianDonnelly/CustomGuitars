@@ -114,12 +114,18 @@ class ProfileUpdateView(UpdateView):
     model = Profile
     template_name = 'accounts/account_edit.html'  
     form_class = CustomUserChangeForm
+    
         
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
     
     def get_object(self, queryset=None):
         return self.request.user
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['show_account_sidebar'] = True 
+        return context
     
     
     
@@ -128,12 +134,15 @@ class AccountView(DetailView):
     model = Profile
     template_name = 'accounts/account.html'
     
+    
+    
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs['pk'])
 
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['show_account_sidebar'] = True
         context['account_edit_url'] = reverse_lazy('accounts:account_edit', kwargs={'pk': self.object.user.id})
         return context
 
@@ -141,7 +150,7 @@ class AccountView(DetailView):
 def OrderView(request):
     # Retrieve orders associated with the current user
     orders = Order.objects.filter(user=request.user)
-    return render(request, 'accounts/orders.html', {'orders': orders})
+    return render(request, 'accounts/orders.html', {'orders': orders,'show_account_sidebar': True})
 
 class Setup_2FAView(DetailView):
     model = Profile
@@ -153,6 +162,7 @@ class Setup_2FAView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['show_account_sidebar'] = True
         img = generate_qr({'otp_secret_key': self.object.user.secret_key} ,issuer_name='Custom Guitars', account_name=self.object.user.email)
         
         folder_path = os.path.join(settings.MEDIA_ROOT, "temp")

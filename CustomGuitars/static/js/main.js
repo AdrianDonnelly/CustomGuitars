@@ -18,3 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
     sessionStorage.removeItem('scrollToCategory');
   }
 });
+
+function openNav() {
+  
+  document.getElementById("top-sidebar").style.visibility = "visible";
+  document.getElementById("sidebar").style.visibility = "visible";
+
+}
+
+function closeNav() {
+  
+  document.getElementById("top-sidebar").style.visibility = "hidden";
+  document.getElementById("sidebar").style.visibility = "hidden";
+  
+}

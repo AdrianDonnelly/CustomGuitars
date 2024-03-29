@@ -13,30 +13,30 @@
     </p>
   </div>
   <div class="mt-5"><h2>Featured</h2></div>
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between ">
 
-    <button onclick="showFeatured('Electrics')" class="home_btn btn btn-primary mt-2 me-1">
+    <button onclick="showFeatured('Electrics')" class="home_btn btn primary_button mt-2 me-1 text-light">
       Electrics
     </button>
     <button
       onclick="showFeatured('Basses')"
-      class="home_btn btn btn btn-primary mt-2 me-1"
+      class="home_btn btn btn primary_button mt-2 me-1 text-light"
     >
       Basses
     </button>
     <button
       onclick="showFeatured('Acoustics')"
-      class="home_btn btn btn btn-primary mt-2 me-1"
+      class="home_btn btn btn primary_button mt-2 me-1 text-light"
     >
       Acoustics
     </button>
     <button
       onclick="showFeatured('Amps')"
-      class="home_btn btn btn btn-primary mt-2 me-1"
+      class="home_btn btn btn primary_button mt-2 me-1 text-light"
     >
       Amps
     </button>
-    <button onclick="showFeatured('Pedals')" class="home_btn btn btn btn-primary mt-2">
+    <button onclick="showFeatured('Pedals')" class="home_btn btn btn primary_button mt-2 text-light">
       Pedals
     </button>
   </div>
@@ -47,7 +47,7 @@
       {% for product in featured %}
         <div class="container-fluid d-flex flex-row justify-content-center">
           <div class=" d-flex cat-img  align-items-center flex-column">
-            <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.image.url}}" alt="{{product.name}}"/></a>
+            <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.primary_image.url}}" alt="{{product.name}}"/></a>
             <div>
               <p>{{product.name}}</p>
             </div>
