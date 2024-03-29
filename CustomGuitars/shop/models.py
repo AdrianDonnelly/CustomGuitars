@@ -181,3 +181,22 @@ class CompareItem(models.Model):
     def __str__(self):
         return self.product
     
+class Wishlist(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product, related_name='wishlists')
+
+    class Meta:
+        verbose_name = 'wishlist'
+        verbose_name_plural = 'wishlists'
+
+    def __str__(self):
+        return f'Wishlist for {self.user.username}'
+
+
+class WishlistItem(models.Model):
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.product.name
