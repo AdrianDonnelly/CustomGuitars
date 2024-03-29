@@ -163,7 +163,17 @@ div.scrollmenu {
     min-width: 60%;
     min-height: 60%;
 }
+.carousel-img{
+    max-width: 20rem;
+}
+.view_img{
+    min-height:55rem;
+}
+.carousel-control-next, .carousel-control-prev {
+    width: 50%;
+    height:70%
 
+}
 
 
 
