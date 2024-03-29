@@ -19,7 +19,9 @@
         />
       </div>
     </div>
-    <div class="text-light">
+
+
+    <div class="text-light ">
       <div class="d-flex flex-column">
         <h2>Similar Items</h2>
         <div class="scrollmenu d-flex">
@@ -29,10 +31,7 @@
             </div>
             {% endfor %}
           </div>
-
-        
       </div>
-
       <h1 class="mt-4">€{{product.price}}</h1>
       <div class="d-flex justify-content-between mt-4">
         <p>Shipping incl.</p>
@@ -45,7 +44,7 @@
       {% else %}
       <div class="d-flex home_btn mb-4 mt-2">
         <a
-          class="btn btn-primary home_btn"
+          class="btn primary_button home_btn text-light"
           href="{% url 'cart:add_cart' product.id %}"
           >Add to Cart</a
         >
@@ -61,6 +60,9 @@
       {% endif %}
     </div>
   </div>
+
+
+
   <div class="d-flex justify-content-around">
     <div class="desc text-light mt-5">
       <h3>Discription</h3>
