@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}View Image{% endblock %} 
+
+{% block content %} 
+<div>
+  
+</div>
+<button class="carousel-control-prev ms-5 mb-5" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next me-5 mb-5" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>
+
+<div id="carouselBasicExample" class="carousel " >
+  <div class="carousel-inner mt-4">
+    <div class="carousel-item active">
+      <img src="{{ product.primary_image.url }}" class="d-block w-100" />
+    </div>
+    <div class="carousel-item">
+      <img src="{{ product.secondary_image1.url }}" class="d-block w-100" alt="Canyon at Night" />
+    </div>
+    <div class="carousel-item">
+      <img src="{{ product.secondary_image2.url }}" class="d-block w-100" alt="Cliff Above a Stormy Sea" />
+    </div>
+  </div>
+</div>
+
+{% endblock %}
