@@ -86,6 +86,9 @@ def guitars(request):
     return render(request, 'products/guitars.html', {'guitars': guitars})
 
 
+def view_images(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'products/view_image.html', {'product': product})
 
 def featured(request, category=None):
     categories = Category.objects.all()
