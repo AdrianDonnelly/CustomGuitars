@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {% block metadescription %}
 {{product.description|truncatewords:155 }} {% endblock %} {% block title %}
 {{product.name }} {% endblock %} {% block content %}
-<div class="d-flex justify-content-around flex-column mt-5">
+<div class="d-flex justify-content-around flex-column mt-3">
   {% if error_message %}
 <div class="alert alert-danger" role="alert">
     {{ error_message }}
@@ -10,14 +10,24 @@
   <br />
   <div class="d-flex justify-content-around">
     <div class="text-light col-12 col-sm-12 col-md-12 col-lg-6">
-      <div>
+      <div class="d-flex flex-column ">
         <h1>{{product.name}}</h1>
-        <img
-          class="prod_img"
-          src="{{product.image.url}}"
-          alt="{{product.name}}"
-        />
+        <div class="d-flex align-items-center">
+          <h2 class="me-2">{{ average_rating }}</h2>
+          <h5>{{total_reviews}}</h5>
+        </div>
+        <div class=" d-flex flex-column align-items-center">
+        <div>
+          <img class="p_prod_img"src="{{product.primary_image.url}}"alt="{{product.name}}"/>
+        </div>
+        <div class="d-flex align-items-center">
+          <img class="s_prod_img m-2"src="{{product.secondary_image1.url}}"alt="{{product.name}}"/>
+          <img class="s_prod_img m-2"src="{{product.secondary_image2.url}}"alt="{{product.name}}"/>
+          <img class="s_prod_img m-2"src="{{product.secondary_image3.url}}"alt="{{product.name}}"/>
+          <img class="s_prod_img m-2"src="{{product.secondary_image4.url}}"alt="{{product.name}}"/>
+        </div>
       </div>
+    </div>
     </div>
 
 
@@ -27,7 +37,7 @@
         <div class="scrollmenu d-flex">
             {% for featured_product in featured%}
             <div class="product-item">
-                 <a class="img m-1 ms-3 mt-3" href="{{featured_product.get_absolute_url}}"><img class="cat_img" src="{{featured_product.image.url}}" alt="{{featured_product.name}}"/></a>
+                 <a class="img m-1 ms-3 mt-3" href="{{featured_product.get_absolute_url}}"><img class="cat_img" src="{{featured_product.primary_image.url}}" alt="{{featured_product.name}}"/></a>
             </div>
             {% endfor %}
           </div>

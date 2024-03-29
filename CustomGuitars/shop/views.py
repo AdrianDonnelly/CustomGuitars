@@ -35,6 +35,8 @@ def product_detail(request,category_id, product_id):
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     category = Category.objects.all()
     reviews = product.reviews.all()
+    average_rating = product.average_rating()
+    total_reviews = product.total_reviews()
     featured_products = None
     product_category=None
     page_obj = None
@@ -53,6 +55,8 @@ def product_detail(request,category_id, product_id):
         page_obj = p.page(4)
     except EmptyPage:
         page_obj = p.page(p.num_pages)   
+        
+    
             
     if category is not None:
         product_category = get_object_or_404(Category, id=category_id)
@@ -74,7 +78,8 @@ def product_detail(request,category_id, product_id):
 
     return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 
                                                      'form':form ,'existing_review':existing_review ,
-                                                     'featured':featured_products,'product_category':category,'page_obj': page_obj})
+                                                     'featured':featured_products,'product_category':category,
+                                                     'page_obj': page_obj,'average_rating': average_rating,'total_reviews':total_reviews})
 
 def guitars(request):
     guitars = Guitar.objects.filter(available=True)

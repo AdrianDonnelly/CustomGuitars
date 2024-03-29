@@ -105,8 +105,11 @@ div.scrollmenu {
 .cat_img{
     max-height: 15rem;
 }
-.prod_img{
+.p_prod_img{
     max-height: 35rem;
+}
+.s_prod_img{
+    max-height: 8rem;
 }
 .review{
     max-width: 20rem;
