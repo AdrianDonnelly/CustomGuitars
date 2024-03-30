@@ -18,7 +18,7 @@ Products{%endblock%} {% block content %} {% if error_message %}
       <div class="d-flex flex-column ms-4 me-4">
         <div style="width: 100%">
           <a href="{{ compare_item.product.get_absolute_url }}" class="link-dark">
-            <img src="{{ compare_item.product.image.url }}" alt="" class="compare_img "/>
+            <img src="{{ compare_item.product.primary_image.url }}" alt="" class="compare_img "/>
           </a>
           <a href="{% url 'shop:compare_remove' compare_item.product.id %}" class="custom_a link-underline-opacity-0 ">
             <i class="fas fa-minus-circle custom_icon "></i>
