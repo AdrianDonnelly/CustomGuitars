@@ -2,22 +2,23 @@
 {% block title %}2FA{% endblock title %} 
 
 {% block content %}
-<div class="text-light mt-5 px-5">
-    <h2>Please enter your One Time Password</h2>
+<div class="OTP d-flex flex-column pt-4 align-items-center text-light mt-5 px-5">
+    <h3 class="mb-4">Please enter your 6-digit verification code</h3>
+    
+    <form class="d-flex "method="post">
+      {% csrf_token %} 
+      <div>
+      <input class="OTP_input me-2"name="otp" type="text" name="otp" required>
+      </div>
+      <div>
+      <button class="btn btn-outline-light "type="submit">Submit</button>
+      </div>
+    </form>
     {% if error_message%}
       <div class="text-light px-5 mt-5">
         <p >{{error_message}}</p>
       </div>
     {%endif%}
-    <form class="d-flex flex-column"method="post">
-      {% csrf_token %} 
-      <div>
-      <input name="otp" type="text" name="otp" required>
-      </div>
-      <div>
-      <button class="btn btn-outline-light mb-2 mt-2"type="submit">Submit</button>
-      </div>
-    </form>
   </div>
 </div>
 

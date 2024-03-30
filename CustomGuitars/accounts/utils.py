@@ -13,7 +13,8 @@ def send_otp(request,data):
     print(f"One Time Password:{otp}")
     return otp
     
-def email_otp(otp,user_email):
+def email_otp(request,otp):
+    user_email = request.session['email']
     subject = "2FA token"
     message = "2FA token:"+otp
     from_email = "CustomGuitars@test.com"

@@ -74,11 +74,11 @@ def OtpView(request):
                 
                     
                 else:
-                    error_message = "invalid One time password token"
+                    error_message = "Invalid One time password token"
             else:
-                error_message = "otp token has expired"
+                error_message = "Otp token has expired"
         else:
-            error_message = "something went wrong"
+            error_message = "Something went wrong"
                     
                     
 
@@ -91,13 +91,13 @@ def UserLoginView(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-        email = request.POST["email"]
-        user = authenticate(request, username=username, password=password,email=email)
+        user = authenticate(request, username=username, password=password)
     
         if user is not None:
             request.session['otp_user'] = user.id
             otp = send_otp(request,{'otp_secret_key': user.secret_key})
-            email_otp(otp,email)
+            request.session['email'] = user.email
+            email_otp(request,otp)
             
             return redirect('accounts:otp')
         

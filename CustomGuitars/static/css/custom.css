@@ -52,6 +52,11 @@ div.scrollmenu {
     min-height: 7rem;
 
 }
+.OTP{
+    max-width: 52rem;
+    min-height:20rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .compare_img{
     max-width: 5rem;
 }
@@ -95,7 +100,7 @@ div.scrollmenu {
     max-width: 100%;
 }
 .signup{
-    width: 50rem;
+    width: 40rem;
 }
 
 .searchbar{
@@ -178,6 +183,9 @@ div.scrollmenu {
 }
 .chrt_container{
     margin-left: 2rem;
+}
+.OTP_input{
+    min-height: 2.4rem;
 }
 
 
