@@ -8,12 +8,33 @@
 {% endblock %}
 
 {% block content %}
-<div class="container text-light mb-2 mt-2 px-5">
-  <h2>Account Overview</h2>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:account_edit' pk=object.user.id %}"><button class="btn btn btn-outline-light mt-5" type="submit">Edit Account</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'logout' %}"><button class="btn btn btn-outline-light mt-5" type="submit">Log Out</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:setup_2FA'  pk=object.user.id %}"><button class="btn btn btn-outline-light mt-5" type="submit">Setup 2FA</button></a>
-    <a class="text-light link-underline link-underline-opacity-0"href="{% url 'accounts:orders' %}"><button class="btn btn btn-outline-light mt-5" type="submit">Orders</button></a>
 
+  <div class=" text-light mb-2 mt-4 px-5">
+    <h2>Account Overview</h2>
+  </div>
+    <div class= "account_container text-light mb-2 p-3 ms-5">
+
+    <div class="mt-4">
+      <p>User Name :</p>
+      {{user.username}}
+      
+    </div>
+    <hr />
+
+    <div class="mt-4">
+      <p>Email:</p>
+      {{user.email}}
+    </div>
+    <hr />
+
+    <div class="mt-4">
+      <p>Phone Number:</p>
+      {{user.phone_number}}
+    </div>
+    <hr />
+    
+    </div>
+
+  </div>
 </div>
 {% endblock content %}

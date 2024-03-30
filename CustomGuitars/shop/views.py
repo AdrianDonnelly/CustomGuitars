@@ -183,7 +183,6 @@ def wishlist_detail(request):
    
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     
-    
     wishlist_items = wishlist.items.all()
     
-    return render(request, 'products/wishlist.html', {'wishlist': wishlist, 'wishlist_items': wishlist_items})
+    return render(request, 'products/wishlist.html', {'wishlist': wishlist, 'wishlist_items': wishlist_items,'show_account_sidebar': True})
