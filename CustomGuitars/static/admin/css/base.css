@@ -5,13 +5,13 @@
 /* VARIABLE DEFINITIONS */
 html[data-theme="light"],
 :root {
-    --primary: #0F4C75;
+    --primary: #002b47;
     --secondary: #0F4C75;
     --accent: #ffffff;
     --primary-fg: #767676;
 
     --body-fg: #333;
-    --body-bg: #303030;
+    --body-bg: rgb(182, 0, 0);
     --body-quiet-color: #666;
     --body-loud-color: #000;
 
@@ -20,11 +20,11 @@ html[data-theme="light"],
     --header-bg: var(--secondary);
     --header-link-color: var(--primary-fg);
 
-    --breadcrumbs-fg: #c4dce8;
+    --breadcrumbs-fg: #0F4C75;
     --breadcrumbs-link-fg: var(--body-bg);
-    --breadcrumbs-bg: var(--primary);
+    --breadcrumbs-bg: #0F4C75;
 
-    --link-fg: #417893;
+    --link-fg: #005b89;
     --link-hover-color: #036;
     --link-selected-fg: #5b80b2;
 
@@ -146,6 +146,7 @@ h1,h2,h3,h4,h5 {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    color: #ffffff;
 }
 
 h1 {
@@ -589,7 +590,7 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 0.8125rem;
     text-align: left;
-    background: var(--primary);
+    background: #146297;
     color: var(--header-link-color);
 }
 
@@ -703,7 +704,7 @@ td ul.errorlist + input, td ul.errorlist + select, td ul.errorlist + textarea {
 /* BREADCRUMBS */
 
 div.breadcrumbs {
-    background: var(--breadcrumbs-bg);
+    background: #146297;
     padding: 10px 40px;
     border: none;
     color: var(--breadcrumbs-fg);
@@ -1141,4 +1142,9 @@ a.deletelink:focus, a.deletelink:hover {
 }
 .chrt_container{
     padding-left: 3rem;
+}
+.admin-logo{
+    max-width: 8rem;
+    margin-right: 1.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
