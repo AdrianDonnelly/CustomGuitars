@@ -176,7 +176,9 @@ div.scrollmenu {
 .review{
     max-width: 10rem;
 }
-
+.chrt_container{
+    margin-left: 2rem;
+}
 
 
 /*txt-fonts*/

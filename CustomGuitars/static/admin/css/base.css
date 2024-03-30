@@ -5,13 +5,13 @@
 /* VARIABLE DEFINITIONS */
 html[data-theme="light"],
 :root {
-    --primary: #79aec8;
-    --secondary: #417690;
-    --accent: #f5dd5d;
-    --primary-fg: #fff;
+    --primary: #0F4C75;
+    --secondary: #0F4C75;
+    --accent: #ffffff;
+    --primary-fg: #767676;
 
     --body-fg: #333;
-    --body-bg: #fff;
+    --body-bg: #303030;
     --body-quiet-color: #666;
     --body-loud-color: #000;
 
@@ -94,7 +94,7 @@ html, body {
 
 body {
     margin: 0;
-    padding: 0;
+    padding:0;
     font-size: 0.875rem;
     font-family: var(--font-family-primary);
     color: var(--body-fg);
@@ -142,7 +142,10 @@ p {
 }
 
 h1,h2,h3,h4,h5 {
-    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h1 {
@@ -917,13 +920,13 @@ a.deletelink:focus, a.deletelink:hover {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background: var(--header-bg);
-    color: var(--header-color);
+    background: #0F4C75;
+    color: #ffffff;
     overflow: hidden;
 }
 
 #header a:link, #header a:visited, #logout-form button {
-    color: var(--header-link-color);
+    color: #ffffff;;
 }
 
 #header a:focus , #header a:hover {
@@ -940,11 +943,11 @@ a.deletelink:focus, a.deletelink:hover {
     margin-inline-end: 20px;
     font-weight: 300;
     font-size: 1.5rem;
-    color: var(--header-branding-color);
+    color: #ffffff;
 }
 
 #branding h1 a:link, #branding h1 a:visited {
-    color: var(--accent);
+    color: #ffffff;
 }
 
 #branding h2 {
@@ -1135,4 +1138,7 @@ a.deletelink:focus, a.deletelink:hover {
 
 .base-svgs {
     display: none;
+}
+.chrt_container{
+    padding-left: 3rem;
 }
