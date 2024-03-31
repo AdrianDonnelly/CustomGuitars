@@ -24,4 +24,3 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = ('username','email','phone_number')
  
- 

@@ -2,6 +2,7 @@ import pyotp
 import qrcode
 from datetime import datetime,timedelta
 from django.core.mail import send_mail
+from django.conf import settings
 
 def send_otp(request,data):
     otp_secret_key = data.get('otp_secret_key', '')
@@ -14,12 +15,11 @@ def send_otp(request,data):
     return otp
     
 def email_otp(request,otp):
-    user_email = request.session['email']
-    subject = "2FA token"
-    message = "2FA token:"+otp
-    from_email = "CustomGuitars@test.com"
-    to_email = [user_email]
-    send_mail(subject, message, from_email, to_email)
+    recipient = request.session['email']
+    subject = " Custom Guitars Authentication code"
+    message = "Your Authentication code is:"+otp+". Please use this code to complete your login process. Do not share this code with anyone."
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient],fail_silently=False)
+
     
 def generate_qr(data,issuer_name, account_name):
     otp_secret_key = data.get('otp_secret_key', '')

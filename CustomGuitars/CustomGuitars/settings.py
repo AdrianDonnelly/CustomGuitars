@@ -151,15 +151,15 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'shop:home'
 LOGOUT_REDIRECT_URL = 'shop:home'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' #this works and sends email to accounts folder holding email 
-EMAIL_FILE_PATH = BASE_DIR / 'accounts/emails'
-# MAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend" Error saying machine has actively refused ?? wtf 
-# EMAIL_FILE_PATH =BASE_DIR / 'orders/emails'
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'customguitars.bis@gmail.com'
+EMAIL_HOST_PASSWORD = 'psum oktm vnjp lres'
     
     
 # Default primary key field type

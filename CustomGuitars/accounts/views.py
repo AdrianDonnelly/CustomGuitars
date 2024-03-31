@@ -56,8 +56,6 @@ def OtpView(request):
         otp_secret_key = request.session['otp_secret_key']
         otp_valid_until = request.session['otp_valid_date']
         
-        print(f"Stored Secret Key: {otp_secret_key}")
-        print(f"Stored Valid Until: {otp_valid_until}")
         
         
         if otp_secret_key and otp_valid_until is not None:
@@ -66,8 +64,6 @@ def OtpView(request):
             if valid_until>datetime.now():
                 totp = pyotp.TOTP(otp_secret_key,interval=30)
                 expected_otp = totp.now()
-                print(f"Expected OTP: {expected_otp}")
-                print(f"Received OTP: {otp}")
                 if totp.verify(otp):
                     login(request, user)
                     return redirect('shop:home')

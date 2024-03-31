@@ -5,10 +5,13 @@ from reportlab.pdfgen import canvas
 from django.core.mail import send_mail
 from django.shortcuts import render
 from order.models import Order
+from django.conf import settings
+
+
 
 def sender_order_email(order):
     subject = "Order Confirmation"
-    customers_email = order.emailAddress
+    recipient = order.emailAddress
     message = f"Thanks for your order!\n\nOrder Number: {order.id}\nTotal: {order.total}\n\n"
     
     order_items = order.orderitem_set.all()
@@ -16,11 +19,8 @@ def sender_order_email(order):
     message += "Order Items:\n"
     for item in order_items:
         message += f"Product: {item.product}, Quantity: {item.quantity}\n"
-    
-    from_email = "CustomGuitars@test.com"
-    to_email = [customers_email]
-
-    send_mail(subject, message, from_email, to_email)
+        
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient],fail_silently=False)
 
 def thanks(request, order_id):
     customer_order = get_object_or_404(Order, id=order_id)
