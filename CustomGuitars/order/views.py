@@ -27,9 +27,12 @@ def whatsapp_order(order):
     account_sid = "AC35862d2a87f33839b12634c64f4e1e9b"
     auth_token  = "56d28fbe8fd7bd44450093c716229d82"
     
+    phone_number = order.user.phone_number
+    formatted_phone_number = f"whatsapp:+353{phone_number}"
+    
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        to="whatsapp:+353851876788",
+        to= formatted_phone_number,
         from_="whatsapp:+14155238886",
         body=f"Thanks for your order!\n\nOrder Number: {order.id}\nTotal: {order.total}\n\n")
 
@@ -37,9 +40,12 @@ def sms_order(order):
     account_sid = "AC35862d2a87f33839b12634c64f4e1e9b"
     auth_token  = "56d28fbe8fd7bd44450093c716229d82"
     
+    phone_number = order.user.phone_number
+    formatted_phone_number = f"+353{phone_number}"
+    
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        to="+353851765118",
+        to=formatted_phone_number,
         from_="+12058289417",
         body=f"Thanks for your order!\n\nOrder Number: {order.id}\nTotal: {order.total}\n\n")
    

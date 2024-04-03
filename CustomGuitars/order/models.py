@@ -11,7 +11,7 @@ class Order(models.Model):
  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True,)
  token = models.CharField(max_length=250, blank=True) 
  total = models.IntegerField(verbose_name='Euro Order Total') 
- emailAddress = models.EmailField(max_length=250, blank=True, verbose_name='Email Address') 
+ emailAddress = models.EmailField(max_length=250, blank=True, verbose_name='Email Address')
  created = models.DateTimeField(auto_now_add=True) 
  billingName = models.CharField(max_length=250, blank=True) 
  billingAddress1 = models.CharField(max_length=250, blank=True) 
