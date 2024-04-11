@@ -31,9 +31,10 @@
     </ul>
 
     <div class=" mx-5 d-flex text-light">
-        <form class="nav-item" action="{% url 'search_app:searchResult' %}"method="get">
-          <input class=" searchbar form-control"type="search"placeholder="Search"aria-label="Search"name="q"/>
-        </form>
+        <form class="nav-item" action="{% url 'search_app:search_results' %}" method="get">
+          <input class="searchbar form-control" type="search" placeholder="Search" aria-label="Search" name="q" />
+      </form>
+      
     </ul>
   </div>
 </div>
