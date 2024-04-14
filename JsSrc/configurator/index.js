@@ -82,7 +82,6 @@ loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
     boundingBox.getSize(size);
 	const scaleFactor = referenceSize / Math.max(size.x, size.y, size.z);
 	gltf.scene.scale.set(scaleFactor, scaleFactor, scaleFactor);
-	gltf.scene.position.y = 1.5;
 
     // Adjust camera position and look at the center of the model
     camera.position.set(center.x, center.y, center.z + 10); // Adjust the distance from the model
