@@ -3,5 +3,6 @@ from .import views
 app_name = 'configurator'
 
 urlpatterns = [
-path('configurator/', views.configurator, name = 'configurator'),
+path('configurator', views.configurator, name='configurator'),
+path('showroom/',views.showroom,name='showroom')
 ]

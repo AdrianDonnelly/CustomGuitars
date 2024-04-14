@@ -44,6 +44,7 @@ class Product(models.Model):
     discreption= models.TextField(blank=True)
     available = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
+    showroom = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     name = models.TextField(blank=True)
