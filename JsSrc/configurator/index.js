@@ -39,10 +39,10 @@ const color = 0xFFFFFF;
 const intensity = 9;
 const light = new THREE.DirectionalLight(color, intensity);
 if (fileName === "gibson_firebird_v_electric_guitar") {
-	light.position.set(-15, 10, 5);
+	light.position.set(-22, 6, 1);
 }
 else if (fileName === "gibson_sg_guitar"){
-	light.position.set(0, 3, 5);
+	light.position.set(-10, 3, 2);
 }else{
 	light.position.set(0, 3, 5);
 }
