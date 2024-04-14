@@ -77,7 +77,7 @@ if (fileName === "gibson_firebird_v_electric_guitar") {
 loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 	
 	if (fileName === "gibson_firebird_v_electric_guitar") {
-		gltf.scene.position.y = -2.5;
+		gltf.scene.position.y = -1.5;
 		gltf.scene.rotation.x = Math.PI / 9;
 		gltf.scene.rotation.y = Math.PI / 11;
 
