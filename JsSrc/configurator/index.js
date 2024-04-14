@@ -36,7 +36,7 @@ const skylight = new THREE.AmbientLight(skycolor, skyintensity);
 scene.add(skylight);
 
 const color = 0xFFFFFF;
-const intensity = 7;
+const intensity = 5;
 const light = new THREE.DirectionalLight(color, intensity);
 if (fileName === "gibson_firebird_v_electric_guitar") {
 	light.position.set(-22, 6, 1);

@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-{%load static%}
-<html lang="en">
-<head>
-<title>Configurator</title>
-<meta charset="utf-8">
-<style>
-        body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        }
-    </style>
-</head>
 
-<body>
+{% extends "base.html" %} {% load static %} {% block content %}
+
 
 <script src= "{% static 'webpack_bundles/configurator.js' %}"> </script>
 
+{% endblock  %}
 
-</body>
-</html>
