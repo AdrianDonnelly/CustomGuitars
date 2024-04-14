@@ -31,12 +31,12 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const skycolor = 0xFFFFFF;
-const skyintensity = 3;
+const skyintensity = 4;
 const skylight = new THREE.AmbientLight(skycolor, skyintensity);
 scene.add(skylight);
 
 const color = 0xFFFFFF;
-const intensity = 9;
+const intensity = 7;
 const light = new THREE.DirectionalLight(color, intensity);
 if (fileName === "gibson_firebird_v_electric_guitar") {
 	light.position.set(-22, 6, 1);
@@ -53,8 +53,10 @@ scene.add(light);
 scene.add(light.target);
 
 
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.maxDistance = 30;
+controls.update();
 
-let controls = new OrbitControls(camera, renderer.domElement);
 
 
 //let axes = new THREE.AxisHelper(50);
@@ -145,7 +147,16 @@ function resize(){
 }
 
 function animate() {
-	renderer.render( scene, camera );
-	controls.update();
-requestAnimationFrame( animate );
+	const cameraPosition = new THREE.Vector3();
+    cameraPosition.setFromMatrixPosition(camera.matrixWorld);
+
+    if (cameraPosition.y < 0) {
+        mesh.visible = false;
+    } else {
+        mesh.visible = true;
+    }
+
+    renderer.render(scene, camera);
+    controls.update();
+    requestAnimationFrame(animate);
 }
