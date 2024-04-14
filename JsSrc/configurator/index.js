@@ -69,7 +69,7 @@ const loader = new GLTFLoader();
 let referenceSize = 0
 
 if (fileName === "gibson_firebird_v_electric_guitar") {
-	referenceSize=8
+	referenceSize=6
 
 }else{
 	referenceSize = 5;
