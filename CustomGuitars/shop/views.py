@@ -1,90 +1,108 @@
-from django.shortcuts import render, get_object_or_404,redirect
-from .models import Category, Product , Guitar, ProductReview, Compare,CompareItem
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from .models import Category, Product, Guitar, ProductReview, Compare, CompareItem,Brand,Wishlist,WishlistItem
 from shop.forms import ProductReviewForm
-from .models import Category, Product, Guitar, ProductReview, Compare, CompareItem, Wishlist, WishlistItem
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+
 
 def index(request):
     return render(request, 'home.html')
 
-def prod_list(request, category_id=None):
+
+def prod_list(request, category_id=None, brand_id=None):
+    
     category = None
+    brand = None
     products = Product.objects.filter(available=True)
 
+    
     if category_id:
         category = get_object_or_404(Category, id=category_id)
-        products = Product.objects.filter(category=category, available=True)
+        products = products.filter(category=category)
 
+   
+    if brand_id:
+        brand = get_object_or_404(Brand, id=brand_id)
+        products = products.filter(brand=brand)
+
+    
     paginator = Paginator(products, 20)
-
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
         page = 1
-
     try:
         products = paginator.page(page)
     except (EmptyPage, InvalidPage):
         products = paginator.page(paginator.num_pages)
+    
 
-    return render(request, 'products/catagories.html', {'category': category, 'prods': products})
+    brands = Brand.objects.all()
+    return render(request, 'products/catagories.html', {'category': category, 'brand': brand, 'prods': products, 'brands': brands})
 
 
-def product_detail(request,category_id, product_id):
+
+def product_detail(request, category_id, product_id):
+   
     product = get_object_or_404(Product, category_id=category_id, id=product_id)
     category = Category.objects.all()
+    brand = product.brand
     reviews = product.reviews.all()
     average_rating = product.average_rating()
     total_reviews = product.total_reviews()
     featured_products = None
-    product_category=None
+    product_category = None
     page_obj = None
-    
+
     try:
-        review_instance = get_object_or_404(ProductReview,product=product,user=request.user)
-       
+        review_instance = get_object_or_404(ProductReview, product=product, user=request.user)
+
     except:
-        review_instance=None
-        
-    p = Paginator(reviews, 3) 
+        review_instance = None
+
+    p = Paginator(reviews, 3)
     page_number = request.GET.get('page')
     try:
-        page_obj = p.get_page(page_number)  
+        page_obj = p.get_page(page_number)
     except PageNotAnInteger:
         page_obj = p.page(4)
     except EmptyPage:
-        page_obj = p.page(p.num_pages)   
-        
-    
-            
+        page_obj = p.page(p.num_pages)
+
+   
     if category is not None:
         product_category = get_object_or_404(Category, id=category_id)
         featured_products = Product.objects.filter(category=product_category, featured=True, available=True)
-    
-    existing_review = product.get_existing(user=request.user,review=review_instance)  
+
+    existing_review = product.get_existing(user=request.user, review=review_instance)
+
     
     if request.method == 'POST':
         form = ProductReviewForm(request.POST)
-        if form.is_valid ():
+        if form.is_valid():
             form.instance.user = request.user
             form.instance.product = product
             form.save()
-            # Refresh reviews after submitting the form
+           
             reviews = product.reviews.all()
             form = ['Thank you for submitting a review']
     else:
         form = ProductReviewForm()
 
-    return render(request, 'products/product.html', {'product': product, 'reviews': reviews , 
-                                                     'form':form ,'existing_review':existing_review ,
-                                                     'featured':featured_products,'product_category':category,
-                                                     'page_obj': page_obj,'average_rating': average_rating,'total_reviews':total_reviews})
+    return render(request, 'products/product.html', {'product': product, 'reviews': reviews,
+                                                     'form': form, 'existing_review': existing_review,
+                                                     'featured': featured_products, 'product_category': category,
+                                                     'page_obj': page_obj, 'average_rating': average_rating,
+                                                     'total_reviews': total_reviews, 'brand': brand})
+
 
 def guitars(request):
+    
     guitars = Guitar.objects.filter(available=True)
     return render(request, 'products/guitars.html', {'guitars': guitars})
+
+
 
 
 def view_images(request, product_id):
