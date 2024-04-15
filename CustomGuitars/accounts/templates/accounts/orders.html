@@ -13,6 +13,7 @@
   </ul>
   {% empty %}
   <p>No orders found.</p>
+  <a href="{% url 'shop:home' %}" class="home_btn btn btn primary_button mt-2 text-light"style="width:12rem;">Continue Shopping</a>
   {% endfor %}
 </div>
 {% endblock content %}

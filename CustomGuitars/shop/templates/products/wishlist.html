@@ -6,8 +6,8 @@ Wishlist
 {% endblock %}
 
 {% block content %}
-<div class="container text-light me-4 mt-5">
-    <h2 class="mb-4">Wishlist</h2>
+<div class="container text-light mb-2 mt-4 px-5">
+    <h2 class="mb-4"> Your Wishlist</h2>
     
     {% if wishlist_items %}
     <div id="wishlist" class="d-flex text-light flex-column justify-content-between">
@@ -31,13 +31,16 @@ Wishlist
                     <a href="{% url 'shop:remove_from_wishlist' item.product.id %}" class="btn btn-danger">Remove</a>
                 </div>
             </div>
+            </div>
         </div>
+        </div>
+    </div>
         {% endfor %}
     </div>
     {% else %}
-    <div class="text-center">
-        <p>Your wishlist is empty.</p>
-        <a href="{% url 'shop:home' %}" class="btn btn-primary">Continue Shopping</a>
+    <div class="">
+        <p>Your Wishlist is empty.</p>
+        <a href="{% url 'shop:home' %}" class="home_btn btn btn primary_button mt-2 text-light"style="width:12rem;">Continue Shopping</a>
     </div>
     {% endif %}
 </div>
