@@ -42,7 +42,7 @@ class SearchResultsListView(ListView):
         context['query'] = self.request.GET.get('q')
         context['min_price'] = self.request.GET.get('min_price')
         context['max_price'] = self.request.GET.get('max_price')
-        context['brand'] = get_brands()  
+        context['brands'] = get_brands()  
         return context
 
 def get_brands():
@@ -51,7 +51,7 @@ def get_brands():
 
 def search_results(request):
     context = {
-        'brand': get_brands(),
+        'brands': get_brands(),
         'query': request.GET.get('q'),
         'min_price': request.GET.get('min_price'),
         'max_price': request.GET.get('max_price')
