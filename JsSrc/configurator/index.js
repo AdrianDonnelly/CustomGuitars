@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { ViewHelper } from 'three/addons/helpers/ViewHelper.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -7,13 +8,14 @@ const fileName = urlParams.get('file_name');
 console.log(fileName)
 
 
-let width = window.innerWidth,
-height = window.innerHeight;
+let width = window.innerWidth;
+let height =window.innerWidth ;
 
 let renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.autoClear = false;
 renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
@@ -23,6 +25,7 @@ scene.background = new THREE.Color(0x212121);
 scene.fog = new THREE.Fog( 0x212121, 15, 50 );
 
 
+
 let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
 camera.position.z = 30;
 scene.add(camera);
@@ -30,6 +33,7 @@ scene.add(camera);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+let helper = new ViewHelper( camera, renderer.domElement );
 const skycolor = 0xFFFFFF;
 const skyintensity = 4;
 const skylight = new THREE.AmbientLight(skycolor, skyintensity);
@@ -140,11 +144,12 @@ animate();
 window.addEventListener('resize',resize);
 function resize(){
 	let w = window.innerWidth;
-	let h = window.innerHeight;
+	let h = window.innerHeight * 0.925;
 	renderer.setSize(w,h);
 	camera.aspect = w / h;
 	camera.updateProjectionMatrix();
 }
+
 
 function animate() {
 	const cameraPosition = new THREE.Vector3();
@@ -155,8 +160,8 @@ function animate() {
     } else {
         mesh.visible = true;
     }
-
     renderer.render(scene, camera);
+	helper.render( renderer );
     controls.update();
     requestAnimationFrame(animate);
 }
