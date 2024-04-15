@@ -15,12 +15,12 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(width, height);
-renderer.setClearColor(0x444444);
 document.body.appendChild(renderer.domElement);
 
 
 let scene = new THREE.Scene();
-
+scene.background = new THREE.Color(0x212121);
+scene.fog = new THREE.Fog( 0x212121, 15, 50 );
 
 
 let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
@@ -36,7 +36,7 @@ const skylight = new THREE.AmbientLight(skycolor, skyintensity);
 scene.add(skylight);
 
 const color = 0xFFFFFF;
-const intensity = 5;
+const intensity = 6;
 const light = new THREE.DirectionalLight(color, intensity);
 if (fileName === "gibson_firebird_v_electric_guitar") {
 	light.position.set(-22, 6, 1);
@@ -113,7 +113,7 @@ loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 	console.error( error );
 } );
 
-const planeSize = 25;
+const planeSize = 80;
      
 const texloader = new THREE.TextureLoader();
 const texture = texloader.load('/static/models/resources/31107-1814430194.jpg');

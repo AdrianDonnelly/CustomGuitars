@@ -10,11 +10,15 @@
     
     {% for product in prods %}
     <div class="container-fluid d-flex flex-row justify-content-center">
+      
       <div class=" d-flex cat-img  align-items-center flex-column">
-        <a class="img" href="{{product.get_absolute_url}}"><img class="cat_img" src="{{product.primary_image.url}}" alt="{{product.name}}"/></a>
+        <a class="img" href="{{product.get_absolute_url}}">
+          {%if product.primary_image%}
+          <img class="cat_img" src="{{product.primary_image.url}}" alt="{{product.name}}"/></a>
         <div>
           <p>{{product.name}}</p>
         </div>
+        {%endif%}
       </div>
     </div>
     {% endfor %}

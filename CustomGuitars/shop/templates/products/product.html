@@ -18,13 +18,17 @@
         </div>
         <div class=" d-flex flex-column align-items-center">
         <div>
+          {%if product.primary_image%}
           <a href="{% url 'shop:view_images' product_id=product.id %}"><img class="p_prod_img" src="{{product.primary_image.url}}" alt="{{product.name}}"/></a>
+          {%endif%}
         </div>
         <div class="d-flex align-items-center">
+          {%if product.secondary_image1 %}
           <a href="{% url 'shop:view_images' product_id=product.id %}"><img class="s_prod_img m-2"src="{{product.secondary_image1.url}}"alt="{{product.name}}"/></a>
           <a href="{% url 'shop:view_images' product_id=product.id %}"><img class="s_prod_img m-2"src="{{product.secondary_image2.url}}"alt="{{product.name}}"/></a>
           <a href="{% url 'shop:view_images' product_id=product.id %}"><img class="s_prod_img m-2"src="{{product.secondary_image3.url}}"alt="{{product.name}}"/></a>
           <a href="{% url 'shop:view_images' product_id=product.id %}"><img class="s_prod_img m-2"src="{{product.secondary_image4.url}}"alt="{{product.name}}"/></a>
+          {%endif%}
         </div>
       </div>
     </div>
