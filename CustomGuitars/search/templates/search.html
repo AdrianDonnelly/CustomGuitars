@@ -15,7 +15,12 @@
                 <input type="text" name="q" class="form-control mb-2" placeholder="Search" value="{{ query }}">
             </div>
             <div class="col-md-3">
-                <input type="text" name="category" class="form-control mb-2" placeholder="Category">
+                <select name="brand" class="form-control mb-2">
+                    <option value="">Select Brand</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand }}">{{ brand }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="col-md-3">
                 <input type="number" name="min_price" class="form-control mb-2" placeholder="Min Price">
@@ -24,6 +29,10 @@
                 <input type="number" name="max_price" class="form-control mb-2" placeholder="Max Price">
             </div>
         </div>
+
+        
+        </div>
+
         <div class="row">
             <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Search</button>
