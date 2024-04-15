@@ -13,22 +13,42 @@
         {% endif %}
     </div>
 
-    <div class="ms-3">
+    <div class="ms-3 mt-5">
+        {%if user.is_superuser%}
+        <div class="">
+            <a class="link-underline text-dark link-underline-opacity-0" href="/admin">
+                <p>Admin Panel</p>
+            </a>
+    </div> 
+        {%endif%}
         {% if user.is_authenticated %}
-            <div class="mt-5">
+            <div class="">
                 <a class="link-underline text-dark link-underline-opacity-0" href="{% url 'accounts:account_edit' pk=user.pk %}">
                     <p>Account Settings</p>
                 </a>
-            </div>
+        </div> 
+        {%else%}
+            <div class="mt-5">
+                <a class="link-underline text-dark link-underline-opacity-0" href="{% url 'accounts:userlogin'%}">
+                    <p>Account Settings</p>
+                </a>
+        </div>
         {% endif %}
         
         
-        
+        {%if user.is_authenticated %}
         <div>
             <a class="link-underline text-dark link-underline-opacity-0" href="{% url 'accounts:orders' %}">
                 <p>Orders</p>
             </a>
         </div>
+        {%else%}
+        <div>
+            <a class="link-underline text-dark link-underline-opacity-0" href="{% url 'accounts:userlogin' %}">
+                <p>Orders</p>
+            </a>
+        </div>
+        {%endif%}
         <div class="mt-3"> 
             <a class="link-underline text-dark link-underline-opacity-0" href="{% url 'cart:cart_detail' %}">
                 <p>Cart</p>
@@ -55,9 +75,15 @@
         <div class="mt-3">
             <a class="text-dark link-underline link-underline-opacity-0" href="{% url 'shop:compare_detail' %}">Compare Products</a>
         </div>
+        {%if user.is_authenticated%}
         <div class="mt-3">
             <a class="text-dark link-underline link-underline-opacity-0" href="{% url 'shop:wishlist_detail' %}">Wishlist</a>
         </div>
+        {%else%}
+        <div class="mt-3">
+            <a class="text-dark link-underline link-underline-opacity-0" href="{% url 'accounts:userlogin' %}">Wishlist</a>
+        </div>
+        {%endif%}
         <div class="logout-side mb-5">
             <a class="text-dark link-underline link-underline-opacity-0" href="{% url 'logout' %}">
                 <p class="font-weight-bold">Logout</p>
