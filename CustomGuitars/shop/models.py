@@ -24,13 +24,21 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+class Brand(models.Model):
+    name = models.CharField(max_length=250, unique=True)
+    description = models.TextField(blank=True)
+    
 
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
+    
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=250, unique=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

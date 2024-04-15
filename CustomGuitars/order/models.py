@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from vouchers.models import Voucher
 from django.core.mail import send_mail
 from accounts.models import CustomUser
-from twilio.rest import Client
+#from twilio.rest import Client
 
 
 
@@ -50,17 +50,17 @@ def sender_order_email(self):
 
         send_mail(subject, message, from_email, to_email)
     
-def whatsapp_order(self):
-    account_sid = "AC35862d2a87f33839b12634c64f4e1e9b"
-    auth_token  = "56d28fbe8fd7bd44450093c716229d82"
+# def whatsapp_order(self):
+#     account_sid = "AC35862d2a87f33839b12634c64f4e1e9b"
+#     auth_token  = "56d28fbe8fd7bd44450093c716229d82"
     
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        to="whatsapp:+353851765118",
-        from_="whatsapp:+15017250604",
-        body=f"Thanks for your order!\n\nOrder Number: {self.id}\nTotal: {self.total}\n\n")
+#     client = Client(account_sid, auth_token)
+#     message = client.messages.create(
+#         to="whatsapp:+353851765118",
+#         from_="whatsapp:+15017250604",
+#         body=f"Thanks for your order!\n\nOrder Number: {self.id}\nTotal: {self.total}\n\n")
 
-    print(message.sid)
+#     print(message.sid)
 
 
 class OrderItem(models.Model):
