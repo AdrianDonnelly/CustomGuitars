@@ -1,20 +1,4 @@
 # Django
-.pyc
-__pycache__
-emails
-.pdf
-db.sqlite3
-.pyo
-.pyd
-.pyo
-.pyc
-.pyo
-.pyd
-.pyc
-.pyo
-.pyd
-migrations/
-
 
 # Webpack
 node_modules/

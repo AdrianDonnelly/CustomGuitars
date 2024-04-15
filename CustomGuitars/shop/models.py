@@ -49,7 +49,6 @@ class Product(models.Model):
     secondary_image3 = models.ImageField(upload_to='product', blank=True)
     secondary_image4 = models.ImageField(upload_to='product', blank=True)
     stock = models.IntegerField()
-    discreption= models.TextField(blank=True)
     available = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     showroom = models.BooleanField(default=False)
