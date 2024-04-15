@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     dob = models.DateField(null = True, blank = True)
-    email = models.EmailField(max_length=254,)
+    email = models.EmailField(max_length=254,unique=True)
     secret_key = models.CharField(max_length=16, null=True) 
     phone_number = models.BigIntegerField(null=True)
     def get_absolute_url(self):

@@ -17,7 +17,6 @@ from django.contrib.auth import login
 from django.shortcuts import render
 from order.models import Order
 
-
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('accounts:userlogin')
@@ -172,3 +171,4 @@ class Setup_2FAView(DetailView):
         context['setup_2FA_url'] = reverse_lazy('accounts:setup_2FA', kwargs={'pk': self.object.user.id})
         
         return context
+    

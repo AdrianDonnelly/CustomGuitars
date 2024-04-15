@@ -1,5 +1,6 @@
 from django.urls import path,include
-from .views import SignUpView, AccountView, ProfileUpdateView, OrderView, UserLoginView, OtpView, Setup_2FAView 
+from django.contrib.auth import views as auth_views
+from .views import SignUpView, AccountView, ProfileUpdateView, OrderView, UserLoginView, OtpView, Setup_2FAView
 from shop.views import wishlist_detail
 
 app_name = 'accounts'
