@@ -2,15 +2,18 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { ViewHelper } from 'three/addons/helpers/ViewHelper.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+
+//~ Get the query parameters from the URL ~//
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const fileName = urlParams.get('file_name');
-console.log(fileName)
 
-
+//~ Set up initial dimensions for the renderer ~//
 let width = window.innerWidth;
 let height =window.innerWidth ;
 
+//~ Create a WebGLRenderer ~//
 let renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.shadowMap.enabled = true;
@@ -19,26 +22,25 @@ renderer.autoClear = false;
 renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
-
+//~ Create a new scene and set its background color and fog ~//
 let scene = new THREE.Scene();
 scene.background = new THREE.Color(0x212121);
 scene.fog = new THREE.Fog( 0x212121, 15, 50 );
 
 
-
+//~ Create a new perspective camera and set position ~//
 let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
 camera.position.z = 30;
 scene.add(camera);
 
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
+//~ Create an AmbientLight to simulate global illumination ~//
 let helper = new ViewHelper( camera, renderer.domElement );
 const skycolor = 0xFFFFFF;
 const skyintensity = 4;
 const skylight = new THREE.AmbientLight(skycolor, skyintensity);
 scene.add(skylight);
 
+//~ Create a DirectionalLight ~//
 const color = 0xFFFFFF;
 const intensity = 6;
 const light = new THREE.DirectionalLight(color, intensity);
@@ -57,8 +59,9 @@ scene.add(light);
 scene.add(light.target);
 
 
+//~ Create OrbitControls to enable camera manipulation ~//
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.maxDistance = 30;
+controls.maxDistance = 30;//~ Max zoom out distance ~//
 controls.update();
 
 
@@ -68,7 +71,7 @@ controls.update();
 
 
 
-
+//~ Load 3D model using GLTFLoader ~//
 const loader = new GLTFLoader();
 let referenceSize = 0
 
@@ -91,34 +94,37 @@ loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 	}else{
 		gltf.scene.position.y = 1.5;
 	}
+	//~ Traverse through model's children to enable shadow casting ~//
 	gltf.scene.traverse(function (child) {
         if (child.isMesh) {
             child.castShadow = true; 
         }
     });
 
-
+	//~ Calculate bounding box of the model and adjust its size and position ~//	
 	const boundingBox = new THREE.Box3().setFromObject(gltf.scene);
     const center = boundingBox.getCenter(new THREE.Vector3());
-
 	const size = new THREE.Vector3();
     boundingBox.getSize(size);
 	const scaleFactor = referenceSize / Math.max(size.x, size.y, size.z);
 	gltf.scene.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
-    // Adjust camera position and look at the center of the model
-    camera.position.set(center.x, center.y, center.z + 5); // Adjust the distance from the model
-    camera.lookAt(center); // Make the camera look at the center of the model
+    //~ Adjust camera position and look at the center of the model ~//
+    camera.position.set(center.x, center.y, center.z + 5); //~ Adjust distance from the model ~//
+    camera.lookAt(center);
 
+	//~ Add loaded model to the scene ~//
 	scene.add( gltf.scene );
 
 }, 
+	//~Error loggin ~//
 	undefined, function ( error ) {
 	console.error( error );
 } );
 
+
+//~ Set up and add plane with texture to the scene (Ground) ~//
 const planeSize = 80;
-     
 const texloader = new THREE.TextureLoader();
 const texture = texloader.load('/static/models/resources/31107-1814430194.jpg');
 texture.wrapS = THREE.RepeatWrapping;
@@ -141,6 +147,7 @@ scene.add(mesh);
 resize();
 animate();
 
+//~ Resize function to handle window resize events ~//
 window.addEventListener('resize',resize);
 function resize(){
 	let w = window.innerWidth;
@@ -150,8 +157,9 @@ function resize(){
 	camera.updateProjectionMatrix();
 }
 
-
+//~ Animation loop function ~//
 function animate() {
+	//~ Check camera position and toggle visibility of the plane ~//
 	const cameraPosition = new THREE.Vector3();
     cameraPosition.setFromMatrixPosition(camera.matrixWorld);
 
@@ -160,8 +168,10 @@ function animate() {
     } else {
         mesh.visible = true;
     }
+
+	//~ Render scene and update controls ~//
     renderer.render(scene, camera);
 	helper.render( renderer );
     controls.update();
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate);//~ Request animation frame for smooth animation ~//
 }
