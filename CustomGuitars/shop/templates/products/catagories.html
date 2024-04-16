@@ -1,8 +1,7 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 
-<div class=" d-flex align-items-center flex-column text-light px-5">
+<div class=" d-flex align-items-center flex-column text-light px-5 mt-4">
   <h1>{{category.name}}</h1>
-  <p>{{category.description}}</p>
 </div>
 <div class="container-fluid d-flex flex-column justify-content-between text-light mt-4 px-5">
   {% if category %}
@@ -15,8 +14,8 @@
         <a class="img" href="{{product.get_absolute_url}}">
           {%if product.primary_image%}
           <img class="cat_img" src="{{product.primary_image.url}}" alt="{{product.name}}"/></a>
-        <div>
-          <p>{{product.name}}</p>
+        <div class="mt-3 text-wrap"style="width:12rem">
+          <p class="text-start">{{product.name}}</p>
         </div>
         {%endif%}
       </div>
