@@ -22,6 +22,7 @@ html {
 div.scrollmenu {
     
     width: 20rem;
+    min-height: 12rem;
     overflow: auto;
     white-space: nowrap;
     scrollbar-color: rgb(147, 147, 147) #212121;
@@ -109,15 +110,18 @@ div.scrollmenu {
 }
 .cat_img{
     max-height: 15rem;
+    max-width:20rem;
 }
 .sim_img{
     max-width: 6rem;
 }
 .p_prod_img{
     max-height: 35rem;
+    max-width: 45rem;
 }
 .s_prod_img{
     max-height: 8rem;
+    max-width: 15rem;
 }
 .review{
     max-width: 20rem;
@@ -171,10 +175,11 @@ div.scrollmenu {
     min-height: 60%;
 }
 .carousel-img{
-    max-width: 20rem;
+    max-width: 50rem;
 }
 .view_img{
     min-height:55rem;
+
 }
 .carousel-control-next, .carousel-control-prev {
     width: 50%;

@@ -24,12 +24,13 @@ document.body.appendChild(renderer.domElement);
 
 //~ Create a new scene and set its background color and fog ~//
 let scene = new THREE.Scene();
-scene.background = new THREE.Color(0x212121);
-scene.fog = new THREE.Fog( 0x212121, 15, 50 );
+//scene.background = new THREE.Color(0xfffafa );
+//scene.fog = new THREE.Fog( 0xfffafa , 15, 50 );
+
 
 
 //~ Create a new perspective camera and set position ~//
-let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
+let camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000);
 camera.position.z = 30;
 scene.add(camera);
 
@@ -44,14 +45,7 @@ scene.add(skylight);
 const color = 0xFFFFFF;
 const intensity = 6;
 const light = new THREE.DirectionalLight(color, intensity);
-if (fileName === "gibson_firebird_v_electric_guitar") {
-	light.position.set(-22, 6, 1);
-}
-else if (fileName === "gibson_sg_guitar"){
-	light.position.set(-10, 3, 2);
-}else{
-	light.position.set(0, 3, 5);
-}
+light.position.set(0, 3, 5);
 
 light.target.position.set(-5, 0, 0);
 light.castShadow = true;
@@ -61,7 +55,7 @@ scene.add(light.target);
 
 //~ Create OrbitControls to enable camera manipulation ~//
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.maxDistance = 30;//~ Max zoom out distance ~//
+controls.maxDistance = 50;//~ Max zoom out distance ~//
 controls.update();
 
 
@@ -76,23 +70,25 @@ const loader = new GLTFLoader();
 let referenceSize = 0
 
 if (fileName === "gibson_firebird_v_electric_guitar") {
-	referenceSize=6
+	referenceSize=35
 
 }else{
-	referenceSize = 5;
+	referenceSize = 50;
 }
 loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 	
 	if (fileName === "gibson_firebird_v_electric_guitar") {
 		gltf.scene.position.y = -1;
 		//gltf.scene.rotation.x = Math.PI / 9;
-		//gltf.scene.rotation.y = Math.PI / 11;
-
+		gltf.scene.rotation.y =Math.PI / 2;
+		console.log(gltf.scene.rotation.z)
 	}else if (fileName === "gibson_sg_guitar"){
-		gltf.scene.rotation.z = (3 * Math.PI / 2);
+		gltf.scene.rotation.z = 250;
+		console.log(gltf.scene.rotation.z)
 		gltf.scene.position.y = 1;
 	}else{
-		gltf.scene.position.y = 1.5;
+		gltf.scene.position.y = 2;
+		gltf.scene.rotation.x = Math.PI / 9;
 	}
 	//~ Traverse through model's children to enable shadow casting ~//
 	gltf.scene.traverse(function (child) {
@@ -126,7 +122,7 @@ loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 //~ Set up and add plane with texture to the scene (Ground) ~//
 const planeSize = 80;
 const texloader = new THREE.TextureLoader();
-const texture = texloader.load('/static/models/resources/31107-1814430194.jpg');
+const texture = texloader.load('/static/models/resources/floor2.jpg');
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
 texture.magFilter = THREE.NearestFilter;
@@ -143,9 +139,16 @@ const planeMat = new THREE.MeshPhongMaterial({
 const mesh = new THREE.Mesh(planeGeo, planeMat);
 mesh.rotation.x = Math.PI * -.5;
 mesh.receiveShadow = true;
-scene.add(mesh);
+//scene.add(mesh);
 resize();
 animate();
+
+
+const backgroundloader = new THREE.TextureLoader();
+const backgroundtexture = backgroundloader.load('/static/models/resources/castle_zavelstein_cellar.jpg',);
+backgroundtexture.mapping = THREE.EquirectangularReflectionMapping;
+backgroundtexture.colorSpace = THREE.SRGBColorSpace;
+scene.background = backgroundtexture;
 
 //~ Resize function to handle window resize events ~//
 window.addEventListener('resize',resize);
