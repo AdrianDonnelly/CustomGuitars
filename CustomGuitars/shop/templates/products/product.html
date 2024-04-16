@@ -41,7 +41,7 @@
         <div class="scrollmenu d-flex">
             {% for featured_product in featured%}
             <div class="product-item">
-                 <a class="img m-1 ms-3 mt-3" href="{{featured_product.get_absolute_url}}"><img class="cat_img" src="{{featured_product.primary_image.url}}" alt="{{featured_product.name}}"/></a>
+                 <a class="img m-1 ms-3 mt-3" href="{{featured_product.get_absolute_url}}"><img class="cat_img sim_img" src="{{featured_product.primary_image.url}}" alt="{{featured_product.name}}"/></a>
             </div>
             {% endfor %}
           </div>

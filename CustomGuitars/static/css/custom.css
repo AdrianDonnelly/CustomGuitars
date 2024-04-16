@@ -110,6 +110,9 @@ div.scrollmenu {
 .cat_img{
     max-height: 15rem;
 }
+.sim_img{
+    max-width: 6rem;
+}
 .p_prod_img{
     max-height: 35rem;
 }
