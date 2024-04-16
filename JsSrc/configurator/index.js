@@ -80,7 +80,7 @@ loader.load( `/static/models/${fileName}.glb`, function ( gltf ) {
 	if (fileName === "gibson_firebird_v_electric_guitar") {
 		gltf.scene.position.y = -1;
 		//gltf.scene.rotation.x = Math.PI / 9;
-		gltf.scene.rotation.y =Math.PI / 2;
+		gltf.scene.rotation.y =2* Math.PI / 3;
 		console.log(gltf.scene.rotation.z)
 	}else if (fileName === "gibson_sg_guitar"){
 		gltf.scene.rotation.z = 250;
