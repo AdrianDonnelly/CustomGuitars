@@ -131,6 +131,7 @@ const repeats = planeSize / 2;
 texture.repeat.set(repeats, repeats); 
 
 const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+
 const planeMat = new THREE.MeshPhongMaterial({
   map: texture,
   side: THREE.DoubleSide,
@@ -148,6 +149,7 @@ const backgroundloader = new THREE.TextureLoader();
 const backgroundtexture = backgroundloader.load('/static/models/resources/castle_zavelstein_cellar.jpg',);
 backgroundtexture.mapping = THREE.EquirectangularReflectionMapping;
 backgroundtexture.colorSpace = THREE.SRGBColorSpace;
+backgroundtexture.receiveShadow = true;
 scene.background = backgroundtexture;
 
 //~ Resize function to handle window resize events ~//
