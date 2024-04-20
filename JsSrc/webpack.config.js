@@ -10,7 +10,6 @@ module.exports = {
     mode: 'production',
     entry: {
         configurator: './configurator/index.js',
-        shop:'./shop/index.js',
     },
     module: {
         rules: [

@@ -27,7 +27,9 @@ div.scrollmenu {
     white-space: nowrap;
     scrollbar-color: rgb(147, 147, 147) #212121;
 }
-    
+.featured{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .primary_button{
     background-color:#0F4C75;
 }
