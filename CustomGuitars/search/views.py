@@ -3,11 +3,13 @@ from django.shortcuts import render
 from shop.models import Product, Brand
 from django.db.models import Q
 from shop.models import Product, Category
+from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 
 class SearchResultsListView(ListView):
     model = Product
     context_object_name = 'product_list'
     template_name = 'search.html'
+    paginate_by = 8
 
     def get_queryset(self):
         query = self.request.GET.get('q')

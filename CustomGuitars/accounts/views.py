@@ -143,7 +143,7 @@ class AccountView(DetailView):
 
     
 def OrderView(request):
-    # Retrieve orders associated with the current user
+    
     orders = Order.objects.filter(user=request.user)
     return render(request, 'accounts/orders.html', {'orders': orders,'show_account_sidebar': True})
 

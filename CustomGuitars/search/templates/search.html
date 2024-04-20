@@ -30,12 +30,9 @@
             </div>
         </div>
 
-        
-        </div>
-
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn primary_button text-light">Search</button>
             </div>
         </div>
     </form>
@@ -61,4 +58,26 @@
         {% endfor %}
     </div>
 </div>
+
+
+<div class="pagination mt-3 text-center">
+    <span class="step-links">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-sm btn-primary">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-sm btn-primary">Previous</a>
+            {% endif %}
+
+            <span class="current text-light">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn primary_button text-light">Next</a>
+                <a href="?page={{ paginator.num_pages }}" class="btn primary_button text-light">Last &raquo;</a>
+            {% endif %}
+        {% endif %}
+    </span>
+</div>
+
 {% endblock %}
