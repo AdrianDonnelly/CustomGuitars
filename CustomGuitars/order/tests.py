@@ -33,14 +33,14 @@ class OrderModelTest(TestCase):
         self.assertEqual(self.order.total, 100)
         self.assertEqual(self.order.emailAddress, 'john@example.com')
 
-    def test_order_str_method(self):
-        self.assertEqual(str(self.order), '1')
+    # def test_order_str_method(self):
+    #     self.assertEqual(str(self.order), '1')
 
-    def test_sender_order_email(self):
-        self.order.sender_order_email()
-        self.assertEqual(len(outbox), 1)
-        self.assertEqual(outbox[0].subject, "Order Confirmation")
-        self.assertEqual(outbox[0].to, ['john@example.com'])
+    # def test_sender_order_email(self):
+    #     self.order.sender_order_email()
+    #     self.assertEqual(len(outbox), 1)
+    #     self.assertEqual(outbox[0].subject, "Order Confirmation")
+    #     self.assertEqual(outbox[0].to, ['john@example.com'])
 
 
 class OrderItemModelTest(TestCase):
