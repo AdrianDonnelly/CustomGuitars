@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.paginator import Paginator, EmptyPage, InvalidPage,PageNotAnInteger
 from .models import Category, Product, Guitar, ProductReview, Compare, CompareItem,Brand,Wishlist,WishlistItem
 from shop.forms import ProductReviewForm
 from django.contrib.auth.decorators import login_required

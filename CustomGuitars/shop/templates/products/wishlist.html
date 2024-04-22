@@ -6,21 +6,21 @@ Wishlist
 {% endblock %}
 
 {% block content %}
-<div class="container text-light mb-2 mt-4 px-5">
+<div class="container text-light mb-2 mt-4 px-5" style="margin-left: 250px;">
     <h2 class="mb-4"> Your Wishlist</h2>
-    
+
     {% if wishlist_items %}
-    <div id="wishlist" class="d-flex text-light flex-column justify-content-between">
+    <div id="wishlist" class="d-flex flex-column text-light">
         {% for item in wishlist_items %}
-        <div class="d-flex justify-content-between mb-4">
-            <div style="width: 30%">
+        <div class="d-flex align-items-center mb-4">
+            <div style="width: 30%" class="d-flex justify-content-center align-items-center">
                 <a href="{{ item.product.get_absolute_url }}" class="link-dark">
-                    <img src="{{ item.product.primary_image.url }}" alt="{{ item.product.name }}" class="compare_img" />
+                    <img src="{{ item.product.primary_image.url }}" alt="{{ item.product.name }}" class="compare_img" style="max-height: 200px;"/>
                 </a>
             </div>
-            <div style="width: 50%" class="d-flex flex-column justify-content-between">
+            <div class="flex-grow-1 d-flex flex-column justify-content-between" style="margin-left: 20px;">
                 <div>
-                    <p class="mb-0">{{ item.product.name }}</p>
+                    <p class="mb-0 text-light">{{ item.product.name }}</p>
                     {% if item.product.stock > 0 %}
                     <p class="text-success">In Stock</p>
                     {% else %}
@@ -31,16 +31,13 @@ Wishlist
                     <a href="{% url 'shop:remove_from_wishlist' item.product.id %}" class="btn btn-danger">Remove</a>
                 </div>
             </div>
-            </div>
         </div>
-        </div>
-    </div>
         {% endfor %}
     </div>
     {% else %}
     <div class="">
         <p>Your Wishlist is empty.</p>
-        <a href="{% url 'shop:home' %}" class="home_btn btn btn primary_button mt-2 text-light"style="width:12rem;">Continue Shopping</a>
+        <a href="{% url 'shop:home' %}" class="home_btn btn btn primary_button mt-2 text-light" style="width: 12rem;">Continue Shopping</a>
     </div>
     {% endif %}
 </div>
