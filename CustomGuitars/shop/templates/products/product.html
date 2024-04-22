@@ -55,6 +55,11 @@
       </div>
       {% if product.stock == 0%}
       <p><b>Out of Stock</b></p>
+      <div class="d-flex home_btn mb-4 mt-2 justify-content-around">
+        <a class="d-flex flex-column justify-content-center link-underline link-underline-opacity-0 text-light" href="{% url 'shop:add_compare' product.id %}"><i class="fa-solid fa-star d-flex  justify-content-center"></i>Compare product</a>
+        <a class="d-flex flex-column justify-content-center link-underline link-underline-opacity-0 text-light" href="{% url 'shop:add_to_wishlist' product.id %}"><i class="fa-solid fa-star d-flex  justify-content-center"></i>Add to Wishlist</a>
+
+      </div>
       {% else %}
       <div class="d-flex home_btn mb-4 mt-2">
         <a
