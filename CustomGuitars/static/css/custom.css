@@ -133,7 +133,7 @@ div.scrollmenu {
 }
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     right: 0;
     background-color: #E6E6E6;
     width: 270px ;
@@ -244,7 +244,6 @@ a{
 
 
 
-/* cart design temp */
 
 /****Cart Page****/
 .my_custom_table {
