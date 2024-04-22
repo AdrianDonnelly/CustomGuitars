@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Category, Product
 
+
 class URLTests(TestCase):
     def test_testhome(self):
         response = self.client.get('')

@@ -13,7 +13,8 @@ class CustomUser(AbstractUser):
     def get_absolute_url(self):
         return reverse('accounts:account', args=[str(self.id)])
     
-    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
     
     
 class Profile(models.Model):
